@@ -13,7 +13,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
+            overflow: hidden;
         }
 
         .title {
@@ -24,10 +25,14 @@
         }
 
         .roulette-container {
-            position: relative;
-            width: 400px;
-            height: 400px;
-            margin: 20px 0;
+            position: fixed;
+            width: 1600px;
+            height: 1600px;
+            top: 500px;
+            left: 50%;
+            transform: translateX(-50%);
+            overflow: hidden;
+            pointer-events: auto;
         }
 
         .roulette-wheel {
@@ -46,8 +51,8 @@
 
         .menu-item {
             position: absolute;
-            width: 45px;
-            height: 70px;
+            width: 120px;
+            height: 180px;
             background: rgba(255, 255, 255, 0.95);
             border: 1px solid rgba(200, 200, 200, 0.6);
             border-radius: 12px;
@@ -56,7 +61,7 @@
             justify-content: center;
             font-weight: bold;
             color: #333;
-            font-size: 11px;
+            font-size: 22px;
             text-shadow: none;
             transform-origin: center;
             box-shadow: 0 2px 6px rgba(0,0,0,0.15);
@@ -197,13 +202,13 @@
                 
                 // 원형 배치 계산
                 const angle = angleStep * index;
-                const radius = 150; // 중심에서의 거리
+                const radius = 600; // 중심에서의 거리 (4배 증가)
                 const x = Math.cos((angle - 90) * Math.PI / 180) * radius;
                 const y = Math.sin((angle - 90) * Math.PI / 180) * radius;
                 
                 // 메뉴판을 방사형으로 배치 (중심에서 바깥쪽 향하도록)
-                menuItem.style.left = `calc(50% + ${x}px - 22.5px)`;
-                menuItem.style.top = `calc(50% + ${y}px - 35px)`;
+                menuItem.style.left = `calc(50% + ${x}px - 60px)`;
+                menuItem.style.top = `calc(50% + ${y}px - 90px)`;
                 menuItem.style.transform = `rotate(${angle}deg)`;
                 
                 roulette.appendChild(menuItem);
