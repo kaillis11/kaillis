@@ -15,6 +15,34 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
+            position: relative;
+        }
+
+        .ad-left, .ad-right {
+            position: fixed;
+            width: 160px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .ad-left {
+            left: 20px;
+        }
+
+        .ad-right {
+            right: 20px;
         }
 
         .title {
@@ -28,7 +56,7 @@
             position: fixed;
             width: 6400px;
             height: 6400px;
-            top: 400px;
+            top: 300px;
             left: 50%;
             transform: translateX(-50%);
             overflow: hidden;
@@ -51,7 +79,7 @@
 
         .menu-item {
             position: absolute;
-            width: 320px;
+            width: 640px;
             height: 900px;
             background: rgba(255, 255, 255, 0.95);
             border: 1px solid rgba(200, 200, 200, 0.6);
@@ -172,6 +200,26 @@
     </style>
 </head>
 <body>
+    <!-- 좌측 광고 영역 -->
+    <div class="ad-left">
+        <div>
+            📱<br>
+            배달의민족<br>
+            <strong>첫 주문 할인!</strong><br>
+            <small>최대 3000원 적립</small>
+        </div>
+    </div>
+    
+    <!-- 우측 광고 영역 -->
+    <div class="ad-right">
+        <div>
+            🎯<br>
+            요기요<br>
+            <strong>무료배달!</strong><br>
+            <small>15,000원 이상</small>
+        </div>
+    </div>
+
     <h1 class="title">🍽️ 오늘 뭐먹지?</h1>
     
     <div class="roulette-container">
@@ -193,23 +241,32 @@
     </div>
 
     <script>
-        // 배달의민족 2025 트렌드 실제 데이터
-        const trendMenus2025 = [
-            { name: '후라이드치킨', icon: '🍗', rank: '1위' },
-            { name: '양념치킨', icon: '🍗', rank: '2위' },
-            { name: '삼겹살구이', icon: '🥘', rank: '3위' },
-            { name: '떡볶이', icon: '🍜', rank: '4위' },
-            { name: '치킨마요덮밥', icon: '🍱', rank: '5위' },
-            { name: '불고기버거', icon: '🍔', rank: '6위' },
-            { name: '모듬초밥', icon: '🍛', rank: '7위' },
-            { name: '국물떡볶이', icon: '🍜', rank: '8위' },
-            { name: '제육볶음', icon: '🥘', rank: '9위' },
-            { name: '영덕치킨', icon: '🍗', rank: '10위' },
-            { name: '향전살덮밥', icon: '🍱', rank: '11위' },
-            { name: '치킨버거', icon: '🍔', rank: '12위' },
-            { name: '돈카츠', icon: '🍛', rank: '13위' },
-            { name: '치즈떡볶이', icon: '🍜', rank: '14위' },
-            { name: '아이스크림', icon: '🍦', rank: '15위' }
+        // 24개 플레이스홀더 카드 (배민 메뉴 + 쿠팡 광고 + 랭킹 카드)
+        const placeholder24Cards = [
+            { name: '후라이드치킨', icon: '🍗', rank: '1위', type: 'menu' },
+            { name: '치킨소스 1위', icon: '🥤', rank: 'AD', type: 'coupang' },
+            { name: '양념치킨', icon: '🍗', rank: '2위', type: 'menu' },
+            { name: '🏆 피자 TOP7', icon: '🍕', rank: 'TOP', type: 'ranking' },
+            { name: '삼겹살구이', icon: '🥘', rank: '3위', type: 'menu' },
+            { name: '구이팬 1위', icon: '🍳', rank: 'AD', type: 'coupang' },
+            { name: '떡볶이', icon: '🍜', rank: '4위', type: 'menu' },
+            { name: '🏆 분식 TOP7', icon: '🍜', rank: 'TOP', type: 'ranking' },
+            { name: '치킨마요덮밥', icon: '🍱', rank: '5위', type: 'menu' },
+            { name: '도시락통 1위', icon: '🥡', rank: 'AD', type: 'coupang' },
+            { name: '불고기버거', icon: '🍔', rank: '6위', type: 'menu' },
+            { name: '🏆 패스트푸드 TOP7', icon: '🍔', rank: 'TOP', type: 'ranking' },
+            { name: '모듬초밥', icon: '🍛', rank: '7위', type: 'menu' },
+            { name: '초밥도구 1위', icon: '🥢', rank: 'AD', type: 'coupang' },
+            { name: '국물떡볶이', icon: '🍜', rank: '8위', type: 'menu' },
+            { name: '🏆 일식 TOP7', icon: '🍣', rank: 'TOP', type: 'ranking' },
+            { name: '제육볶음', icon: '🥘', rank: '9위', type: 'menu' },
+            { name: '양념통 1위', icon: '🧂', rank: 'AD', type: 'coupang' },
+            { name: '영덕치킨', icon: '🍗', rank: '10위', type: 'menu' },
+            { name: '🏆 양식 TOP7', icon: '🍝', rank: 'TOP', type: 'ranking' },
+            { name: '향전살덮밥', icon: '🍱', rank: '11위', type: 'menu' },
+            { name: '전자레인지 1위', icon: '📱', rank: 'AD', type: 'coupang' },
+            { name: '치킨버거', icon: '🍔', rank: '12위', type: 'menu' },
+            { name: '🏆 디저트 TOP7', icon: '🍰', rank: 'TOP', type: 'ranking' }
         ];
 
         const colors = [
@@ -234,13 +291,22 @@
 
         function createRouletteWheel() {
             const roulette = document.getElementById('roulette');
-            const angleStep = 360 / trendMenus2025.length;
+            const angleStep = 360 / placeholder24Cards.length;
             
-            trendMenus2025.forEach((menuData, index) => {
+            placeholder24Cards.forEach((menuData, index) => {
                 const menuItem = document.createElement('div');
                 menuItem.className = 'menu-item';
                 
-                // 배민 스타일 카드 구조 생성
+                // 카드 타입별 스타일 적용
+                if (menuData.type === 'coupang') {
+                    menuItem.style.background = 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)';
+                    menuItem.style.border = '2px solid #ffc107';
+                } else if (menuData.type === 'ranking') {
+                    menuItem.style.background = 'linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)';
+                    menuItem.style.border = '2px solid #ff6b35';
+                }
+                
+                // 카드 구조 생성
                 const rankElement = document.createElement('div');
                 rankElement.className = 'menu-rank';
                 rankElement.textContent = menuData.rank;
@@ -261,12 +327,12 @@
                 
                 // 원형 배치 계산
                 const angle = angleStep * index;
-                const radius = 2800; // 원둘레 바깥쪽으로 이동
+                const radius = 2650; // 카드가 원 경계 안에 들어오도록 조정
                 const x = Math.cos((angle - 90) * Math.PI / 180) * radius;
                 const y = Math.sin((angle - 90) * Math.PI / 180) * radius;
                 
                 // 메뉴판을 방사형으로 배치 (중심에서 바깥쪽 향하도록)
-                menuItem.style.left = `calc(50% + ${x}px - 160px)`;
+                menuItem.style.left = `calc(50% + ${x}px - 320px)`;
                 menuItem.style.top = `calc(50% + ${y}px - 450px)`;
                 menuItem.style.transform = `rotate(${angle}deg)`;
                 
@@ -407,13 +473,23 @@
         function checkResult() {
             // 결과 계산
             const normalizedAngle = ((currentRotation % 360) + 360) % 360;
-            const selectedIndex = Math.floor(((360 - normalizedAngle + (360 / trendMenus2025.length / 2)) % 360) / (360 / trendMenus2025.length));
-            const selectedMenuData = trendMenus2025[selectedIndex];
+            const selectedIndex = Math.floor(((360 - normalizedAngle + (360 / placeholder24Cards.length / 2)) % 360) / (360 / placeholder24Cards.length));
+            const selectedMenuData = placeholder24Cards[selectedIndex];
             
-            // 결과 표시
-            document.getElementById('selected-menu').innerHTML = 
-                `${selectedMenuData.icon} <strong>${selectedMenuData.name}</strong><br>
-                 <small style="color: #ff6b35;">${selectedMenuData.rank} 인기 메뉴</small>`;
+            // 결과 표시 (타입별로 다르게)
+            let resultText = '';
+            if (selectedMenuData.type === 'coupang') {
+                resultText = `${selectedMenuData.icon} <strong>${selectedMenuData.name}</strong><br>
+                             <small style="color: #ffc107;">🛒 쿠팡 베스트셀러</small>`;
+            } else if (selectedMenuData.type === 'ranking') {
+                resultText = `${selectedMenuData.icon} <strong>${selectedMenuData.name}</strong><br>
+                             <small style="color: #ff6b35;">🏆 랭킹 카테고리</small>`;
+            } else {
+                resultText = `${selectedMenuData.icon} <strong>${selectedMenuData.name}</strong><br>
+                             <small style="color: #ff6b35;">${selectedMenuData.rank} 인기 메뉴</small>`;
+            }
+            
+            document.getElementById('selected-menu').innerHTML = resultText;
             document.getElementById('result').style.display = 'block';
         }
 
