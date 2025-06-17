@@ -51,8 +51,8 @@
 
         .menu-item {
             position: absolute;
-            width: 320px;
-            height: 900px;
+            width: 480px;
+            height: 720px;
             background: rgba(255, 255, 255, 0.95);
             border: 1px solid rgba(200, 200, 200, 0.6);
             border-radius: 15px;
@@ -261,13 +261,13 @@
                 
                 // 원형 배치 계산
                 const angle = angleStep * index;
-                const radius = 2800; // 원둘레 바깥쪽으로 이동
+                const radius = 2400; // 중심에서의 거리 (16배 증가)
                 const x = Math.cos((angle - 90) * Math.PI / 180) * radius;
                 const y = Math.sin((angle - 90) * Math.PI / 180) * radius;
                 
                 // 메뉴판을 방사형으로 배치 (중심에서 바깥쪽 향하도록)
-                menuItem.style.left = `calc(50% + ${x}px - 160px)`;
-                menuItem.style.top = `calc(50% + ${y}px - 450px)`;
+                menuItem.style.left = `calc(50% + ${x}px - 240px)`;
+                menuItem.style.top = `calc(50% + ${y}px - 360px)`;
                 menuItem.style.transform = `rotate(${angle}deg)`;
                 
                 roulette.appendChild(menuItem);

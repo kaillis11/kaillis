@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배민 스타일 음식 룰렛</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .title {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .roulette-container {
+            position: fixed;
+            width: 4000px;
+            height: 4000px;
+            top: 800px;
+            left: 50%;
+            transform: translateX(-50%);
+            overflow: hidden;
+            pointer-events: auto;
+        }
+
+        .roulette-wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: relative;
+            background: #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            cursor: grab;
+        }
+
+        .roulette-wheel:active {
+            cursor: grabbing;
+        }
+
+        .menu-category-card {
+            position: absolute;
+            width: 400px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(200, 200, 200, 0.6);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+            transform-origin: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            cursor: grab;
+            backdrop-filter: blur(5px);
+        }
+
+        .category-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .menu-item-row {
+            display: flex;
+            align-items: center;
+            padding: 15px 10px;
+            margin: 8px 0;
+            background: rgba(248, 249, 250, 0.8);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item-row:hover {
+            background: rgba(255, 107, 53, 0.1);
+            transform: translateX(5px);
+        }
+
+        .rank-number {
+            font-size: 20px;
+            font-weight: 900;
+            color: #ff6b35;
+            width: 40px;
+            text-align: center;
+        }
+
+        .menu-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 2px solid #fff;
+        }
+
+        .menu-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+
+        .spin-button {
+            background: linear-gradient(45deg, #ff6b6b, #ff5252);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .spin-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .result {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .center-dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: #333;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .pointer {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 25px solid #333;
+            transform: translateX(-50%);
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">🍽️ 배민 스타일 룰렛</h1>
+    
+    <div class="roulette-container">
+        <div class="pointer"></div>
+        <div class="roulette-wheel" id="roulette">
+            <div class="center-dot"></div>
+        </div>
+    </div>
+    
+    <button class="spin-button" onclick="spinRoulette()">🎲 룰렛 돌리기!</button>
+    
+    <div class="result" id="result" style="display: none;">
+        <h3>🎉 오늘의 추천</h3>
+        <p id="selected-menu"></p>
+    </div>
+
+    <script>
+        // 배민 스타일 카테고리별 TOP3 메뉴 데이터
+        const categoryMenus = [
+            {
+                title: "🍗 치킨",
+                items: [
+                    { rank: "1위", name: "후라이드치킨", icon: "🍗" },
+                    { rank: "2위", name: "양념치킨", icon: "🍗" },
+                    { rank: "3위", name: "간장양념치킨", icon: "🍗" }
+                ]
+            },
+            {
+                title: "🥘 고기·구이",
+                items: [
+                    { rank: "1위", name: "삼겹살구이", icon: "🥩" },
+                    { rank: "2위", name: "갈비구이", icon: "🥩" },
+                    { rank: "3위", name: "제육볶음", icon: "🥘" }
+                ]
+            },
+            {
+                title: "🍜 분식",
+                items: [
+                    { rank: "1위", name: "떡볶이", icon: "🍜" },
+                    { rank: "2위", name: "국물떡볶이", icon: "🍜" },
+                    { rank: "3위", name: "치즈떡볶이", icon: "🧀" }
+                ]
+            },
+            {
+                title: "🍱 도시락",
+                items: [
+                    { rank: "1위", name: "치킨마요덮밥", icon: "🍱" },
+                    { rank: "2위", name: "불고기덮밥", icon: "🍱" },
+                    { rank: "3위", name: "김치볶음밥", icon: "🍚" }
+                ]
+            },
+            {
+                title: "🍔 패스트푸드",
+                items: [
+                    { rank: "1위", name: "불고기버거", icon: "🍔" },
+                    { rank: "2위", name: "치킨버거", icon: "🍔" },
+                    { rank: "3위", name: "더블치즈버거", icon: "🍔" }
+                ]
+            },
+            {
+                title: "🍛 일식",
+                items: [
+                    { rank: "1위", name: "모듬초밥", icon: "🍣" },
+                    { rank: "2위", name: "돈카츠", icon: "🍛" },
+                    { rank: "3위", name: "우동", icon: "🍜" }
+                ]
+            },
+            {
+                title: "🍝 양식",
+                items: [
+                    { rank: "1위", name: "크림파스타", icon: "🍝" },
+                    { rank: "2위", name: "토마토파스타", icon: "🍝" },
+                    { rank: "3위", name: "피자", icon: "🍕" }
+                ]
+            },
+            {
+                title: "🥤 카페·디저트",
+                items: [
+                    { rank: "1위", name: "아이스크림", icon: "🍦" },
+                    { rank: "2위", name: "케이크", icon: "🍰" },
+                    { rank: "3위", name: "마카롱", icon: "🧁" }
+                ]
+            }
+        ];
+
+        // 룰렛 상태 관리
+        let currentRotation = 0;
+        let isSpinning = false;
+        let isDragging = false;
+        let lastAngle = 0;
+
+        function createRouletteWheel() {
+            const roulette = document.getElementById('roulette');
+            const angleStep = 360 / categoryMenus.length;
+            
+            categoryMenus.forEach((category, index) => {
+                const categoryCard = document.createElement('div');
+                categoryCard.className = 'menu-category-card';
+                
+                // 카테고리 제목
+                const titleElement = document.createElement('div');
+                titleElement.className = 'category-title';
+                titleElement.textContent = category.title;
+                categoryCard.appendChild(titleElement);
+                
+                // TOP3 메뉴 아이템들
+                category.items.forEach(item => {
+                    const itemRow = document.createElement('div');
+                    itemRow.className = 'menu-item-row';
+                    
+                    const rankElement = document.createElement('div');
+                    rankElement.className = 'rank-number';
+                    rankElement.textContent = item.rank;
+                    
+                    const iconElement = document.createElement('div');
+                    iconElement.className = 'menu-icon';
+                    iconElement.textContent = item.icon;
+                    
+                    const nameElement = document.createElement('div');
+                    nameElement.className = 'menu-name';
+                    nameElement.textContent = item.name;
+                    
+                    itemRow.appendChild(rankElement);
+                    itemRow.appendChild(iconElement);
+                    itemRow.appendChild(nameElement);
+                    categoryCard.appendChild(itemRow);
+                });
+                
+                // 원형 배치 계산
+                const angle = angleStep * index;
+                const radius = 1500; // 중심에서의 거리
+                const x = Math.cos((angle - 90) * Math.PI / 180) * radius;
+                const y = Math.sin((angle - 90) * Math.PI / 180) * radius;
+                
+                // 카드를 방사형으로 배치
+                categoryCard.style.left = `calc(50% + ${x}px - 200px)`;
+                categoryCard.style.top = `calc(50% + ${y}px - 300px)`;
+                categoryCard.style.transform = `rotate(${angle}deg)`;
+                
+                roulette.appendChild(categoryCard);
+            });
+
+            setupDragEvents();
+        }
+
+        function setupDragEvents() {
+            const container = document.querySelector('.roulette-container');
+
+            container.addEventListener('mousedown', startDrag);
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', endDrag);
+
+            container.addEventListener('touchstart', startDrag);
+            document.addEventListener('touchmove', drag);
+            document.addEventListener('touchend', endDrag);
+        }
+
+        function getAngleFromEvent(e) {
+            const container = document.querySelector('.roulette-container');
+            const rect = container.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            
+            const deltaX = clientX - centerX;
+            const deltaY = clientY - centerY;
+            
+            return Math.atan2(deltaY, deltaX) * 180 / Math.PI;
+        }
+
+        function startDrag(e) {
+            if (isSpinning) return;
+            isDragging = true;
+            lastAngle = getAngleFromEvent(e);
+            document.getElementById('result').style.display = 'none';
+            e.preventDefault();
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            
+            const currentAngle = getAngleFromEvent(e);
+            let deltaAngle = currentAngle - lastAngle;
+            
+            if (deltaAngle > 180) deltaAngle -= 360;
+            if (deltaAngle < -180) deltaAngle += 360;
+            
+            currentRotation += deltaAngle;
+            updateRouletteRotation();
+            
+            lastAngle = currentAngle;
+            e.preventDefault();
+        }
+
+        function endDrag(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            checkResult();
+        }
+
+        function updateRouletteRotation() {
+            const roulette = document.getElementById('roulette');
+            roulette.style.transform = `rotate(${currentRotation}deg)`;
+        }
+
+        function checkResult() {
+            const normalizedAngle = ((currentRotation % 360) + 360) % 360;
+            const selectedIndex = Math.floor(((360 - normalizedAngle + (360 / categoryMenus.length / 2)) % 360) / (360 / categoryMenus.length));
+            const selectedCategory = categoryMenus[selectedIndex];
+            
+            // 카테고리 내에서 랜덤하게 하나 선택
+            const randomItem = selectedCategory.items[Math.floor(Math.random() * selectedCategory.items.length)];
+            
+            document.getElementById('selected-menu').innerHTML = 
+                `<strong>${selectedCategory.title}</strong><br>
+                 ${randomItem.icon} <strong>${randomItem.name}</strong> (${randomItem.rank})`;
+            document.getElementById('result').style.display = 'block';
+        }
+
+        function spinRoulette() {
+            if (isSpinning || isDragging) return;
+            
+            isSpinning = true;
+            const randomSpin = 720 + Math.random() * 1440; // 2-6바퀴
+            currentRotation += randomSpin;
+            
+            const roulette = document.getElementById('roulette');
+            roulette.style.transition = 'transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
+            roulette.style.transform = `rotate(${currentRotation}deg)`;
+            
+            setTimeout(() => {
+                isSpinning = false;
+                roulette.style.transition = 'transform 0.3s ease-out';
+                checkResult();
+            }, 3000);
+        }
+
+        // 페이지 로드시 룰렛 생성
+        window.onload = function() {
+            createRouletteWheel();
+        };
+    </script>
+</body>
+</html>
