@@ -508,6 +508,8 @@
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
+            z-index: 1001; /* 다른 요소들보다 위에 */
+            pointer-events: auto; /* 클릭 허용 확실히 */
         }
 
         .popup-close:hover {
@@ -1027,14 +1029,15 @@
                 this.popup = document.getElementById('cardPopup');
                 this.currentCard = null;
                 
-                // X 버튼 클릭시 팝업 닫기
-                const closeBtn = document.getElementById('popupCloseBtn');
-                if (closeBtn) {
-                    closeBtn.addEventListener('click', (e) => {
-                        e.stopPropagation(); // 이벤트 버블링 방지
+                // X 버튼 클릭시 팝업 닫기 - 더 안전한 방법
+                document.addEventListener('click', (e) => {
+                    if (e.target && e.target.id === 'popupCloseBtn') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('X 버튼 클릭됨!'); // 디버그 로그
                         this.closePopup();
-                    });
-                }
+                    }
+                });
                 
                 // 오버레이 클릭시 팝업 닫기
                 this.overlay.addEventListener('click', (e) => {
