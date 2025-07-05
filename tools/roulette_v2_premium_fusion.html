@@ -378,15 +378,35 @@
 
         .card-popup {
             background: white;
-            border-radius: 25px;
+            border-radius: 20px;
             width: 90%;
             max-width: 500px;
             max-height: 80vh;
-            padding: 30px;
+            padding: 24px 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             transform: scale(0.8);
             animation: popupScale 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            overflow-y: auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 팝업 카드에 원본 카드와 동일한 배경 그라데이션 적용 */
+        .card-popup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(180deg, var(--theme-bg) 0%, transparent 100%);
+            border-radius: 20px 20px 0 0;
+            z-index: 0;
+        }
+
+        /* 팝업 내용이 배경 위에 오도록 */
+        .popup-header, .popup-menu-grid {
+            position: relative;
+            z-index: 1;
         }
 
         @keyframes fadeIn {
@@ -407,47 +427,69 @@
 
         .popup-header {
             text-align: center;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #f0f0f0;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--theme-bg);
         }
 
         .popup-emoji {
-            font-size: 80px;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+            font-size: 50px;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
 
         .popup-title {
-            font-size: 32px;
+            font-size: 24px;
             font-weight: 800;
             color: var(--theme-color);
-            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+            margin-bottom: 6px;
         }
 
         .popup-subtitle {
-            font-size: 16px;
+            font-size: 14px;
             color: #7f8c8d;
+            font-weight: 400;
         }
 
         .popup-menu-grid {
             display: grid;
-            gap: 15px;
+            gap: 8px;
         }
 
         .popup-menu-item {
             display: flex;
             align-items: center;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 15px;
+            padding: 12px 16px;
+            background: var(--theme-bg);
+            border-radius: 12px;
             transition: all 0.2s ease;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            min-height: 60px;
+        }
+
+        /* 원본 카드와 동일한 호버 효과 */
+        .popup-menu-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: var(--theme-color);
+            transform: translateX(-100%);
+            transition: transform 0.2s ease;
         }
 
         .popup-menu-item:hover {
-            background: #e9ecef;
-            transform: translateY(-2px);
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .popup-menu-item:hover::before {
+            transform: translateX(0);
         }
 
         .popup-close {
@@ -628,6 +670,26 @@
         <button class="spin-button" onclick="rouletteEngine.randomSpin()">
             <span>🎲 룰렛 돌리기!</span>
         </button>
+    </div>
+
+    <!-- 속도 힌트 -->
+    <div class="slow-rotation-hint" id="speedHint">
+        💡 천천히 돌 때 카드를 클릭해보세요!
+    </div>
+
+    <!-- 카드 팝업 오버레이 -->
+    <div class="card-popup-overlay" id="cardPopupOverlay">
+        <div class="card-popup" id="cardPopup">
+            <button class="popup-close" onclick="cardPopupManager.closePopup()">✕</button>
+            <div class="popup-header">
+                <div class="popup-emoji" id="popupEmoji"></div>
+                <div class="popup-title" id="popupTitle"></div>
+                <div class="popup-subtitle" id="popupSubtitle"></div>
+            </div>
+            <div class="popup-menu-grid" id="popupMenuGrid">
+                <!-- 메뉴 아이템들이 여기에 동적으로 추가됩니다 -->
+            </div>
+        </div>
     </div>
     
 
@@ -958,6 +1020,218 @@
             }
         }
 
+        // 카드 팝업 매니저 클래스
+        class CardPopupManager {
+            constructor() {
+                this.overlay = document.getElementById('cardPopupOverlay');
+                this.popup = document.getElementById('cardPopup');
+                this.currentCard = null;
+                
+                // 오버레이 클릭시 팝업 닫기
+                this.overlay.addEventListener('click', (e) => {
+                    if (e.target === this.overlay) {
+                        this.closePopup();
+                    }
+                });
+                
+                // ESC 키로 팝업 닫기
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.overlay.classList.contains('active')) {
+                        this.closePopup();
+                    }
+                });
+            }
+
+            showPopup(categoryData) {
+                this.currentCard = categoryData;
+                
+                // 팝업 내용 업데이트
+                document.getElementById('popupEmoji').textContent = categoryData.title.split(' ')[0];
+                document.getElementById('popupTitle').textContent = this.getCleanTitle(categoryData);
+                document.getElementById('popupSubtitle').textContent = this.getSubtitle(categoryData);
+                
+                // 테마 색상과 배경 적용 (원본 카드와 동일)
+                const themeColors = this.getThemeColors(categoryData.id);
+                this.popup.style.setProperty('--theme-color', themeColors.color);
+                this.popup.style.setProperty('--theme-bg', themeColors.bg);
+                
+                // 메뉴 그리드 생성
+                this.createMenuGrid(categoryData);
+                
+                // 팝업 표시
+                this.overlay.classList.add('active');
+                
+                // 룰렛 일시정지 (선택사항)
+                // rouletteEngine.state.mode = 'idle';
+            }
+
+            closePopup() {
+                this.overlay.classList.remove('active');
+                this.currentCard = null;
+            }
+
+            getCleanTitle(categoryData) {
+                if (categoryData.type === 'coupang') {
+                    return `${categoryData.rank} ${categoryData.title.split(' ')[1]}`;
+                } else if (categoryData.type === 'ranking') {
+                    return `${categoryData.title.split(' ')[1]} ${categoryData.title.split(' ')[2]}`;
+                } else {
+                    return categoryData.title.split(' ')[1];
+                }
+            }
+
+            getSubtitle(categoryData) {
+                if (categoryData.type === 'coupang') {
+                    return '🛒 쿠팡 베스트셀러 상품';
+                } else if (categoryData.type === 'ranking') {
+                    return '🏆 인기 순위 보기';
+                } else {
+                    return `인기 ${categoryData.title.split(' ')[1]} 메뉴`;
+                }
+            }
+
+            createMenuGrid(categoryData) {
+                const grid = document.getElementById('popupMenuGrid');
+                grid.innerHTML = '';
+                
+                categoryData.items.forEach((item, index) => {
+                    const menuItem = document.createElement('div');
+                    menuItem.className = 'popup-menu-item';
+                    
+                    if (categoryData.type === 'coupang' || categoryData.type === 'ranking') {
+                        // 쿠팡/랭킹 카드는 하나의 큰 버튼
+                        menuItem.innerHTML = `
+                            <div class="menu-icon" style="font-size: 32px; margin-right: 16px; width: 45px; height: 45px;">${item.icon}</div>
+                            <div class="menu-info" style="flex: 1;">
+                                <div class="menu-name" style="font-size: 18px;">${item.name}</div>
+                                <div class="menu-tag" style="font-size: 14px;">${item.tag}</div>
+                            </div>
+                            <div style="font-size: 20px; margin-left: 16px;">→</div>
+                        `;
+                        
+                        menuItem.addEventListener('click', () => {
+                            if (categoryData.type === 'coupang') {
+                                // 쿠팡 페이지로 이동
+                                alert('🛒 쿠팡 페이지로 이동합니다!');
+                            } else if (categoryData.type === 'ranking') {
+                                // 랭킹 페이지 표시
+                                this.showRankingPage(categoryData);
+                            }
+                        });
+                    } else {
+                        // 일반 메뉴 아이템
+                        menuItem.innerHTML = `
+                            <div class="rank-badge" style="min-width: 40px; height: 40px; margin-right: 12px; font-size: 14px;">${item.rank}</div>
+                            <div class="menu-icon" style="font-size: 28px; margin-right: 12px; width: 40px; height: 40px;">${item.icon}</div>
+                            <div class="menu-info" style="flex: 1;">
+                                <div class="menu-name" style="font-size: 16px;">${item.name}</div>
+                                <div class="menu-tag" style="font-size: 12px;">${item.tag}</div>
+                            </div>
+                        `;
+                        
+                        menuItem.addEventListener('click', () => {
+                            // 메뉴 선택 효과
+                            this.selectMenu(item, categoryData);
+                        });
+                    }
+                    
+                    grid.appendChild(menuItem);
+                });
+            }
+
+            selectMenu(item, categoryData) {
+                // 선택 효과 애니메이션
+                const selectedText = `🎯 ${item.name} 선택!`;
+                
+                // 팝업 제목 업데이트
+                document.getElementById('popupTitle').textContent = selectedText;
+                document.getElementById('popupSubtitle').textContent = `${item.tag} - 좋은 선택이에요!`;
+                
+                // 2초 후 팝업 닫기
+                setTimeout(() => {
+                    this.closePopup();
+                }, 2000);
+            }
+
+            showRankingPage(categoryData) {
+                // 랭킹 페이지 표시 (간단 버전)
+                const rankings = this.getRankingData(categoryData.id);
+                const grid = document.getElementById('popupMenuGrid');
+                grid.innerHTML = '';
+                
+                document.getElementById('popupSubtitle').textContent = '🏆 실시간 인기 순위';
+                
+                rankings.forEach((rank, index) => {
+                    const rankItem = document.createElement('div');
+                    rankItem.className = 'popup-menu-item';
+                    rankItem.innerHTML = `
+                        <div class="rank-badge" style="background: ${index < 3 ? '#ffd700' : '#f0f0f0'}; min-width: 40px; height: 40px; margin-right: 12px; font-size: 14px;">
+                            ${index + 1}위
+                        </div>
+                        <div class="menu-icon" style="font-size: 28px; margin-right: 12px; width: 40px; height: 40px;">${rank.icon}</div>
+                        <div class="menu-info" style="flex: 1;">
+                            <div class="menu-name" style="font-size: 16px;">${rank.name}</div>
+                            <div class="menu-tag" style="font-size: 12px;">${rank.share}% 점유율</div>
+                        </div>
+                    `;
+                    grid.appendChild(rankItem);
+                });
+            }
+
+            getRankingData(categoryType) {
+                // 간단한 랭킹 데이터 (실제로는 API에서 가져올 수 있음)
+                const rankings = {
+                    'ranking-pizza': [
+                        { name: '페퍼로니 피자', icon: '🍕', share: 25 },
+                        { name: '치즈 피자', icon: '🧀', share: 20 },
+                        { name: '불고기 피자', icon: '🥩', share: 18 },
+                        { name: '콤비네이션 피자', icon: '🍕', share: 15 },
+                        { name: '하와이안 피자', icon: '🍍', share: 12 },
+                        { name: '마르게리타 피자', icon: '🍅', share: 10 }
+                    ],
+                    'ranking-bunsik': [
+                        { name: '떡볶이', icon: '🍜', share: 30 },
+                        { name: '김밥', icon: '🍙', share: 25 },
+                        { name: '라면', icon: '🍜', share: 20 },
+                        { name: '순대', icon: '🥓', share: 15 },
+                        { name: '튀김', icon: '🍤', share: 10 }
+                    ]
+                };
+                
+                return rankings[categoryType] || rankings['ranking-pizza'];
+            }
+
+            getThemeColors(categoryId) {
+                const themes = {
+                    'chicken': { color: '#ff6b35', bg: '#fff5f0' },
+                    'meat': { color: '#e74c3c', bg: '#ffebee' },
+                    'bunsik': { color: '#f39c12', bg: '#fffbf0' },
+                    'lunchbox': { color: '#27ae60', bg: '#f0fff4' },
+                    'fastfood': { color: '#e67e22', bg: '#fff8f0' },
+                    'japanese': { color: '#8e44ad', bg: '#f8f0ff' },
+                    'western': { color: '#3498db', bg: '#f0f8ff' },
+                    'dessert': { color: '#e91e63', bg: '#fff0f5' },
+                    'chinese': { color: '#c0392b', bg: '#fff0f0' },
+                    'latenight': { color: '#34495e', bg: '#f0f2f5' },
+                    'soup': { color: '#16a085', bg: '#f0fffa' },
+                    'asian': { color: '#d35400', bg: '#fff5e6' },
+                    'coupang': { 
+                        color: '#ffc107', 
+                        bg: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)'
+                    },
+                    'ranking': { 
+                        color: '#ff6b35', 
+                        bg: 'linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)'
+                    }
+                };
+                return themes[categoryId] || { color: '#3498db', bg: '#f0f8ff' };
+            }
+
+            getThemeColor(categoryId) {
+                return this.getThemeColors(categoryId).color;
+            }
+        }
+
         // 메인 룰렛 엔진 클래스
         class RouletteEngine {
             constructor() {
@@ -989,6 +1263,13 @@
             createCategoryCard(categoryData, index, angleStep) {
                 const card = document.createElement('div');
                 card.className = `menu-category-card category-${categoryData.id}`;
+                
+                // 카드 클릭 이벤트 추가
+                card.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.handleCardClick(categoryData);
+                });
                 
                 // 카테고리 헤더
                 const header = document.createElement('div');
@@ -1090,6 +1371,9 @@
                     if (this.state.mode === 'spinning') {
                         this.updateSpinning();
                     }
+                    
+                    // 속도에 따른 카드 클릭 가능성 업데이트
+                    this.updateSpeedHintVisibility();
                     
                     this.renderer.render(this.state);
                     this.renderer.updateDebugInfo(this.state, this.fpsCounter.fps);
@@ -1207,18 +1491,78 @@
                 this.state.velocity = (Math.random() * 15 + 10) * (Math.random() > 0.5 ? 1 : -1);
             }
 
+            handleCardClick(categoryData) {
+                // 속도 체크: 최저 속도일 때만 클릭 허용
+                const currentSpeed = Math.abs(this.state.velocity);
+                const clickableSpeed = PHYSICS.PERPETUAL_VELOCITY * 3; // 최저 속도의 3배까지 허용
+                
+                if (currentSpeed > clickableSpeed) {
+                    // 너무 빨리 돌고 있으면 힌트 표시
+                    this.showSpeedHint();
+                    return;
+                }
+                
+                // 카드 팝업 표시
+                cardPopupManager.showPopup(categoryData);
+                
+                // 선택 효과 (선택사항)
+                this.addCardSelectionEffect();
+            }
+
+            showSpeedHint() {
+                const hint = document.getElementById('speedHint');
+                hint.classList.add('visible');
+                
+                // 3초 후 힌트 숨기기
+                setTimeout(() => {
+                    hint.classList.remove('visible');
+                }, 3000);
+            }
+
+            addCardSelectionEffect() {
+                // 간단한 선택 효과 (진동이나 플래시)
+                if (navigator.vibrate) {
+                    navigator.vibrate(50); // 모바일에서 진동
+                }
+            }
+
+            updateSpeedHintVisibility() {
+                const hint = document.getElementById('speedHint');
+                const currentSpeed = Math.abs(this.state.velocity);
+                const clickableSpeed = PHYSICS.PERPETUAL_VELOCITY * 3;
+                
+                // 클릭 가능한 속도일 때 카드에 시각적 효과 추가
+                const cards = document.querySelectorAll('.menu-category-card');
+                
+                if (currentSpeed <= clickableSpeed) {
+                    // 카드 클릭 가능 상태
+                    cards.forEach(card => {
+                        card.classList.add('clickable-card');
+                    });
+                } else {
+                    // 카드 클릭 불가 상태
+                    cards.forEach(card => {
+                        card.classList.remove('clickable-card');
+                    });
+                }
+            }
+
         }
 
 
-        // 전역 룰렛 엔진 인스턴스
+        // 전역 인스턴스들
         let rouletteEngine;
+        let cardPopupManager;
 
         // 페이지 로드 시 초기화
         window.addEventListener('load', () => {
             rouletteEngine = new RouletteEngine();
+            cardPopupManager = new CardPopupManager();
+            
             console.log('🎯 WhatToEat 프리미엄 룰렛 v2.0 초기화 완료!');
             console.log('💡 디버그 정보를 보려면 D키를 누르세요.');
             console.log('🖱️ 드래그로 룰렛을 돌려보세요!');
+            console.log('🎪 천천히 돌 때 카드를 클릭해보세요!');
         });
     </script>
 </body>
