@@ -355,6 +355,13 @@
             container.addEventListener('touchstart', startDrag);
             document.addEventListener('touchmove', drag);
             document.addEventListener('touchend', endDrag);
+            
+            // 응급 리셋 이벤트 (더블클릭)
+            container.addEventListener('dblclick', function(e) {
+                emergencyReset();
+                console.log('더블클릭으로 응급 리셋!');
+                e.preventDefault();
+            });
         }
 
         function getAngleFromEvent(e) {
@@ -373,18 +380,13 @@
         }
 
         function startDrag(e) {
-            if (isSpinning) return;
+            // 응급 리셋 먼저 실행
+            emergencyReset();
             
             isDragging = true;
             lastAngle = getAngleFromEvent(e);
             velocityHistory = [];
             
-            if (animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
-            }
-            
-            document.getElementById('result').style.display = 'none';
             e.preventDefault();
         }
 
@@ -449,11 +451,18 @@
             isSpinning = true;
             
             function animate() {
+                // 드래그 시작되면 애니메이션 중단
+                if (isDragging) {
+                    isSpinning = false;
+                    animationId = null;
+                    return;
+                }
+                
                 velocity *= FRICTION;
                 currentRotation += velocity;
                 updateRouletteRotation();
                 
-                if (Math.abs(velocity) > MIN_VELOCITY) {
+                if (Math.abs(velocity) > MIN_VELOCITY && isSpinning) {
                     animationId = requestAnimationFrame(animate);
                 } else {
                     isSpinning = false;
@@ -493,8 +502,25 @@
             document.getElementById('result').style.display = 'block';
         }
 
+        // 응급 리셋 함수 - 모든 상태 강제 초기화
+        function emergencyReset() {
+            console.log('응급 리셋 실행!');
+            isSpinning = false;
+            isDragging = false;
+            velocity = 0;
+            velocityHistory = [];
+            
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+            
+            document.getElementById('result').style.display = 'none';
+        }
+
         function spinRoulette() {
-            if (isSpinning || isDragging) return;
+            // 응급 리셋 먼저 실행
+            emergencyReset();
             
             // 버튼으로 랜덤 스핀
             velocity = (Math.random() * 15 + 10) * (Math.random() > 0.5 ? 1 : -1);

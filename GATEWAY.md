@@ -1,64 +1,25 @@
-# 🚪 WhatToEat 게이트웨이
-
-**현재 위치**: `/WhatToEat/` (프로젝트 루트)  
-**현재 단계**: Level 2 - 프로젝트 전체 개요
-
+# 🚪 WhatToEat Gateway
+**현재 위치**: `/WhatToEat/`  
+**상위 폴더**: [`../project_hub/`](../project_hub/)  
+**마지막 수정**: 2025-06-18
 ---
-
-## 🗺️ 현재 위치에서 보이는 풍경
-
-**WhatToEat**는 [프로젝트 한줄 설명]입니다.
-- [주요 특징 1]
-- [주요 특징 2]  
-- [주요 특징 3]
-
+## 🗺️ 이 폴더의 목적
+음식 선택 고민을 해결하는 프리미엄 룰렛 앱 - 무한회전 안정화 엔진 + 3단계 수익화 모델
 ---
-
-## 🔼 상위로 가는 길 (더 간단한 개념)
-
-### 📍 **프로젝트 허브 전체 보기**
-> 더 넓은 맥락에서 이 프로젝트의 위치를 파악하고 싶다면
-> 
-> 🚪 [`/mnt/d/ai/project_hub/`](/mnt/d/ai/project_hub/) - 모든 프로젝트 통합 뷰
-
+## 📄 같은 폴더 내 문서 (파일)
+- [PROJECT_HUB.md](PROJECT_HUB.md) - 프로젝트 전체 현황 및 성과 요약
 ---
-
-## 🔽 하위로 가는 길 (더 자세한 내용)
-
-### 📂 **창의적 아이디어**
-> 미래 비전과 실험적 구상을 보고 싶다면
-> 
-> 🚪 [`./ideas/GATEWAY.md`](ideas/GATEWAY.md) → 혁신적 아이디어들
-
-### 📂 **공식 문서**
-> 확정된 설계와 기술 명세를 원한다면
-> 
-> 🚪 [`./docs/GATEWAY.md`](docs/GATEWAY.md) → 체계적 기술 문서
-
-### 📂 **실행 도구**
-> 실제 구현과 자동화 스크립트를 보려면
-> 
-> 🚪 [`./tools/`](tools/) → 스크립트와 유틸리티
-
-### 📂 **적용 사례**
-> 실제 사용 예시와 결과를 확인하려면
-> 
-> 🚪 [`./examples/`](examples/) → 구체적 활용 사례
-
+## 📂 하위 폴더
+- [tools/](tools/)  
+  ↳ [`tools/GATEWAY.md`](tools/GATEWAY.md) - 실행 가능한 최종 HTML 파일들
+- [docs/](docs/)  
+  ↳ [`docs/GATEWAY.md`](docs/GATEWAY.md) - 기술 문서 및 인수인계 가이드
+- [ideas/](ideas/)  
+  ↳ [`ideas/GATEWAY.md`](ideas/GATEWAY.md) - 수익화 전략 및 미래 비전
 ---
-
-## 🎯 빠른 길잡이
-
-**처음 방문자라면**: 
-1. `PROJECT_HUB.md` 읽기 (전체 그림)
-2. `ideas/` 폴더 탐색 (핵심 아이디어)
-3. `INSTRUCTIONS.md` 확인 (사용법)
-
-**개발자라면**:
-1. `docs/` 폴더에서 기술 명세 확인
-2. `tools/` 폴더에서 구현 도구 탐색
-3. `examples/` 폴더에서 적용 사례 참조
-
+## 🎯 바로가기
+- **바로 사용하려면:** [tools/roulette_v2_premium_fusion.html](tools/roulette_v2_premium_fusion.html)
+- **개발 인수인계:** [docs/HANDOVER_GUIDE.md](docs/HANDOVER_GUIDE.md)
+- **수익화 전략:** [ideas/3_tier_monetization_strategy.md](ideas/3_tier_monetization_strategy.md)
 ---
-
-*"각 문은 새로운 이해의 차원으로 통한다. 당신이 원하는 깊이를 선택하라."* 🚪
+> **TIP:** 프로젝트 전체 맥락이 필요하면 [PROJECT_HUB.md](PROJECT_HUB.md)를 먼저 확인하세요.

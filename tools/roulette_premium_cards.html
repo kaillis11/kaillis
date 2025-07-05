@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프리미엄 배민 스타일 음식 룰렛</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 배경 애니메이션 */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: bgMove 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes bgMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            padding: 2rem 1rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .title {
+            color: white;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-weight: 400;
+        }
+
+        .roulette-container {
+            position: fixed;
+            width: 5000px;
+            height: 5000px;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: auto;
+        }
+
+        .roulette-wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: relative;
+            background: radial-gradient(circle at center, #ffffff 0%, #f8f9fa 100%);
+            box-shadow: 
+                0 0 0 2px rgba(255,255,255,0.8),
+                0 10px 40px rgba(0,0,0,0.3),
+                inset 0 0 100px rgba(0,0,0,0.05);
+            cursor: grab;
+            transition: transform 0.3s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+        }
+
+        .roulette-wheel:active {
+            cursor: grabbing;
+        }
+
+        /* 카테고리별 테마 색상 */
+        .category-chicken { --theme-color: #ff6b35; --theme-bg: #fff5f0; }
+        .category-meat { --theme-color: #e74c3c; --theme-bg: #ffebee; }
+        .category-bunsik { --theme-color: #f39c12; --theme-bg: #fffbf0; }
+        .category-lunchbox { --theme-color: #27ae60; --theme-bg: #f0fff4; }
+        .category-fastfood { --theme-color: #e67e22; --theme-bg: #fff8f0; }
+        .category-japanese { --theme-color: #8e44ad; --theme-bg: #f8f0ff; }
+        .category-western { --theme-color: #3498db; --theme-bg: #f0f8ff; }
+        .category-dessert { --theme-color: #e91e63; --theme-bg: #fff0f5; }
+        .category-chinese { --theme-color: #c0392b; --theme-bg: #fff0f0; }
+        .category-latenight { --theme-color: #34495e; --theme-bg: #f0f2f5; }
+        .category-soup { --theme-color: #16a085; --theme-bg: #f0fffa; }
+        .category-asian { --theme-color: #d35400; --theme-bg: #fff5e6; }
+
+        .menu-category-card {
+            position: absolute;
+            width: 420px;
+            height: 620px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            transform-origin: center;
+            box-shadow: 
+                0 2px 8px rgba(0,0,0,0.08),
+                0 8px 24px rgba(0,0,0,0.12);
+            cursor: grab;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu-category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(180deg, var(--theme-bg) 0%, transparent 100%);
+            z-index: 0;
+        }
+
+        .category-header {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--theme-bg);
+        }
+
+        .category-emoji {
+            font-size: 48px;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .category-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--theme-color);
+            letter-spacing: -0.02em;
+        }
+
+        .menu-items-container {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        /* 스크롤바 스타일 */
+        .menu-items-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .menu-items-container::-webkit-scrollbar-track {
+            background: var(--theme-bg);
+            border-radius: 2px;
+        }
+
+        .menu-items-container::-webkit-scrollbar-thumb {
+            background: var(--theme-color);
+            border-radius: 2px;
+            opacity: 0.5;
+        }
+
+        .menu-item-row {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--theme-bg);
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item-row::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--theme-color);
+            transform: translateX(-100%);
+            transition: transform 0.2s ease;
+        }
+
+        .menu-item-row:hover {
+            transform: translateX(4px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .menu-item-row:hover::before {
+            transform: translateX(0);
+        }
+
+        .rank-badge {
+            min-width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--theme-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-right: 12px;
+        }
+
+        .menu-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .menu-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .menu-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2c3e50;
+            letter-spacing: -0.01em;
+        }
+
+        .menu-tag {
+            font-size: 12px;
+            color: #7f8c8d;
+            font-weight: 400;
+        }
+
+        /* 중앙 장식 */
+        .center-decoration {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 0 0 8px rgba(255,255,255,0.2),
+                0 4px 20px rgba(0,0,0,0.2),
+                inset 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 10;
+            font-size: 48px;
+        }
+
+        /* 포인터 */
+        .pointer {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        .pointer-shape {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 35px solid #2c3e50;
+            position: relative;
+        }
+
+        .pointer-shape::after {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: -30px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 25px solid #34495e;
+        }
+
+        /* 컨트롤 영역 */
+        .controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 16px;
+            z-index: 100;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate(-50%, 20px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        .spin-button {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 100px;
+            cursor: pointer;
+            box-shadow: 
+                0 4px 20px rgba(255, 82, 82, 0.4),
+                0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spin-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .spin-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 6px 30px rgba(255, 82, 82, 0.5),
+                0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .spin-button:active {
+            transform: translateY(0);
+        }
+
+        .spin-button:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* 결과 표시 */
+        .result {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: white;
+            padding: 32px;
+            border-radius: 24px;
+            box-shadow: 
+                0 10px 40px rgba(0,0,0,0.2),
+                0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            min-width: 320px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 200;
+        }
+
+        .result.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .result-emoji {
+            font-size: 64px;
+            margin-bottom: 16px;
+            animation: bounce 0.6s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .result-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .result-menu {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ff6b35;
+            margin-bottom: 8px;
+        }
+
+        .result-category {
+            font-size: 16px;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .result-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            background: #f8f9fa;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #7f8c8d;
+            transition: all 0.2s ease;
+        }
+
+        .result-close:hover {
+            background: #e9ecef;
+            color: #2c3e50;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .roulette-container {
+                width: 3000px;
+                height: 3000px;
+            }
+            
+            .menu-category-card {
+                width: 320px;
+                height: 480px;
+                padding: 20px;
+            }
+            
+            .controls {
+                bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="header">
+            <h1 class="title">🍽️ 오늘 뭐 먹지?</h1>
+            <p class="subtitle">2024년 최신 트렌드 기반 TOP 8 메뉴</p>
+        </div>
+    </div>
+    
+    <div class="roulette-container">
+        <div class="pointer">
+            <div class="pointer-shape"></div>
+        </div>
+        <div class="roulette-wheel" id="roulette">
+            <div class="center-decoration">🎯</div>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <button class="spin-button" onclick="spinRoulette()">
+            <span>🎲 룰렛 돌리기!</span>
+        </button>
+    </div>
+    
+    <div class="result" id="result">
+        <button class="result-close" onclick="closeResult()">×</button>
+        <div class="result-emoji" id="result-emoji">🎉</div>
+        <h3 class="result-title">오늘의 추천 메뉴</h3>
+        <div class="result-menu" id="result-menu"></div>
+        <div class="result-category" id="result-category"></div>
+    </div>
+
+    <!-- 모듈 스크립트 -->
+    <script src="../modules/MenuDataManager.js"></script>
+    <script src="../modules/RouletteEngine.js"></script>
+    <script src="../modules/CardRenderer.js"></script>
+
+    <script>
+        // 데이터 매니저 초기화
+        const dataManager = new MenuDataManager();
+        const categories = dataManager.getCategoriesWithLimit(8);
+        
+        // 카테고리별 태그 추가
+        const categoryTags = {
+            chicken: "바삭한 행복",
+            meat: "육즙 가득",
+            bunsik: "추억의 맛",
+            lunchbox: "든든한 한 끼",
+            fastfood: "빠른 만족",
+            japanese: "정갈한 맛",
+            western: "이국적 향연",
+            dessert: "달콤한 유혹",
+            chinese: "진한 풍미",
+            latenight: "밤의 위로",
+            soup: "따뜻한 온기",
+            asian: "향신료의 매력"
+        };
+
+        // 룰렛 상태 관리
+        let currentRotation = 0;
+        let isSpinning = false;
+        let isDragging = false;
+        let lastAngle = 0;
+        let velocity = 0;
+        let animationId = null;
+
+        // 물리 상수
+        const FRICTION = 0.985;
+        const MIN_VELOCITY = 0.5;
+
+        function createRouletteWheel() {
+            const roulette = document.getElementById('roulette');
+            const angleStep = 360 / categories.length;
+            
+            categories.forEach((category, index) => {
+                const card = createCategoryCard(category, index, angleStep);
+                roulette.appendChild(card);
+            });
+
+            setupDragEvents();
+        }
+
+        function createCategoryCard(category, index, angleStep) {
+            const card = document.createElement('div');
+            card.className = `menu-category-card category-${category.id}`;
+            
+            // 카테고리 헤더
+            const header = document.createElement('div');
+            header.className = 'category-header';
+            
+            const emoji = document.createElement('div');
+            emoji.className = 'category-emoji';
+            emoji.textContent = category.title.split(' ')[0];
+            
+            const title = document.createElement('div');
+            title.className = 'category-title';
+            title.textContent = category.title.split(' ')[1];
+            
+            header.appendChild(emoji);
+            header.appendChild(title);
+            card.appendChild(header);
+            
+            // 메뉴 아이템 컨테이너
+            const itemsContainer = document.createElement('div');
+            itemsContainer.className = 'menu-items-container';
+            
+            category.items.forEach(item => {
+                const itemRow = createMenuItem(item, categoryTags[category.id]);
+                itemsContainer.appendChild(itemRow);
+            });
+            
+            card.appendChild(itemsContainer);
+            
+            // 위치 계산
+            const angle = angleStep * index;
+            const radius = 1600;
+            const x = Math.cos((angle - 90) * Math.PI / 180) * radius;
+            const y = Math.sin((angle - 90) * Math.PI / 180) * radius;
+            
+            card.style.left = `calc(50% + ${x}px - 210px)`;
+            card.style.top = `calc(50% + ${y}px - 310px)`;
+            card.style.transform = `rotate(${angle}deg)`;
+            
+            return card;
+        }
+
+        function createMenuItem(item, categoryTag) {
+            const row = document.createElement('div');
+            row.className = 'menu-item-row';
+            
+            const rank = document.createElement('div');
+            rank.className = 'rank-badge';
+            rank.textContent = item.rank;
+            
+            const icon = document.createElement('div');
+            icon.className = 'menu-icon';
+            icon.textContent = item.icon;
+            
+            const info = document.createElement('div');
+            info.className = 'menu-info';
+            
+            const name = document.createElement('div');
+            name.className = 'menu-name';
+            name.textContent = item.name;
+            
+            const tag = document.createElement('div');
+            tag.className = 'menu-tag';
+            tag.textContent = categoryTag;
+            
+            info.appendChild(name);
+            info.appendChild(tag);
+            
+            row.appendChild(rank);
+            row.appendChild(icon);
+            row.appendChild(info);
+            
+            return row;
+        }
+
+        function setupDragEvents() {
+            const container = document.querySelector('.roulette-container');
+
+            container.addEventListener('mousedown', startDrag);
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', endDrag);
+
+            container.addEventListener('touchstart', startDrag);
+            document.addEventListener('touchmove', drag);
+            document.addEventListener('touchend', endDrag);
+        }
+
+        function getAngleFromEvent(e) {
+            const container = document.querySelector('.roulette-container');
+            const rect = container.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            
+            const deltaX = clientX - centerX;
+            const deltaY = clientY - centerY;
+            
+            return Math.atan2(deltaY, deltaX) * 180 / Math.PI;
+        }
+
+        function startDrag(e) {
+            if (isSpinning) return;
+            isDragging = true;
+            lastAngle = getAngleFromEvent(e);
+            velocity = 0;
+            closeResult();
+            e.preventDefault();
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            
+            const currentAngle = getAngleFromEvent(e);
+            let deltaAngle = currentAngle - lastAngle;
+            
+            if (deltaAngle > 180) deltaAngle -= 360;
+            if (deltaAngle < -180) deltaAngle += 360;
+            
+            velocity = deltaAngle * 0.5;
+            currentRotation += deltaAngle;
+            updateRouletteRotation();
+            
+            lastAngle = currentAngle;
+            e.preventDefault();
+        }
+
+        function endDrag(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            if (Math.abs(velocity) > MIN_VELOCITY) {
+                startInertia();
+            } else {
+                checkResult();
+            }
+        }
+
+        function startInertia() {
+            isSpinning = true;
+            
+            function animate() {
+                velocity *= FRICTION;
+                currentRotation += velocity;
+                updateRouletteRotation();
+                
+                if (Math.abs(velocity) > MIN_VELOCITY) {
+                    animationId = requestAnimationFrame(animate);
+                } else {
+                    isSpinning = false;
+                    animationId = null;
+                    checkResult();
+                }
+            }
+            
+            animationId = requestAnimationFrame(animate);
+        }
+
+        function updateRouletteRotation() {
+            const roulette = document.getElementById('roulette');
+            roulette.style.transform = `rotate(${currentRotation}deg)`;
+        }
+
+        function checkResult() {
+            const normalizedAngle = ((currentRotation % 360) + 360) % 360;
+            const selectedIndex = Math.floor(((360 - normalizedAngle + (360 / categories.length / 2)) % 360) / (360 / categories.length));
+            const selectedCategory = categories[selectedIndex];
+            
+            // 카테고리에서 랜덤 메뉴 선택
+            const randomItem = selectedCategory.items[Math.floor(Math.random() * selectedCategory.items.length)];
+            
+            // 결과 표시
+            showResult(selectedCategory, randomItem);
+        }
+
+        function showResult(category, item) {
+            const resultEl = document.getElementById('result');
+            const emojiEl = document.getElementById('result-emoji');
+            const menuEl = document.getElementById('result-menu');
+            const categoryEl = document.getElementById('result-category');
+            
+            emojiEl.textContent = item.icon;
+            menuEl.textContent = item.name;
+            categoryEl.textContent = `${category.title} ${item.rank}`;
+            
+            resultEl.classList.add('show');
+        }
+
+        function closeResult() {
+            const resultEl = document.getElementById('result');
+            resultEl.classList.remove('show');
+        }
+
+        function spinRoulette() {
+            if (isSpinning || isDragging) return;
+            
+            closeResult();
+            isSpinning = true;
+            
+            const targetRotation = currentRotation + 1440 + Math.random() * 1440;
+            const duration = 4000;
+            const startTime = Date.now();
+            const startRotation = currentRotation;
+            
+            function animate() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // 이징 함수 (ease-out)
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                
+                currentRotation = startRotation + (targetRotation - startRotation) * easeProgress;
+                updateRouletteRotation();
+                
+                if (progress < 1) {
+                    animationId = requestAnimationFrame(animate);
+                } else {
+                    isSpinning = false;
+                    animationId = null;
+                    checkResult();
+                }
+            }
+            
+            animationId = requestAnimationFrame(animate);
+        }
+
+        // 초기화
+        window.onload = function() {
+            createRouletteWheel();
+        };
+    </script>
+</body>
+</html>

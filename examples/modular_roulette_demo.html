@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>모듈형 룰렛 데모</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .title {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .controls {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .controls button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .controls button:hover {
+            transform: translateY(-2px);
+        }
+
+        .primary-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff5252);
+            color: white;
+        }
+
+        .secondary-btn {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+
+        .info-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .roulette-container {
+            position: fixed;
+            width: 5000px;
+            height: 5000px;
+            top: 1000px;
+            left: 50%;
+            transform: translateX(-50%);
+            overflow: hidden;
+            pointer-events: auto;
+        }
+
+        .roulette-wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: relative;
+            background: #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            cursor: grab;
+        }
+
+        .roulette-wheel:active {
+            cursor: grabbing;
+        }
+
+        .center-dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: #333;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .pointer {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 25px solid #333;
+            transform: translateX(-50%);
+            z-index: 5;
+        }
+
+        .result {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            min-width: 200px;
+            display: none;
+        }
+
+        .status {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 12px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">🍽️ 모듈형 룰렛 시스템</h1>
+    
+    <div class="controls">
+        <button class="primary-btn" onclick="app.spin()">🎲 물리 스핀</button>
+        <button class="primary-btn" onclick="app.smoothSpin()">✨ 부드러운 스핀</button>
+        <button class="secondary-btn" onclick="toggleCardStyle()">🔄 카드 스타일</button>
+        <button class="secondary-btn" onclick="changeTopN()">📊 TOP N 변경</button>
+        <button class="info-btn" onclick="showStatus()">📋 상태 확인</button>
+        <button class="info-btn" onclick="testSearch()">🔍 검색 테스트</button>
+    </div>
+    
+    <div class="roulette-container">
+        <div class="pointer"></div>
+        <div class="roulette-wheel" id="roulette">
+            <div class="center-dot"></div>
+        </div>
+    </div>
+    
+    <div class="result" id="result">
+        <h3>🎉 오늘의 추천</h3>
+        <p id="selected-menu"></p>
+    </div>
+
+    <div class="status" id="status">
+        시스템 로딩 중...
+    </div>
+
+    <!-- 모듈 스크립트 로드 -->
+    <script src="../modules/MenuDataManager.js"></script>
+    <script src="../modules/RouletteEngine.js"></script>
+    <script src="../modules/CardRenderer.js"></script>
+    <script src="../modules/RouletteApp.js"></script>
+
+    <script>
+        // 글로벌 앱 인스턴스
+        let app;
+        let currentTopN = 5;
+        let currentStyle = 'category';
+
+        // 페이지 로드 시 초기화
+        window.onload = function() {
+            try {
+                // 룰렛 앱 초기화
+                app = new RouletteApp('.roulette-container', {
+                    topN: currentTopN,
+                    cardStyle: currentStyle,
+                    onResult: function(selectedItem, index) {
+                        console.log('Result:', selectedItem, 'Index:', index);
+                        updateStatus(`결과: ${selectedItem.title || selectedItem.name}`);
+                    }
+                });
+
+                updateStatus('시스템 준비 완료');
+                
+                // 5초 후 상태창 숨기기
+                setTimeout(() => {
+                    document.getElementById('status').style.display = 'none';
+                }, 5000);
+
+            } catch (error) {
+                console.error('Initialization error:', error);
+                updateStatus('초기화 오류: ' + error.message);
+            }
+        };
+
+        /**
+         * 카드 스타일 토글
+         */
+        function toggleCardStyle() {
+            currentStyle = currentStyle === 'category' ? 'menu' : 'category';
+            app.setCardStyle(currentStyle);
+            updateStatus(`카드 스타일: ${currentStyle}`);
+        }
+
+        /**
+         * TOP N 변경
+         */
+        function changeTopN() {
+            const newTopN = currentTopN === 5 ? 7 : currentTopN === 7 ? 3 : 5;
+            currentTopN = newTopN;
+            app.setTopN(newTopN);
+            updateStatus(`TOP ${newTopN} 적용됨`);
+        }
+
+        /**
+         * 상태 정보 표시
+         */
+        function showStatus() {
+            const state = app.getState();
+            const info = `
+카테고리: ${state.dataCount}개
+카드: ${state.cardCount}개  
+TOP: ${state.config.topN}
+스타일: ${state.config.cardStyle}
+회전: ${state.engineState?.rotation.toFixed(1)}°
+            `.trim();
+            
+            updateStatus(info);
+            console.log('Full state:', state);
+        }
+
+        /**
+         * 검색 테스트
+         */
+        function testSearch() {
+            const keywords = ['치킨', '떡볶이', '피자', '초밥'];
+            const keyword = keywords[Math.floor(Math.random() * keywords.length)];
+            const results = app.search(keyword);
+            
+            updateStatus(`"${keyword}" 검색: ${results.length}개 결과`);
+            console.log('Search results:', results);
+        }
+
+        /**
+         * 특정 결과로 스핀 (데모용)
+         */
+        function demoSpinToResult() {
+            app.spinToResult('chicken'); // 치킨 카테고리로 스핀
+        }
+
+        /**
+         * 상태 메시지 업데이트
+         */
+        function updateStatus(message) {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = message;
+            statusEl.style.display = 'block';
+            
+            // 3초 후 자동 숨김
+            setTimeout(() => {
+                statusEl.style.display = 'none';
+            }, 3000);
+        }
+
+        /**
+         * 키보드 단축키
+         */
+        document.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case ' ': // 스페이스바
+                    e.preventDefault();
+                    app.spin();
+                    break;
+                case 'r': // R키
+                    app.smoothSpin();
+                    break;
+                case 't': // T키
+                    changeTopN();
+                    break;
+                case 's': // S키
+                    toggleCardStyle();
+                    break;
+                case 'h': // H키
+                    app.hideResult();
+                    break;
+            }
+        });
+
+        // 전역 함수로 노출 (디버깅용)
+        window.rouletteApp = app;
+    </script>
+</body>
+</html>

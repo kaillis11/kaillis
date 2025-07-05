@@ -1,83 +1,26 @@
-# 🚪 WhatToEat 공식 문서 게이트웨이
-
+# 🚪 Docs Gateway
 **현재 위치**: `/WhatToEat/docs/`  
-**현재 단계**: Level 3 - 확정된 기술 문서와 명세
-
+**상위 폴더**: [`../`](../)  
+**마지막 수정**: 2025-06-18
 ---
-
-## 🗺️ 현재 위치에서 보이는 풍경
-
-**WhatToEat의 공식 기술 문서**가 체계적으로 정리된 공간입니다.
-확정되고 검증된 설계와 구현 가이드들이 여기에 있습니다:
-- 시스템 아키텍처와 설계 문서
-- API 레퍼런스와 기술 명세
-- 구현 가이드와 모범 사례
-
+## 🗺️ 이 폴더의 목적
+WhatToEat 프로젝트의 기술 문서 및 인수인계 가이드 모음
 ---
-
-## 🔼 상위로 가는 길 (더 간단한 개념)
-
-### 📍 **프로젝트 개요로**
-> 기술적 세부사항에서 벗어나 전체 그림을 보려면
-> 
-> 🚪 [`../GATEWAY.md`](../GATEWAY.md) - 프로젝트 루트
-
-### 📍 **아이디어와 비전으로**
-> 기술보다 창의적 구상이 궁금하다면
-> 
-> 🚪 [`../ideas/GATEWAY.md`](../ideas/GATEWAY.md) - 혁신적 아이디어들
-
+## 📄 같은 폴더 내 문서 (파일)
+- [HANDOVER_GUIDE.md](HANDOVER_GUIDE.md) - ⭐ 40페이지 완벽 인수인계 가이드
+- [roulette_adjustment_guide.md](roulette_adjustment_guide.md) - 룰렛 크기/위치 조정 방법
+- [physics_engine_redesign_plan.md](physics_engine_redesign_plan.md) - 물리엔진 재설계 과정
+- [2024_food_trend_research_report.md](2024_food_trend_research_report.md) - 트렌드 분석
+- [popular_menu_data_2024.md](popular_menu_data_2024.md) - 인기 메뉴 데이터
+- [menu_data_top8_update_summary.md](menu_data_top8_update_summary.md) - TOP 8 업데이트
+- [modular_architecture_guide.md](modular_architecture_guide.md) - 모듈 설계 가이드
 ---
-
-## 🔽 하위로 가는 길 (더 자세한 내용)
-
-### 📄 **시스템 설계 문서들** (작성 예정)
-> 프로젝트의 기술적 기반
-> 
-> - `system_architecture.md` - 전체 시스템 구조
-> - `api_reference.md` - API 명세와 사용법
-> - `implementation_guide.md` - 구현 가이드
-> - `technical_specification.md` - 상세 기술 명세
-
-### 📄 **운영 문서들** (작성 예정)
-> 배포와 운영을 위한 가이드
-> 
-> - `deployment_guide.md` - 배포 방법
-> - `maintenance_guide.md` - 유지보수 가이드
-> - `troubleshooting.md` - 문제 해결 방법
-
+## 📂 하위 폴더
+*없음*
 ---
-
-## 📋 문서 작성 가이드
-
-### **새 문서를 작성할 때**
-1. **명확한 목적**: 문서의 목표와 대상 독자 명시
-2. **체계적 구조**: 논리적이고 일관된 구성
-3. **공식적 톤**: 전문적이고 정확한 문체
-4. **실행 가능성**: 따라할 수 있는 구체적 내용
-
-### **문서 품질 기준**
-- ✅ **정확성**: 검증된 정보만 포함
-- ✅ **완전성**: 필요한 모든 정보 제공
-- ✅ **명확성**: 이해하기 쉬운 설명
-- ✅ **최신성**: 정기적 업데이트
-
+## 🎯 바로가기
+- **새 작업자 시작:** [HANDOVER_GUIDE.md](HANDOVER_GUIDE.md)
+- **룰렛 조정:** [roulette_adjustment_guide.md](roulette_adjustment_guide.md)
+- **물리엔진 분석:** [physics_engine_redesign_plan.md](physics_engine_redesign_plan.md)
 ---
-
-## 🎯 빠른 길잡이
-
-**시스템을 이해하려면**:
-→ `system_architecture.md` 먼저 읽기
-
-**API를 사용하려면**:
-→ `api_reference.md` 참조
-
-**직접 구현하려면**:
-→ `implementation_guide.md` 따라하기
-
-**문제가 생겼다면**:
-→ `troubleshooting.md` 확인
-
----
-
-*"좋은 문서는 지식의 집이고, 명세는 그 집의 설계도다."* 📋
+> **TIP:** 프로젝트 인수인계가 목적이라면 HANDOVER_GUIDE.md부터 시작하세요.
