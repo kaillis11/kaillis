@@ -680,7 +680,7 @@
     <!-- 카드 팝업 오버레이 -->
     <div class="card-popup-overlay" id="cardPopupOverlay">
         <div class="card-popup" id="cardPopup">
-            <button class="popup-close" onclick="cardPopupManager.closePopup()">✕</button>
+            <button class="popup-close" id="popupCloseBtn">✕</button>
             <div class="popup-header">
                 <div class="popup-emoji" id="popupEmoji"></div>
                 <div class="popup-title" id="popupTitle"></div>
@@ -1026,6 +1026,15 @@
                 this.overlay = document.getElementById('cardPopupOverlay');
                 this.popup = document.getElementById('cardPopup');
                 this.currentCard = null;
+                
+                // X 버튼 클릭시 팝업 닫기
+                const closeBtn = document.getElementById('popupCloseBtn');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', (e) => {
+                        e.stopPropagation(); // 이벤트 버블링 방지
+                        this.closePopup();
+                    });
+                }
                 
                 // 오버레이 클릭시 팝업 닫기
                 this.overlay.addEventListener('click', (e) => {
