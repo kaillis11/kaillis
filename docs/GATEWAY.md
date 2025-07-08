@@ -7,6 +7,7 @@
 WhatToEat 프로젝트의 기술 문서 및 인수인계 가이드 모음
 ---
 ## 📄 같은 폴더 내 문서 (파일)
+- [NAVER_API_ANALYSIS_SYSTEM_NEXUS.md](NAVER_API_ANALYSIS_SYSTEM_NEXUS.md) - 🔗 **네이버 API 시스템 NEXUS** ⭐⭐⭐⭐⭐
 - [HANDOVER_GUIDE.md](HANDOVER_GUIDE.md) - ⭐ 40페이지 완벽 인수인계 가이드
 - [roulette_adjustment_guide.md](roulette_adjustment_guide.md) - 룰렛 크기/위치 조정 방법
 - [physics_engine_redesign_plan.md](physics_engine_redesign_plan.md) - 물리엔진 재설계 과정
@@ -19,6 +20,7 @@ WhatToEat 프로젝트의 기술 문서 및 인수인계 가이드 모음
 *없음*
 ---
 ## 🎯 바로가기
+- **🔗 네이버 API 시스템:** [NAVER_API_ANALYSIS_SYSTEM_NEXUS.md](NAVER_API_ANALYSIS_SYSTEM_NEXUS.md) ⭐
 - **새 작업자 시작:** [HANDOVER_GUIDE.md](HANDOVER_GUIDE.md)
 - **룰렛 조정:** [roulette_adjustment_guide.md](roulette_adjustment_guide.md)
 - **물리엔진 분석:** [physics_engine_redesign_plan.md](physics_engine_redesign_plan.md)

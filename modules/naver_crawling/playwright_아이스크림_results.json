@@ -1,0 +1,27 @@
+{
+  "query": "아이스크림",
+  "timestamp": "2025-07-08T19:41:28.320806",
+  "method": "playwright",
+  "products": [
+    {
+      "rank": 1,
+      "title": "이용약관",
+      "price": "가격미표시"
+    },
+    {
+      "rank": 2,
+      "title": "개인정보처리방침",
+      "price": "가격미표시"
+    },
+    {
+      "rank": 3,
+      "title": "책임의 한계와 법적고지",
+      "price": "가격미표시"
+    },
+    {
+      "rank": 4,
+      "title": "회원정보 고객센터",
+      "price": "가격미표시"
+    }
+  ]
+}

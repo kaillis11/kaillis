@@ -41,7 +41,11 @@ WhatToEat/
 ### **실행 레이어** (`tools/`)
 - **목적**: 실제 구현과 자동화
 - **특징**: 실행 가능한 스크립트들
-- **파일들**: [주요 스크립트 파일들]
+- **파일들**: 
+  - **네이버 API 시스템**: `naver_shopping_api_test.py`, `test_datalab_api.py`, `universal_ranking_system.py`
+  - **크롤링 시스템**: `naver_shopping_crawler.py`, `simple_naver_crawler.py`, `advanced_naver_crawler.py`
+  - **분석 도구**: `icecream_top10_detailed.py`, `icecream_bestseller_analysis.py`, `demo_ranking_system.py`
+  - **룰렛 엔진**: `roulette_v2_premium_fusion.html`, `roulette_v3_google_login.html`
 
 ---
 
@@ -62,19 +66,25 @@ WhatToEat/
 - [모듈 C] ← [모듈 D]
 
 ### **외부 의존성**
-- **[라이브러리 1]**: [사용 목적]
-- **[라이브러리 2]**: [사용 목적]
+- **requests**: 네이버 API 호출 및 HTTP 통신
+- **selenium**: 동적 웹 크롤링 (JavaScript 처리)
+- **beautifulsoup4**: HTML 파싱 및 데이터 추출
+- **pandas**: 데이터 분석 및 CSV 저장
+- **webdriver-manager**: Chrome 드라이버 자동 관리
 
 ---
 
 ## 📍 주요 진입점
 
 ### **메인 스크립트**
-- `tools/main.py` - 주요 실행 파일
-- `tools/config.py` - 설정 관리
+- `tools/roulette_v2_premium_fusion.html` - 메인 룰렛 앱 (구글 로그인 이전 버전)
+- `tools/roulette_v3_google_login.html` - 구글 로그인 통합 버전
+- `tools/universal_ranking_system.py` - 범용 랭킹 분석 도구
 
 ### **API 엔드포인트**
-- `/api/v1/[endpoint]` - [기능 설명]
+- **네이버 쇼핑 API**: `https://openapi.naver.com/v1/search/shop.json`
+- **네이버 데이터랩 API**: `https://openapi.naver.com/v1/datalab/shopping/categories`
+- **API 키**: `UP8PqJq_FpkcB63sEFH9` (테스트용)
 
 ---
 

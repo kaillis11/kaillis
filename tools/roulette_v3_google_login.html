@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatToEat 룰렛 v3.0 - Google 로그인</title>
+    
+    <!-- Google Sign-In 라이브러리 -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 로그인 영역 */
+        .auth-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        #user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        #user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #667eea;
+        }
+
+        #user-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .sign-out-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .sign-out-btn:hover {
+            background: #ff5252;
+            transform: translateY(-1px);
+        }
+
+        /* MBTI 모달 */
+        .mbti-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .mbti-modal {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mbti-modal h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .mbti-modal p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        #mbti-select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .modal-buttons button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .save-btn {
+            background: #667eea;
+            color: white;
+        }
+
+        .save-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .skip-btn {
+            background: #e0e0e0;
+            color: #666;
+        }
+
+        .skip-btn:hover {
+            background: #d0d0d0;
+        }
+
+        /* 기존 룰렛 스타일 유지 */
+        .header {
+            text-align: center;
+            padding: 2rem 1rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .title {
+            color: white;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-weight: 400;
+        }
+
+        /* 개인화 표시 */
+        .personalized-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* X 버튼 스타일 추가 */
+        .remove-menu-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 24px;
+            height: 24px;
+            background: rgba(255,0,0,0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 12px;
+            display: none;
+            z-index: 10;
+        }
+
+        .menu-category-card:hover .remove-menu-btn {
+            display: block;
+        }
+
+        /* 나머지 룰렛 스타일은 기존과 동일... */
+    </style>
+</head>
+<body>
+    <!-- 로그인/사용자 정보 영역 -->
+    <div class="auth-container">
+        <div id="google-signin-button"></div>
+        <div id="user-info" style="display: none;">
+            <img id="user-avatar" src="" alt="프로필">
+            <span id="user-name"></span>
+            <button class="sign-out-btn" onclick="signOut()">로그아웃</button>
+        </div>
+    </div>
+
+    <!-- 헤더 -->
+    <div class="header">
+        <h1 class="title">오늘 뭐먹지?</h1>
+        <p class="subtitle">프리미엄 룰렛으로 선택하세요</p>
+        <div id="personalized-indicator" style="display: none;">
+            <span class="personalized-badge">
+                <span id="user-mbti"></span> 맞춤 룰렛
+            </span>
+        </div>
+    </div>
+
+    <!-- 여기에 기존 룰렛 HTML 추가 -->
+    
+    <script>
+        // Google 로그인 초기화
+        let CLIENT_ID = '662688031132-gq477hpobp0ssnjhtf4lpqba3rnp1bbp.apps.googleusercontent.com';
+        
+        function initializeGoogleSignIn() {
+            google.accounts.id.initialize({
+                client_id: CLIENT_ID,
+                callback: handleCredentialResponse,
+                auto_select: true,
+                cancel_on_tap_outside: false
+            });
+
+            google.accounts.id.renderButton(
+                document.getElementById("google-signin-button"),
+                { 
+                    theme: "outline", 
+                    size: "large",
+                    text: "signin_with",
+                    shape: "rectangular",
+                    logo_alignment: "left"
+                }
+            );
+
+            // 기존 로그인 확인
+            const savedUser = localStorage.getItem('userInfo');
+            if (savedUser) {
+                displayUserInfo(JSON.parse(savedUser));
+                checkUserMBTI(JSON.parse(savedUser).id);
+            } else {
+                google.accounts.id.prompt();
+            }
+        }
+
+        // 로그인 성공 처리
+        function handleCredentialResponse(response) {
+            const responsePayload = decodeJwtResponse(response.credential);
+            
+            const userInfo = {
+                id: responsePayload.sub,
+                name: responsePayload.name,
+                email: responsePayload.email,
+                picture: responsePayload.picture
+            };
+            
+            localStorage.setItem('userInfo', JSON.stringify(userInfo));
+            displayUserInfo(userInfo);
+            checkUserMBTI(userInfo.id);
+            
+            // 로그인 이벤트 기록
+            recordUserAction('login', { userId: userInfo.id });
+        }
+
+        // JWT 디코딩
+        function decodeJwtResponse(token) {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
+        }
+
+        // 사용자 정보 표시
+        function displayUserInfo(userInfo) {
+            document.getElementById('google-signin-button').style.display = 'none';
+            document.getElementById('user-info').style.display = 'flex';
+            document.getElementById('user-avatar').src = userInfo.picture;
+            document.getElementById('user-name').textContent = userInfo.name;
+        }
+
+        // MBTI 확인
+        function checkUserMBTI(userId) {
+            const savedMBTI = localStorage.getItem('userMBTI');
+            
+            if (!savedMBTI) {
+                setTimeout(() => showMBTIModal(), 1000);
+            } else {
+                showPersonalizedIndicator(savedMBTI);
+                personalizeRoulette(savedMBTI);
+            }
+        }
+
+        // MBTI 모달 표시
+        function showMBTIModal() {
+            const modalHTML = `
+                <div class="mbti-modal-overlay" id="mbti-modal-overlay">
+                    <div class="mbti-modal">
+                        <h2>MBTI를 알려주세요! 🧠</h2>
+                        <p>더 정확한 메뉴 추천을 위해 필요해요 😊</p>
+                        <select id="mbti-select">
+                            <option value="">선택하세요</option>
+                            <option value="INTJ">INTJ - 용의주도한 전략가</option>
+                            <option value="INTP">INTP - 논리적인 사색가</option>
+                            <option value="ENTJ">ENTJ - 대담한 통솔자</option>
+                            <option value="ENTP">ENTP - 논쟁을 즐기는 변론가</option>
+                            <option value="INFJ">INFJ - 선의의 옹호자</option>
+                            <option value="INFP">INFP - 열정적인 중재자</option>
+                            <option value="ENFJ">ENFJ - 정의로운 사회운동가</option>
+                            <option value="ENFP">ENFP - 재기발랄한 활동가</option>
+                            <option value="ISTJ">ISTJ - 청렴결백한 논리주의자</option>
+                            <option value="ISFJ">ISFJ - 용감한 수호자</option>
+                            <option value="ESTJ">ESTJ - 엄격한 관리자</option>
+                            <option value="ESFJ">ESFJ - 사교적인 외교관</option>
+                            <option value="ISTP">ISTP - 만능 재주꾼</option>
+                            <option value="ISFP">ISFP - 호기심 많은 예술가</option>
+                            <option value="ESTP">ESTP - 모험을 즐기는 사업가</option>
+                            <option value="ESFP">ESFP - 자유로운 연예인</option>
+                        </select>
+                        <div class="modal-buttons">
+                            <button class="save-btn" onclick="saveMBTI()">저장</button>
+                            <button class="skip-btn" onclick="skipMBTI()">나중에</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+        }
+
+        // MBTI 저장
+        function saveMBTI() {
+            const mbti = document.getElementById('mbti-select').value;
+            if (mbti) {
+                localStorage.setItem('userMBTI', mbti);
+                showPersonalizedIndicator(mbti);
+                personalizeRoulette(mbti);
+                closeModal();
+                
+                // MBTI 선택 이벤트 기록
+                recordUserAction('mbti_selected', { mbti: mbti });
+            }
+        }
+
+        // MBTI 건너뛰기
+        function skipMBTI() {
+            closeModal();
+            recordUserAction('mbti_skipped', {});
+        }
+
+        // 모달 닫기
+        function closeModal() {
+            const modal = document.getElementById('mbti-modal-overlay');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        // 개인화 표시
+        function showPersonalizedIndicator(mbti) {
+            document.getElementById('personalized-indicator').style.display = 'block';
+            document.getElementById('user-mbti').textContent = mbti;
+        }
+
+        // 룰렛 개인화
+        function personalizeRoulette(mbti) {
+            const settings = {
+                mbti: mbti,
+                hiddenMenus: JSON.parse(localStorage.getItem('hiddenMenus') || '[]'),
+                favoriteMenus: [],
+                lastUpdate: new Date().toISOString()
+            };
+            
+            localStorage.setItem('userRouletteSettings', JSON.stringify(settings));
+            
+            // 숨긴 메뉴들 적용
+            settings.hiddenMenus.forEach(menuId => {
+                const card = document.querySelector(`[data-menu-id="${menuId}"]`);
+                if (card) {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 메뉴 제거 (X 버튼)
+        function removeMenuItem(menuId) {
+            const hiddenMenus = JSON.parse(localStorage.getItem('hiddenMenus') || '[]');
+            if (!hiddenMenus.includes(menuId)) {
+                hiddenMenus.push(menuId);
+                localStorage.setItem('hiddenMenus', JSON.stringify(hiddenMenus));
+            }
+            
+            // UI에서 제거
+            const card = document.querySelector(`[data-menu-id="${menuId}"]`);
+            if (card) {
+                card.style.display = 'none';
+            }
+            
+            // 데이터 수집
+            const mbti = localStorage.getItem('userMBTI');
+            recordUserAction('menu_removed', {
+                menuId: menuId,
+                mbti: mbti || 'unknown'
+            });
+        }
+
+        // 사용자 행동 기록 (익명화)
+        function recordUserAction(action, data) {
+            const timestamp = new Date().toISOString();
+            const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+            
+            const actionData = {
+                action: action,
+                timestamp: timestamp,
+                data: data,
+                sessionId: generateSessionId() // 익명 세션 ID
+            };
+            
+            // 로컬 저장 (나중에 서버로 전송)
+            const actions = JSON.parse(localStorage.getItem('userActions') || '[]');
+            actions.push(actionData);
+            localStorage.setItem('userActions', JSON.stringify(actions));
+            
+            console.log('Action recorded:', actionData);
+        }
+
+        // 세션 ID 생성
+        function generateSessionId() {
+            let sessionId = sessionStorage.getItem('sessionId');
+            if (!sessionId) {
+                sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                sessionStorage.setItem('sessionId', sessionId);
+            }
+            return sessionId;
+        }
+
+        // 로그아웃
+        function signOut() {
+            google.accounts.id.disableAutoSelect();
+            
+            // 개인 설정은 유지, 로그인 정보만 삭제
+            localStorage.removeItem('userInfo');
+            
+            location.reload();
+        }
+
+        // 페이지 로드시 실행
+        window.addEventListener('load', function() {
+            // Google Sign-In 초기화는 Client ID 설정 후 실행
+            if (CLIENT_ID !== 'YOUR_CLIENT_ID.apps.googleusercontent.com') {
+                initializeGoogleSignIn();
+            } else {
+                console.warn('Google Client ID를 설정해주세요!');
+                // 개발 모드에서는 가짜 로그인 버튼 표시
+                document.getElementById('google-signin-button').innerHTML = 
+                    '<button onclick="devLogin()">개발자 로그인</button>';
+            }
+        });
+
+        // 개발자 모드 로그인 (테스트용)
+        function devLogin() {
+            const devUser = {
+                id: 'dev_user_123',
+                name: '테스트 사용자',
+                email: 'test@example.com',
+                picture: 'https://via.placeholder.com/150'
+            };
+            localStorage.setItem('userInfo', JSON.stringify(devUser));
+            displayUserInfo(devUser);
+            checkUserMBTI(devUser.id);
+        }
+    </script>
+</body>
+</html>
