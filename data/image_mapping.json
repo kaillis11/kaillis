@@ -1,0 +1,322 @@
+{
+  "timestamp": "2025-07-09T12:50:17.469760",
+  "total_icons": 45,
+  "total_backgrounds": 45,
+  "mapping": {
+    "치킨": {
+      "icon_file": "icon_치킨.jpg",
+      "bg_file": "bg_치킨.jpg",
+      "icon_path": "./images/icon_치킨.jpg",
+      "bg_path": "./images/bg_치킨.jpg",
+      "status": "available"
+    },
+    "치킨마요덮밥": {
+      "icon_file": "icon_치킨마요덮밥.jpg",
+      "bg_file": "bg_치킨마요덮밥.jpg",
+      "icon_path": "./images/icon_치킨마요덮밥.jpg",
+      "bg_path": "./images/bg_치킨마요덮밥.jpg",
+      "status": "available"
+    },
+    "치킨버거": {
+      "icon_file": "icon_치킨버거.jpg",
+      "bg_file": "bg_치킨버거.jpg",
+      "icon_path": "./images/icon_치킨버거.jpg",
+      "bg_path": "./images/bg_치킨버거.jpg",
+      "status": "available"
+    },
+    "삼겹살구이": {
+      "icon_file": "icon_삼겹살구이.jpg",
+      "bg_file": "bg_삼겹살구이.jpg",
+      "icon_path": "./images/icon_삼겹살구이.jpg",
+      "bg_path": "./images/bg_삼겹살구이.jpg",
+      "status": "available"
+    },
+    "갈비구이": {
+      "icon_file": "icon_갈비구이.jpg",
+      "bg_file": "bg_갈비구이.jpg",
+      "icon_path": "./images/icon_갈비구이.jpg",
+      "bg_path": "./images/bg_갈비구이.jpg",
+      "status": "available"
+    },
+    "제육볶음": {
+      "icon_file": "icon_제육볶음.jpg",
+      "bg_file": "bg_제육볶음.jpg",
+      "icon_path": "./images/icon_제육볶음.jpg",
+      "bg_path": "./images/bg_제육볶음.jpg",
+      "status": "available"
+    },
+    "대패삼겹살": {
+      "icon_file": "icon_대패삼겹살.jpg",
+      "bg_file": "bg_대패삼겹살.jpg",
+      "icon_path": "./images/icon_대패삼겹살.jpg",
+      "bg_path": "./images/bg_대패삼겹살.jpg",
+      "status": "available"
+    },
+    "항정살구이": {
+      "icon_file": "icon_항정살구이.jpg",
+      "bg_file": "bg_항정살구이.jpg",
+      "icon_path": "./images/icon_항정살구이.jpg",
+      "bg_path": "./images/bg_항정살구이.jpg",
+      "status": "available"
+    },
+    "불고기덮밥": {
+      "icon_file": "icon_불고기덮밥.jpg",
+      "bg_file": "bg_불고기덮밥.jpg",
+      "icon_path": "./images/icon_불고기덮밥.jpg",
+      "bg_path": "./images/bg_불고기덮밥.jpg",
+      "status": "available"
+    },
+    "불고기버거": {
+      "icon_file": "icon_불고기버거.jpg",
+      "bg_file": "bg_불고기버거.jpg",
+      "icon_path": "./images/icon_불고기버거.jpg",
+      "bg_path": "./images/bg_불고기버거.jpg",
+      "status": "available"
+    },
+    "떡볶이": {
+      "icon_file": "icon_tteokbokki.jpg",
+      "bg_file": "bg_tteokbokki.jpg",
+      "icon_path": "./images/icon_tteokbokki.jpg",
+      "bg_path": "./images/bg_tteokbokki.jpg",
+      "status": "available"
+    },
+    "김밥": {
+      "icon_file": "icon_kimbap.jpg",
+      "bg_file": "bg_kimbap.jpg",
+      "icon_path": "./images/icon_kimbap.jpg",
+      "bg_path": "./images/bg_kimbap.jpg",
+      "status": "available"
+    },
+    "라면": {
+      "icon_file": "icon_ramen.jpg",
+      "bg_file": "bg_ramen.jpg",
+      "icon_path": "./images/icon_ramen.jpg",
+      "bg_path": "./images/bg_ramen.jpg",
+      "status": "available"
+    },
+    "순대": {
+      "icon_file": "icon_순대.jpg",
+      "bg_file": "bg_순대.jpg",
+      "icon_path": "./images/icon_순대.jpg",
+      "bg_path": "./images/bg_순대.jpg",
+      "status": "available"
+    },
+    "어묵": {
+      "icon_file": "icon_어묵.jpg",
+      "bg_file": "bg_어묵.jpg",
+      "icon_path": "./images/icon_어묵.jpg",
+      "bg_path": "./images/bg_어묵.jpg",
+      "status": "available"
+    },
+    "김치찌개": {
+      "icon_file": "icon_kimchi_stew.jpg",
+      "bg_file": "bg_kimchi_stew.jpg",
+      "icon_path": "./images/icon_kimchi_stew.jpg",
+      "bg_path": "./images/bg_kimchi_stew.jpg",
+      "status": "available"
+    },
+    "비빔밥": {
+      "icon_file": "icon_비빔밥.jpg",
+      "bg_file": "bg_비빔밥.jpg",
+      "icon_path": "./images/icon_비빔밥.jpg",
+      "bg_path": "./images/bg_비빔밥.jpg",
+      "status": "available"
+    },
+    "모듬초밥": {
+      "icon_file": "icon_모듬초밥.jpg",
+      "bg_file": "bg_모듬초밥.jpg",
+      "icon_path": "./images/icon_모듬초밥.jpg",
+      "bg_path": "./images/bg_모듬초밥.jpg",
+      "status": "available"
+    },
+    "돈카츠": {
+      "icon_file": "icon_돈카츠.jpg",
+      "bg_file": "bg_돈카츠.jpg",
+      "icon_path": "./images/icon_돈카츠.jpg",
+      "bg_path": "./images/bg_돈카츠.jpg",
+      "status": "available"
+    },
+    "우동": {
+      "icon_file": "icon_우동.jpg",
+      "bg_file": "bg_우동.jpg",
+      "icon_path": "./images/icon_우동.jpg",
+      "bg_path": "./images/bg_우동.jpg",
+      "status": "available"
+    },
+    "연어덮밥": {
+      "icon_file": "icon_연어덮밥.jpg",
+      "bg_file": "bg_연어덮밥.jpg",
+      "icon_path": "./images/icon_연어덮밥.jpg",
+      "bg_path": "./images/bg_연어덮밥.jpg",
+      "status": "available"
+    },
+    "규동": {
+      "icon_file": "icon_규동.jpg",
+      "bg_file": "bg_규동.jpg",
+      "icon_path": "./images/icon_규동.jpg",
+      "bg_path": "./images/bg_규동.jpg",
+      "status": "available"
+    },
+    "크림파스타": {
+      "icon_file": "icon_크림파스타.jpg",
+      "bg_file": "bg_크림파스타.jpg",
+      "icon_path": "./images/icon_크림파스타.jpg",
+      "bg_path": "./images/bg_크림파스타.jpg",
+      "status": "available"
+    },
+    "토마토파스타": {
+      "icon_file": "icon_토마토파스타.jpg",
+      "bg_file": "bg_토마토파스타.jpg",
+      "icon_path": "./images/icon_토마토파스타.jpg",
+      "bg_path": "./images/bg_토마토파스타.jpg",
+      "status": "available"
+    },
+    "피자": {
+      "icon_file": "icon_pizza.jpg",
+      "bg_file": "bg_pizza.jpg",
+      "icon_path": "./images/icon_pizza.jpg",
+      "bg_path": "./images/bg_pizza.jpg",
+      "status": "available"
+    },
+    "오일파스타": {
+      "icon_file": "icon_오일파스타.jpg",
+      "bg_file": "bg_오일파스타.jpg",
+      "icon_path": "./images/icon_오일파스타.jpg",
+      "bg_path": "./images/bg_오일파스타.jpg",
+      "status": "available"
+    },
+    "라자냐": {
+      "icon_file": "icon_라자냐.jpg",
+      "bg_file": "bg_라자냐.jpg",
+      "icon_path": "./images/icon_라자냐.jpg",
+      "bg_path": "./images/bg_라자냐.jpg",
+      "status": "available"
+    },
+    "짜장면": {
+      "icon_file": "icon_jajangmyeon.jpg",
+      "bg_file": "bg_jajangmyeon.jpg",
+      "icon_path": "./images/icon_jajangmyeon.jpg",
+      "bg_path": "./images/bg_jajangmyeon.jpg",
+      "status": "available"
+    },
+    "짬뽕": {
+      "icon_file": "icon_jjamppong.jpg",
+      "bg_file": "bg_jjamppong.jpg",
+      "icon_path": "./images/icon_jjamppong.jpg",
+      "bg_path": "./images/bg_jjamppong.jpg",
+      "status": "available"
+    },
+    "탕수육": {
+      "icon_file": "icon_sweet_sour_pork.jpg",
+      "bg_file": "bg_sweet_sour_pork.jpg",
+      "icon_path": "./images/icon_sweet_sour_pork.jpg",
+      "bg_path": "./images/bg_sweet_sour_pork.jpg",
+      "status": "available"
+    },
+    "양장피": {
+      "icon_file": "icon_양장피.jpg",
+      "bg_file": "bg_양장피.jpg",
+      "icon_path": "./images/icon_양장피.jpg",
+      "bg_path": "./images/bg_양장피.jpg",
+      "status": "available"
+    },
+    "마파두부": {
+      "icon_file": "icon_마파두부.jpg",
+      "bg_file": "bg_마파두부.jpg",
+      "icon_path": "./images/icon_마파두부.jpg",
+      "bg_path": "./images/bg_마파두부.jpg",
+      "status": "available"
+    },
+    "더블치즈버거": {
+      "icon_file": "icon_더블치즈버거.jpg",
+      "bg_file": "bg_더블치즈버거.jpg",
+      "icon_path": "./images/icon_더블치즈버거.jpg",
+      "bg_path": "./images/bg_더블치즈버거.jpg",
+      "status": "available"
+    },
+    "새우버거": {
+      "icon_file": "icon_새우버거.jpg",
+      "bg_file": "bg_새우버거.jpg",
+      "icon_path": "./images/icon_새우버거.jpg",
+      "bg_path": "./images/bg_새우버거.jpg",
+      "status": "available"
+    },
+    "베이컨버거": {
+      "icon_file": "icon_베이컨버거.jpg",
+      "bg_file": "bg_베이컨버거.jpg",
+      "icon_path": "./images/icon_베이컨버거.jpg",
+      "bg_path": "./images/bg_베이컨버거.jpg",
+      "status": "available"
+    },
+    "돈까스덮밥": {
+      "icon_file": "icon_돈까스덮밥.jpg",
+      "bg_file": "bg_돈까스덮밥.jpg",
+      "icon_path": "./images/icon_돈까스덮밥.jpg",
+      "bg_path": "./images/bg_돈까스덮밥.jpg",
+      "status": "available"
+    },
+    "스팸마요덮밥": {
+      "icon_file": "icon_스팸마요덮밥.jpg",
+      "bg_file": "bg_스팸마요덮밥.jpg",
+      "icon_path": "./images/icon_스팸마요덮밥.jpg",
+      "bg_path": "./images/bg_스팸마요덮밥.jpg",
+      "status": "available"
+    },
+    "족발": {
+      "icon_file": "icon_족발.jpg",
+      "bg_file": "bg_족발.jpg",
+      "icon_path": "./images/icon_족발.jpg",
+      "bg_path": "./images/bg_족발.jpg",
+      "status": "available"
+    },
+    "보쌈": {
+      "icon_file": "icon_보쌈.jpg",
+      "bg_file": "bg_보쌈.jpg",
+      "icon_path": "./images/icon_보쌈.jpg",
+      "bg_path": "./images/bg_보쌈.jpg",
+      "status": "available"
+    },
+    "곱창": {
+      "icon_file": "icon_곱창.jpg",
+      "bg_file": "bg_곱창.jpg",
+      "icon_path": "./images/icon_곱창.jpg",
+      "bg_path": "./images/bg_곱창.jpg",
+      "status": "available"
+    },
+    "아이스크림": {
+      "icon_file": "icon_아이스크림.jpg",
+      "bg_file": "bg_아이스크림.jpg",
+      "icon_path": "./images/icon_아이스크림.jpg",
+      "bg_path": "./images/bg_아이스크림.jpg",
+      "status": "available"
+    },
+    "케이크": {
+      "icon_file": "icon_케이크.jpg",
+      "bg_file": "bg_케이크.jpg",
+      "icon_path": "./images/icon_케이크.jpg",
+      "bg_path": "./images/bg_케이크.jpg",
+      "status": "available"
+    },
+    "마카롱": {
+      "icon_file": "icon_마카롱.jpg",
+      "bg_file": "bg_마카롱.jpg",
+      "icon_path": "./images/icon_마카롱.jpg",
+      "bg_path": "./images/bg_마카롱.jpg",
+      "status": "available"
+    },
+    "붕어빵": {
+      "icon_file": "icon_붕어빵.jpg",
+      "bg_file": "bg_붕어빵.jpg",
+      "icon_path": "./images/icon_붕어빵.jpg",
+      "bg_path": "./images/bg_붕어빵.jpg",
+      "status": "available"
+    },
+    "호떡": {
+      "icon_file": "icon_호떡.jpg",
+      "bg_file": "bg_호떡.jpg",
+      "icon_path": "./images/icon_호떡.jpg",
+      "bg_path": "./images/bg_호떡.jpg",
+      "status": "available"
+    }
+  }
+}

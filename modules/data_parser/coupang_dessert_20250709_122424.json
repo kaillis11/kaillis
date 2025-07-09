@@ -1,0 +1,176 @@
+{
+  "meta": {
+    "category": "dessert",
+    "category_name": "디저트",
+    "total_products": 15,
+    "parsed_at": "2025-07-09T12:24:24.147161",
+    "source": "coupang_manual_copy"
+  },
+  "products": [
+    {
+      "rank": 1,
+      "name": "마켓오 브라우니 제주말차 12개입, 240g, 1개",
+      "price": "860",
+      "price_numeric": 860,
+      "reviews": "0",
+      "rating": "0.0",
+      "category": "dessert",
+      "category_name": "디저트",
+      "parsed_at": "2025-07-09T12:24:24.147106"
+    },
+    {
+      "rank": 2,
+      "name": "마켓오 브라우니 제주말차 12개입, 240g, 1개",
+      "price": "5,280",
+      "price_numeric": 5280,
+      "reviews": "0",
+      "rating": "0.0",
+      "category": "dessert",
+      "category_name": "디저트",
+      "parsed_at": "2025-07-09T12:24:24.147119"
+    },
+    {
+      "rank": 3,
+      "name": "배스킨라빈스 피스타치오 크림 모찌 파이 12p, 264g, 1개",
+      "price": "5,280",
+      "price_numeric": 5280,
+      "reviews": "708",
+      "rating": "4.5",
+      "category": "dessert",
+      "category_name": "디저트",
+      "parsed_at": "2025-07-09T12:24:24.147120"
+    },
+    {
+      "rank": 4,
+      "name": "배스킨라빈스 쫀떡궁합 파이, 264g, 3개",
+      "price": "784",
+      "price_numeric": 784,
+      "reviews": "668",
+      "rating": "0.0",
+      "category": "dessert",
+      "category_name": "디저트",
+      "parsed_at": "2025-07-09T12:24:24.147121"
+    },
+    {
+      "rank": 5,
+      "name": "배스킨라빈스 쫀떡궁합 파이, 264g, 3개",
+      "price": "15,840",
+      "price_numeric": 15840,
+      "reviews": "668",
+      "rating": "0.0",
+      "category": "dessert",
+      "category_name": "디저트",
+      "parsed_at": "2025-07-09T12:24:24.147122"
+    },
+    {
+      "rank": 6,
+      "name": "쿠캣 딸기쏙우유 찹쌀떡 (냉동), 60g, 9개입, 1개",
+      "price": "495",
+      "price_numeric": 495,
+      "reviews": "668",
+      "rating": "0.0",
+      "category": "dessert",
+      "category_name": "디저트",
+      "parsed_at": "2025-07-09T12:24:24.147123"
+    },
+    {
+      "rank": 7,
+      "name": "쿠캣 딸기쏙우유 찹쌀떡 (냉동), 60g, 9개입, 1개",
+      "price": "13,900",
+      "price_numeric": 13900,
+      "reviews": "0",
+      "rating": "0.0",
+      "category": "dessert",
+      "category_name": "디저트",
+      "parsed_at": "2025-07-09T12:24:24.147123"
+    },
+    {
+      "rank": 8,
+      "name": "뉴트리오코 초콜릿맛 웨이퍼, 12g, 30개",
+      "price": "1,188",
+      "price_numeric": 1188,
+      "reviews": "0",
+      "rating": "0.0",
+      "category": "dessert",
+      "category_name": "디저트",
+      "parsed_at": "2025-07-09T12:24:24.147124"
+    },
+    {
+      "rank": 9,
+      "name": "뉴트리오코 초콜릿맛 웨이퍼, 12g, 30개",
+      "price": "7,800",
+      "price_numeric": 7800,
+      "reviews": "0",
+      "rating": "0.0",
+      "category": "dessert",
+      "category_name": "디저트",
+      "parsed_at": "2025-07-09T12:24:24.147125"
+    },
+    {
+      "rank": 10,
+      "name": "던킨 딸기 듬뿍 미니도넛 (냉동), 25g, 10개입, 1개",
+      "price": "7,450",
+      "price_numeric": 7450,
+      "reviews": "0",
+      "rating": "0.0",
+      "category": "dessert",
+      "category_name": "디저트",
+      "parsed_at": "2025-07-09T12:24:24.147126"
+    },
+    {
+      "rank": 11,
+      "name": "디엔비 글레이즈드 도넛 (냉동), 50g, 10개입, 1개",
+      "price": "299",
+      "price_numeric": 299,
+      "reviews": "0",
+      "rating": "0.0",
+      "category": "dessert",
+      "category_name": "디저트",
+      "parsed_at": "2025-07-09T12:24:24.147126"
+    },
+    {
+      "rank": 12,
+      "name": "던킨 바바리안 듬뿍 미니도넛 (냉동), 25g, 10개입, 1개",
+      "price": "415",
+      "price_numeric": 415,
+      "reviews": "0",
+      "rating": "0.0",
+      "category": "dessert",
+      "category_name": "디저트",
+      "parsed_at": "2025-07-09T12:24:24.147127"
+    },
+    {
+      "rank": 13,
+      "name": "빙그레 엑설런트 오리지널 아이스크림 (냉동), 800ml, 1개",
+      "price": "520",
+      "price_numeric": 520,
+      "reviews": "0",
+      "rating": "4.5",
+      "category": "dessert",
+      "category_name": "디저트",
+      "parsed_at": "2025-07-09T12:24:24.147128"
+    },
+    {
+      "rank": 14,
+      "name": "구구 크러스터 아이스크림 (냉동), 660ml, 1개입, 1개",
+      "price": "330",
+      "price_numeric": 330,
+      "reviews": "0",
+      "rating": "0.0",
+      "category": "dessert",
+      "category_name": "디저트",
+      "parsed_at": "2025-07-09T12:24:24.147128"
+    },
+    {
+      "rank": 15,
+      "name": "젤리젤리 부드럽고 촉촉한 한입 카스테라, 1kg, 1박스",
+      "price": "12,900",
+      "price_numeric": 12900,
+      "reviews": "0",
+      "rating": "4.5",
+      "category": "dessert",
+      "category_name": "디저트",
+      "parsed_at": "2025-07-09T12:24:24.147129"
+    }
+  ]
+}

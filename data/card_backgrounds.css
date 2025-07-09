@@ -1,0 +1,90 @@
+
+.menu-category-card.category-chicken::before {
+    background-image: url('./images/bg_치킨.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    filter: blur(1px);
+}
+
+.menu-category-card.category-meat::before {
+    background-image: url('./images/bg_삼겹살구이.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    filter: blur(1px);
+}
+
+.menu-category-card.category-bunsik::before {
+    background-image: url('./images/bg_tteokbokki.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    filter: blur(1px);
+}
+
+.menu-category-card.category-lunchbox::before {
+    background-image: url('./images/bg_치킨마요덮밥.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    filter: blur(1px);
+}
+
+.menu-category-card.category-japanese::before {
+    background-image: url('./images/bg_모듬초밥.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    filter: blur(1px);
+}
+
+.menu-category-card.category-western::before {
+    background-image: url('./images/bg_크림파스타.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    filter: blur(1px);
+}
+
+.menu-category-card.category-chinese::before {
+    background-image: url('./images/bg_jajangmyeon.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    filter: blur(1px);
+}
+
+.menu-category-card.category-dessert::before {
+    background-image: url('./images/bg_아이스크림.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    filter: blur(1px);
+}
+
+.menu-category-card.category-soup::before {
+    background-image: url('./images/bg_kimchi_stew.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    filter: blur(1px);
+}
+
+.menu-category-card.category-latenight::before {
+    background-image: url('./images/bg_족발.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    filter: blur(1px);
+}

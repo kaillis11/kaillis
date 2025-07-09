@@ -1,30 +1,33 @@
 # 🍽️ WhatToEat - 프로젝트 허브
 
-**최종 업데이트**: 2025-07-05  
-**프로젝트 상태**: 🔄 **개발중** (바스티유 베타 준비 + 랭킹 시스템 추가)
+**최종 업데이트**: 2025-07-09  
+**프로젝트 상태**: 🔄 **개발중** (데이터 파싱 시스템 + 이미지 수집 시스템 완성)
 
 🎯 **프리미엄 음식 룰렛 앱** - 아테나×오로라 융합 디자인 + 무한회전 안정화 엔진
 
 ---
 
 ## 🚨 필수 읽기 (우선순위 순)
-1. 🔐 **[Google 로그인 구현 완료](docs/google_login_implementation_complete.md)** - 실제 작동 확인! ⭐ NEW
-2. 🏆 **[RANKING_SYSTEM_GUIDE.md](docs/RANKING_SYSTEM_GUIDE.md)** - 범용 랭킹 시스템 완전 가이드
-3. 🍽️ **[CONTEXT.md](CONTEXT.md)** - 프로젝트 컨텍스트 및 진행상황
-4. 🌟 **최종 버전**: `tools/roulette_v2_premium_fusion.html`
-5. 📖 **[HANDOVER_GUIDE.md](docs/HANDOVER_GUIDE.md)** - 완벽한 인수인계 가이드 (40페이지)
-6. 🚪 **[GATEWAY.md](GATEWAY.md)** - 전체 네비게이션 포털
+1. 🔧 **[MODULE_GUIDE.md](docs/MODULE_GUIDE.md)** - 모든 모듈 완전 가이드 🔥 NEW
+2. 🔐 **[Google 로그인 구현 완료](docs/google_login_implementation_complete.md)** - 실제 작동 확인!
+3. 🏆 **[RANKING_SYSTEM_GUIDE.md](docs/RANKING_SYSTEM_GUIDE.md)** - 범용 랭킹 시스템 완전 가이드
+4. 🍽️ **[CONTEXT.md](CONTEXT.md)** - 프로젝트 컨텍스트 및 진행상황
+5. 🌟 **최종 버전**: `tools/roulette_v2_premium_fusion.html`
+6. 📖 **[HANDOVER_GUIDE.md](docs/HANDOVER_GUIDE.md)** - 완벽한 인수인계 가이드 (40페이지)
+7. 🚪 **[GATEWAY.md](GATEWAY.md)** - 전체 네비게이션 포털
 
 ## 📁 프로젝트 완성 현황
 
 ### ✅ **완성된 핵심 기능들**
-- **Google OAuth 2.0 로그인**: 실제 구글 계정으로 로그인 가능 🔥 NEW
-- **MBTI 입력 시스템**: 16가지 성격 유형 연동 + 개인화 준비 🔥 NEW
+- **쿠팡 데이터 파싱 시스템**: 수작업 복사 → 구조화된 JSON 변환 🔥 NEW  
+- **네이버 이미지 수집 시스템**: 제품 이미지 자동 수집 + 데모 버전 🔥 NEW
+- **Google OAuth 2.0 로그인**: 실제 구글 계정으로 로그인 가능
+- **MBTI 입력 시스템**: 16가지 성격 유형 연동 + 개인화 준비
 - **무한회전 물리엔진**: 절대 멈추지 않는 안정성
 - **24개 프리미엄 카드**: 메뉴 12 + 쿠팡광고 6 + 랭킹 6
 - **범용 랭킹 시스템**: 모든 카테고리 판매량/매출 순위 분석
 - **네이버 쇼핑 API 연동**: 실시간 상품 검색 및 트렌드 분석
-- **네이버 크롤링 시스템**: 3가지 방식 크롤러 + 봇 차단 우회 🔥 NEW
+- **네이버 크롤링 시스템**: 3가지 방식 크롤러 + 봇 차단 우회
 - **클래스 기반 아키텍처**: RouletteState + Renderer + EventHandler + Engine
 - **NaN 방어 시스템**: 모든 계산에서 완벽한 안전성
 
@@ -54,16 +57,27 @@ NaN 방어 시스템 + 무한회전 + 상태 동기화로 어떤 상황에서도
 
 ## 🧩 모듈 시스템
 
-### 📊 **네이버 크롤링 모듈** 🆕
+### 📊 **완성된 모듈 시스템** 🔥 NEW
+**전체 문서**: [MODULE_GUIDE.md](docs/MODULE_GUIDE.md) - 모든 모듈의 완전한 사용법과 예제
+
+### 📋 **데이터 파싱 모듈**
+- **위치**: `modules/data_parser/`
+- **핵심 파일**: `improved_parser.py` - 수작업 복사 데이터 → 구조화된 JSON
+- **지원 기능**: 정확한 순위 추출, 메타데이터 생성, 다중 카테고리 지원
+- **완성도**: ⭐⭐⭐⭐⭐ (프로덕션 레디)
+
+### 🖼️ **이미지 수집 모듈**  
+- **위치**: `modules/image_fetcher/`
+- **핵심 파일**: `demo_image_fetcher.py` - 데모 이미지 자동 할당
+- **실제 파일**: `naver_image_fetcher.py` - 네이버 쇼핑 실제 이미지 수집
+- **지원 기능**: 제품명 정제, 이미지 검증, 기존 데이터 연동
+- **완성도**: ⭐⭐⭐⭐⭐ (데모), ⭐⭐⭐ (실제 크롤링)
+
+### 🌐 **크롤링 모듈** (참고용)
 - **위치**: `modules/naver_crawling/`
 - **3가지 크롤러**: Selenium, Requests, 고급우회 방식
-- **주요 기능**: 봇 차단 우회, 다중 선택자 패턴, CSV 자동저장
-- **문서**: [NAVER_CRAWLING_SYSTEM_DOCS.md](modules/naver_crawling/NAVER_CRAWLING_SYSTEM_DOCS.md)
-- **실행 파일들**:
-  - `naver_shopping_crawler.py` - Selenium 기반 (동적 콘텐츠)
-  - `simple_naver_crawler.py` - 빠른 HTTP 요청 방식
-  - `advanced_naver_crawler.py` - 봇 차단 우회 특화
-- **향후 개선**: undetected-chromedriver 적용 예정
+- **현실적 한계**: 봇 차단으로 인한 제한적 활용
+- **권장 방식**: 수작업 복사 + 파싱 시스템 활용
 
 ---
 

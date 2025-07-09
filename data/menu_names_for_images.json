@@ -1,0 +1,1058 @@
+{
+  "timestamp": "2025-07-09T12:32:14.904946",
+  "total_menus": 103,
+  "categories": {
+    "chicken": [
+      {
+        "original": "후라이드치킨",
+        "cleaned": "후라이드치킨",
+        "search_term": "후라이드치킨 food korean"
+      },
+      {
+        "original": "양념치킨",
+        "cleaned": "양념치킨",
+        "search_term": "양념치킨 food korean"
+      },
+      {
+        "original": "뿌링클치킨",
+        "cleaned": "뿌링클치킨",
+        "search_term": "뿌링클치킨 food korean"
+      },
+      {
+        "original": "허니콤보치킨",
+        "cleaned": "허니콤보치킨",
+        "search_term": "허니콤보치킨 food korean"
+      },
+      {
+        "original": "황금올리브치킨",
+        "cleaned": "황금올리브치킨",
+        "search_term": "황금올리브치킨 food korean"
+      },
+      {
+        "original": "치킨마요덮밥",
+        "cleaned": "치킨마요덮밥",
+        "search_term": "치킨마요덮밥 food korean"
+      },
+      {
+        "original": "치킨버거",
+        "cleaned": "치킨버거",
+        "search_term": "치킨버거 food korean"
+      },
+      {
+        "original": "치킨",
+        "cleaned": "치킨",
+        "search_term": "치킨 food korean"
+      },
+      {
+        "original": "불닭볶음면",
+        "cleaned": "불닭볶음면",
+        "search_term": "불닭볶음면 food korean"
+      },
+      {
+        "original": "크크크치킨",
+        "cleaned": "크크크치킨",
+        "search_term": "크크크치킨 food korean"
+      },
+      {
+        "original": "뿌링클",
+        "cleaned": "뿌링클",
+        "search_term": "뿌링클 food korean"
+      },
+      {
+        "original": "슈프림양념",
+        "cleaned": "슈프림양념",
+        "search_term": "슈프림양념 food korean"
+      },
+      {
+        "original": "옥수수치킨",
+        "cleaned": "옥수수치킨",
+        "search_term": "옥수수치킨 food korean"
+      },
+      {
+        "original": "크랑이치킨",
+        "cleaned": "크랑이치킨",
+        "search_term": "크랑이치킨 food korean"
+      },
+      {
+        "original": "교촌치킨",
+        "cleaned": "교촌치킨",
+        "search_term": "교촌치킨 food korean"
+      },
+      {
+        "original": "굽네치킨",
+        "cleaned": "굽네치킨",
+        "search_term": "굽네치킨 food korean"
+      },
+      {
+        "original": "처갓집치킨",
+        "cleaned": "처갓집치킨",
+        "search_term": "처갓집치킨 food korean"
+      },
+      {
+        "original": "춘천닭갈비",
+        "cleaned": "춘천닭갈비",
+        "search_term": "춘천닭갈비 food korean"
+      },
+      {
+        "original": "치킨도시락",
+        "cleaned": "치킨도시락",
+        "search_term": "치킨도시락 food korean"
+      },
+      {
+        "original": "치킨마요계란덮밥",
+        "cleaned": "치킨마요계란덮밥",
+        "search_term": "치킨마요계란덮밥 food korean"
+      }
+    ],
+    "meat": [
+      {
+        "original": "삼겹살구이",
+        "cleaned": "삼겹살구이",
+        "search_term": "삼겹살구이 food korean"
+      },
+      {
+        "original": "갈비구이",
+        "cleaned": "갈비구이",
+        "search_term": "갈비구이 food korean"
+      },
+      {
+        "original": "제육볶음",
+        "cleaned": "제육볶음",
+        "search_term": "제육볶음 food korean"
+      },
+      {
+        "original": "대패삼겹살",
+        "cleaned": "대패삼겹살",
+        "search_term": "대패삼겹살 food korean"
+      },
+      {
+        "original": "항정살구이",
+        "cleaned": "항정살구이",
+        "search_term": "항정살구이 food korean"
+      },
+      {
+        "original": "불고기덮밥",
+        "cleaned": "불고기덮밥",
+        "search_term": "불고기덮밥 food korean"
+      },
+      {
+        "original": "불고기버거",
+        "cleaned": "불고기버거",
+        "search_term": "불고기버거 food korean"
+      },
+      {
+        "original": "바싹불고기도시락",
+        "cleaned": "바싹불고기도시락",
+        "search_term": "바싹불고기도시락 food korean"
+      },
+      {
+        "original": "언양식 불고기김밥",
+        "cleaned": "언양식 불고기김밥",
+        "search_term": "언양식 불고기김밥 food korean"
+      }
+    ],
+    "korean": [
+      {
+        "original": "떡볶이",
+        "cleaned": "떡볶이",
+        "search_term": "떡볶이 food korean"
+      },
+      {
+        "original": "김밥",
+        "cleaned": "김밥",
+        "search_term": "김밥 food korean"
+      },
+      {
+        "original": "순대",
+        "cleaned": "순대",
+        "search_term": "순대 food korean"
+      },
+      {
+        "original": "김치찌개",
+        "cleaned": "김치찌개",
+        "search_term": "김치찌개 food korean"
+      },
+      {
+        "original": "된장찌개",
+        "cleaned": "된장찌개",
+        "search_term": "된장찌개 food korean"
+      },
+      {
+        "original": "부대찌개",
+        "cleaned": "부대찌개",
+        "search_term": "부대찌개 food korean"
+      },
+      {
+        "original": "순두부찌개",
+        "cleaned": "순두부찌개",
+        "search_term": "순두부찌개 food korean"
+      },
+      {
+        "original": "미역국",
+        "cleaned": "미역국",
+        "search_term": "미역국 food korean"
+      },
+      {
+        "original": "참치마요김밥",
+        "cleaned": "참치마요김밥",
+        "search_term": "참치마요김밥 food korean"
+      },
+      {
+        "original": "참치김치김밥",
+        "cleaned": "참치김치김밥",
+        "search_term": "참치김치김밥 food korean"
+      }
+    ],
+    "japanese": [
+      {
+        "original": "라면",
+        "cleaned": "라면",
+        "search_term": "라면 food korean"
+      },
+      {
+        "original": "모듬초밥",
+        "cleaned": "모듬초밥",
+        "search_term": "모듬초밥 food korean"
+      },
+      {
+        "original": "돈카츠",
+        "cleaned": "돈카츠",
+        "search_term": "돈카츠 food korean"
+      },
+      {
+        "original": "우동",
+        "cleaned": "우동",
+        "search_term": "우동 food korean"
+      },
+      {
+        "original": "연어덮밥",
+        "cleaned": "연어덮밥",
+        "search_term": "연어덮밥 food korean"
+      },
+      {
+        "original": "규동",
+        "cleaned": "규동",
+        "search_term": "규동 food korean"
+      },
+      {
+        "original": "신라면",
+        "cleaned": "신라면",
+        "search_term": "신라면 food korean"
+      },
+      {
+        "original": "진라면",
+        "cleaned": "진라면",
+        "search_term": "진라면 food korean"
+      },
+      {
+        "original": "삼양라면",
+        "cleaned": "삼양라면",
+        "search_term": "삼양라면 food korean"
+      },
+      {
+        "original": "열라면",
+        "cleaned": "열라면",
+        "search_term": "열라면 food korean"
+      },
+      {
+        "original": "참깨라면",
+        "cleaned": "참깨라면",
+        "search_term": "참깨라면 food korean"
+      }
+    ],
+    "western": [
+      {
+        "original": "더블치즈버거",
+        "cleaned": "더블치즈버거",
+        "search_term": "더블치즈버거 food korean"
+      },
+      {
+        "original": "새우버거",
+        "cleaned": "새우버거",
+        "search_term": "새우버거 food korean"
+      },
+      {
+        "original": "베이컨버거",
+        "cleaned": "베이컨버거",
+        "search_term": "베이컨버거 food korean"
+      },
+      {
+        "original": "크림파스타",
+        "cleaned": "크림파스타",
+        "search_term": "크림파스타 food korean"
+      },
+      {
+        "original": "토마토파스타",
+        "cleaned": "토마토파스타",
+        "search_term": "토마토파스타 food korean"
+      },
+      {
+        "original": "피자",
+        "cleaned": "피자",
+        "search_term": "피자 food korean"
+      },
+      {
+        "original": "오일파스타",
+        "cleaned": "오일파스타",
+        "search_term": "오일파스타 food korean"
+      },
+      {
+        "original": "라자냐",
+        "cleaned": "라자냐",
+        "search_term": "라자냐 food korean"
+      },
+      {
+        "original": "피자",
+        "cleaned": "피자",
+        "search_term": "피자 food korean"
+      }
+    ],
+    "chinese": [
+      {
+        "original": "짜장면",
+        "cleaned": "짜장면",
+        "search_term": "짜장면 food korean"
+      },
+      {
+        "original": "짬뽕",
+        "cleaned": "짬뽕",
+        "search_term": "짬뽕 food korean"
+      },
+      {
+        "original": "탕수육",
+        "cleaned": "탕수육",
+        "search_term": "탕수육 food korean"
+      },
+      {
+        "original": "양장피",
+        "cleaned": "양장피",
+        "search_term": "양장피 food korean"
+      },
+      {
+        "original": "마파두부",
+        "cleaned": "마파두부",
+        "search_term": "마파두부 food korean"
+      },
+      {
+        "original": "오징어짬뽕",
+        "cleaned": "오징어짬뽕",
+        "search_term": "오징어짬뽕 food korean"
+      }
+    ],
+    "dessert": [
+      {
+        "original": "케이크",
+        "cleaned": "케이크",
+        "search_term": "케이크 food korean"
+      },
+      {
+        "original": "마카롱",
+        "cleaned": "마카롱",
+        "search_term": "마카롱 food korean"
+      },
+      {
+        "original": "붕어빵",
+        "cleaned": "붕어빵",
+        "search_term": "붕어빵 food korean"
+      },
+      {
+        "original": "호떡",
+        "cleaned": "호떡",
+        "search_term": "호떡 food korean"
+      }
+    ],
+    "drink": [],
+    "snack": [],
+    "icecream": [
+      {
+        "original": "아이스크림",
+        "cleaned": "아이스크림",
+        "search_term": "아이스크림 food korean"
+      },
+      {
+        "original": "월드콘",
+        "cleaned": "월드콘",
+        "search_term": "월드콘 food korean"
+      },
+      {
+        "original": "붕어싸만코",
+        "cleaned": "붕어싸만코",
+        "search_term": "붕어싸만코 food korean"
+      },
+      {
+        "original": "메로나",
+        "cleaned": "메로나",
+        "search_term": "메로나 food korean"
+      },
+      {
+        "original": "투게더",
+        "cleaned": "투게더",
+        "search_term": "투게더 food korean"
+      },
+      {
+        "original": "빵빠레",
+        "cleaned": "빵빠레",
+        "search_term": "빵빠레 food korean"
+      },
+      {
+        "original": "브라보콘",
+        "cleaned": "브라보콘",
+        "search_term": "브라보콘 food korean"
+      },
+      {
+        "original": "돼지바",
+        "cleaned": "돼지바",
+        "search_term": "돼지바 food korean"
+      },
+      {
+        "original": "비비빅",
+        "cleaned": "비비빅",
+        "search_term": "비비빅 food korean"
+      },
+      {
+        "original": "수박바",
+        "cleaned": "수박바",
+        "search_term": "수박바 food korean"
+      },
+      {
+        "original": "하겐다즈",
+        "cleaned": "하겐다즈",
+        "search_term": "하겐다즈 food korean"
+      }
+    ],
+    "other": [
+      {
+        "original": "어묵",
+        "cleaned": "어묵",
+        "search_term": "어묵 food korean"
+      },
+      {
+        "original": "비빔밥",
+        "cleaned": "비빔밥",
+        "search_term": "비빔밥 food korean"
+      },
+      {
+        "original": "돈까스덮밥",
+        "cleaned": "돈까스덮밥",
+        "search_term": "돈까스덮밥 food korean"
+      },
+      {
+        "original": "스팸마요덮밥",
+        "cleaned": "스팸마요덮밥",
+        "search_term": "스팸마요덮밥 food korean"
+      },
+      {
+        "original": "족발",
+        "cleaned": "족발",
+        "search_term": "족발 food korean"
+      },
+      {
+        "original": "보쌈",
+        "cleaned": "보쌈",
+        "search_term": "보쌈 food korean"
+      },
+      {
+        "original": "곱창",
+        "cleaned": "곱창",
+        "search_term": "곱창 food korean"
+      },
+      {
+        "original": "안성탕면",
+        "cleaned": "안성탕면",
+        "search_term": "안성탕면 food korean"
+      },
+      {
+        "original": "너구리",
+        "cleaned": "너구리",
+        "search_term": "너구리 food korean"
+      },
+      {
+        "original": "짜파게티",
+        "cleaned": "짜파게티",
+        "search_term": "짜파게티 food korean"
+      },
+      {
+        "original": "고추바사삭",
+        "cleaned": "고추바사삭",
+        "search_term": "고추바사삭 food korean"
+      },
+      {
+        "original": "허니콤보",
+        "cleaned": "허니콤보",
+        "search_term": "허니콤보 food korean"
+      },
+      {
+        "original": "황금올리브",
+        "cleaned": "황금올리브",
+        "search_term": "황금올리브 food korean"
+      },
+      {
+        "original": "자메이카통다리",
+        "cleaned": "자메이카통다리",
+        "search_term": "자메이카통다리 food korean"
+      },
+      {
+        "original": "치필링",
+        "cleaned": "치필링",
+        "search_term": "치필링 food korean"
+      },
+      {
+        "original": "BHC",
+        "cleaned": "BHC",
+        "search_term": "BHC food korean"
+      },
+      {
+        "original": "BBQ",
+        "cleaned": "BBQ",
+        "search_term": "BBQ food korean"
+      },
+      {
+        "original": "더큰 참치마요",
+        "cleaned": "더큰 참치마요",
+        "search_term": "더큰 참치마요 food korean"
+      },
+      {
+        "original": "붉은대게 딱지장",
+        "cleaned": "붉은대게 딱지장",
+        "search_term": "붉은대게 딱지장 food korean"
+      },
+      {
+        "original": "더큰 베이컨참치마요",
+        "cleaned": "더큰 베이컨참치마요",
+        "search_term": "더큰 베이컨참치마요 food korean"
+      },
+      {
+        "original": "뉴 전주비빔",
+        "cleaned": "뉴 전주비빔",
+        "search_term": "뉴 전주비빔 food korean"
+      },
+      {
+        "original": "등심돈까스도시락",
+        "cleaned": "등심돈까스도시락",
+        "search_term": "등심돈까스도시락 food korean"
+      },
+      {
+        "original": "혜자로운 집밥",
+        "cleaned": "혜자로운 집밥",
+        "search_term": "혜자로운 집밥 food korean"
+      }
+    ]
+  },
+  "all_menus": [
+    {
+      "original": "후라이드치킨",
+      "cleaned": "후라이드치킨",
+      "search_term": "후라이드치킨 food korean"
+    },
+    {
+      "original": "양념치킨",
+      "cleaned": "양념치킨",
+      "search_term": "양념치킨 food korean"
+    },
+    {
+      "original": "뿌링클치킨",
+      "cleaned": "뿌링클치킨",
+      "search_term": "뿌링클치킨 food korean"
+    },
+    {
+      "original": "허니콤보치킨",
+      "cleaned": "허니콤보치킨",
+      "search_term": "허니콤보치킨 food korean"
+    },
+    {
+      "original": "황금올리브치킨",
+      "cleaned": "황금올리브치킨",
+      "search_term": "황금올리브치킨 food korean"
+    },
+    {
+      "original": "삼겹살구이",
+      "cleaned": "삼겹살구이",
+      "search_term": "삼겹살구이 food korean"
+    },
+    {
+      "original": "갈비구이",
+      "cleaned": "갈비구이",
+      "search_term": "갈비구이 food korean"
+    },
+    {
+      "original": "제육볶음",
+      "cleaned": "제육볶음",
+      "search_term": "제육볶음 food korean"
+    },
+    {
+      "original": "대패삼겹살",
+      "cleaned": "대패삼겹살",
+      "search_term": "대패삼겹살 food korean"
+    },
+    {
+      "original": "항정살구이",
+      "cleaned": "항정살구이",
+      "search_term": "항정살구이 food korean"
+    },
+    {
+      "original": "떡볶이",
+      "cleaned": "떡볶이",
+      "search_term": "떡볶이 food korean"
+    },
+    {
+      "original": "김밥",
+      "cleaned": "김밥",
+      "search_term": "김밥 food korean"
+    },
+    {
+      "original": "라면",
+      "cleaned": "라면",
+      "search_term": "라면 food korean"
+    },
+    {
+      "original": "순대",
+      "cleaned": "순대",
+      "search_term": "순대 food korean"
+    },
+    {
+      "original": "어묵",
+      "cleaned": "어묵",
+      "search_term": "어묵 food korean"
+    },
+    {
+      "original": "치킨마요덮밥",
+      "cleaned": "치킨마요덮밥",
+      "search_term": "치킨마요덮밥 food korean"
+    },
+    {
+      "original": "불고기덮밥",
+      "cleaned": "불고기덮밥",
+      "search_term": "불고기덮밥 food korean"
+    },
+    {
+      "original": "비빔밥",
+      "cleaned": "비빔밥",
+      "search_term": "비빔밥 food korean"
+    },
+    {
+      "original": "돈까스덮밥",
+      "cleaned": "돈까스덮밥",
+      "search_term": "돈까스덮밥 food korean"
+    },
+    {
+      "original": "스팸마요덮밥",
+      "cleaned": "스팸마요덮밥",
+      "search_term": "스팸마요덮밥 food korean"
+    },
+    {
+      "original": "불고기버거",
+      "cleaned": "불고기버거",
+      "search_term": "불고기버거 food korean"
+    },
+    {
+      "original": "치킨버거",
+      "cleaned": "치킨버거",
+      "search_term": "치킨버거 food korean"
+    },
+    {
+      "original": "더블치즈버거",
+      "cleaned": "더블치즈버거",
+      "search_term": "더블치즈버거 food korean"
+    },
+    {
+      "original": "새우버거",
+      "cleaned": "새우버거",
+      "search_term": "새우버거 food korean"
+    },
+    {
+      "original": "베이컨버거",
+      "cleaned": "베이컨버거",
+      "search_term": "베이컨버거 food korean"
+    },
+    {
+      "original": "모듬초밥",
+      "cleaned": "모듬초밥",
+      "search_term": "모듬초밥 food korean"
+    },
+    {
+      "original": "돈카츠",
+      "cleaned": "돈카츠",
+      "search_term": "돈카츠 food korean"
+    },
+    {
+      "original": "우동",
+      "cleaned": "우동",
+      "search_term": "우동 food korean"
+    },
+    {
+      "original": "연어덮밥",
+      "cleaned": "연어덮밥",
+      "search_term": "연어덮밥 food korean"
+    },
+    {
+      "original": "규동",
+      "cleaned": "규동",
+      "search_term": "규동 food korean"
+    },
+    {
+      "original": "크림파스타",
+      "cleaned": "크림파스타",
+      "search_term": "크림파스타 food korean"
+    },
+    {
+      "original": "토마토파스타",
+      "cleaned": "토마토파스타",
+      "search_term": "토마토파스타 food korean"
+    },
+    {
+      "original": "피자",
+      "cleaned": "피자",
+      "search_term": "피자 food korean"
+    },
+    {
+      "original": "오일파스타",
+      "cleaned": "오일파스타",
+      "search_term": "오일파스타 food korean"
+    },
+    {
+      "original": "라자냐",
+      "cleaned": "라자냐",
+      "search_term": "라자냐 food korean"
+    },
+    {
+      "original": "아이스크림",
+      "cleaned": "아이스크림",
+      "search_term": "아이스크림 food korean"
+    },
+    {
+      "original": "케이크",
+      "cleaned": "케이크",
+      "search_term": "케이크 food korean"
+    },
+    {
+      "original": "마카롱",
+      "cleaned": "마카롱",
+      "search_term": "마카롱 food korean"
+    },
+    {
+      "original": "붕어빵",
+      "cleaned": "붕어빵",
+      "search_term": "붕어빵 food korean"
+    },
+    {
+      "original": "호떡",
+      "cleaned": "호떡",
+      "search_term": "호떡 food korean"
+    },
+    {
+      "original": "짜장면",
+      "cleaned": "짜장면",
+      "search_term": "짜장면 food korean"
+    },
+    {
+      "original": "짬뽕",
+      "cleaned": "짬뽕",
+      "search_term": "짬뽕 food korean"
+    },
+    {
+      "original": "탕수육",
+      "cleaned": "탕수육",
+      "search_term": "탕수육 food korean"
+    },
+    {
+      "original": "양장피",
+      "cleaned": "양장피",
+      "search_term": "양장피 food korean"
+    },
+    {
+      "original": "마파두부",
+      "cleaned": "마파두부",
+      "search_term": "마파두부 food korean"
+    },
+    {
+      "original": "치킨",
+      "cleaned": "치킨",
+      "search_term": "치킨 food korean"
+    },
+    {
+      "original": "피자",
+      "cleaned": "피자",
+      "search_term": "피자 food korean"
+    },
+    {
+      "original": "족발",
+      "cleaned": "족발",
+      "search_term": "족발 food korean"
+    },
+    {
+      "original": "보쌈",
+      "cleaned": "보쌈",
+      "search_term": "보쌈 food korean"
+    },
+    {
+      "original": "곱창",
+      "cleaned": "곱창",
+      "search_term": "곱창 food korean"
+    },
+    {
+      "original": "김치찌개",
+      "cleaned": "김치찌개",
+      "search_term": "김치찌개 food korean"
+    },
+    {
+      "original": "된장찌개",
+      "cleaned": "된장찌개",
+      "search_term": "된장찌개 food korean"
+    },
+    {
+      "original": "부대찌개",
+      "cleaned": "부대찌개",
+      "search_term": "부대찌개 food korean"
+    },
+    {
+      "original": "순두부찌개",
+      "cleaned": "순두부찌개",
+      "search_term": "순두부찌개 food korean"
+    },
+    {
+      "original": "미역국",
+      "cleaned": "미역국",
+      "search_term": "미역국 food korean"
+    },
+    {
+      "original": "신라면",
+      "cleaned": "신라면",
+      "search_term": "신라면 food korean"
+    },
+    {
+      "original": "진라면",
+      "cleaned": "진라면",
+      "search_term": "진라면 food korean"
+    },
+    {
+      "original": "안성탕면",
+      "cleaned": "안성탕면",
+      "search_term": "안성탕면 food korean"
+    },
+    {
+      "original": "삼양라면",
+      "cleaned": "삼양라면",
+      "search_term": "삼양라면 food korean"
+    },
+    {
+      "original": "너구리",
+      "cleaned": "너구리",
+      "search_term": "너구리 food korean"
+    },
+    {
+      "original": "열라면",
+      "cleaned": "열라면",
+      "search_term": "열라면 food korean"
+    },
+    {
+      "original": "불닭볶음면",
+      "cleaned": "불닭볶음면",
+      "search_term": "불닭볶음면 food korean"
+    },
+    {
+      "original": "짜파게티",
+      "cleaned": "짜파게티",
+      "search_term": "짜파게티 food korean"
+    },
+    {
+      "original": "참깨라면",
+      "cleaned": "참깨라면",
+      "search_term": "참깨라면 food korean"
+    },
+    {
+      "original": "오징어짬뽕",
+      "cleaned": "오징어짬뽕",
+      "search_term": "오징어짬뽕 food korean"
+    },
+    {
+      "original": "크크크치킨",
+      "cleaned": "크크크치킨",
+      "search_term": "크크크치킨 food korean"
+    },
+    {
+      "original": "뿌링클",
+      "cleaned": "뿌링클",
+      "search_term": "뿌링클 food korean"
+    },
+    {
+      "original": "고추바사삭",
+      "cleaned": "고추바사삭",
+      "search_term": "고추바사삭 food korean"
+    },
+    {
+      "original": "허니콤보",
+      "cleaned": "허니콤보",
+      "search_term": "허니콤보 food korean"
+    },
+    {
+      "original": "황금올리브",
+      "cleaned": "황금올리브",
+      "search_term": "황금올리브 food korean"
+    },
+    {
+      "original": "자메이카통다리",
+      "cleaned": "자메이카통다리",
+      "search_term": "자메이카통다리 food korean"
+    },
+    {
+      "original": "슈프림양념",
+      "cleaned": "슈프림양념",
+      "search_term": "슈프림양념 food korean"
+    },
+    {
+      "original": "치필링",
+      "cleaned": "치필링",
+      "search_term": "치필링 food korean"
+    },
+    {
+      "original": "옥수수치킨",
+      "cleaned": "옥수수치킨",
+      "search_term": "옥수수치킨 food korean"
+    },
+    {
+      "original": "크랑이치킨",
+      "cleaned": "크랑이치킨",
+      "search_term": "크랑이치킨 food korean"
+    },
+    {
+      "original": "BHC",
+      "cleaned": "BHC",
+      "search_term": "BHC food korean"
+    },
+    {
+      "original": "BBQ",
+      "cleaned": "BBQ",
+      "search_term": "BBQ food korean"
+    },
+    {
+      "original": "교촌치킨",
+      "cleaned": "교촌치킨",
+      "search_term": "교촌치킨 food korean"
+    },
+    {
+      "original": "굽네치킨",
+      "cleaned": "굽네치킨",
+      "search_term": "굽네치킨 food korean"
+    },
+    {
+      "original": "처갓집치킨",
+      "cleaned": "처갓집치킨",
+      "search_term": "처갓집치킨 food korean"
+    },
+    {
+      "original": "더큰 참치마요",
+      "cleaned": "더큰 참치마요",
+      "search_term": "더큰 참치마요 food korean"
+    },
+    {
+      "original": "붉은대게 딱지장",
+      "cleaned": "붉은대게 딱지장",
+      "search_term": "붉은대게 딱지장 food korean"
+    },
+    {
+      "original": "더큰 베이컨참치마요",
+      "cleaned": "더큰 베이컨참치마요",
+      "search_term": "더큰 베이컨참치마요 food korean"
+    },
+    {
+      "original": "뉴 전주비빔",
+      "cleaned": "뉴 전주비빔",
+      "search_term": "뉴 전주비빔 food korean"
+    },
+    {
+      "original": "춘천닭갈비",
+      "cleaned": "춘천닭갈비",
+      "search_term": "춘천닭갈비 food korean"
+    },
+    {
+      "original": "치킨도시락",
+      "cleaned": "치킨도시락",
+      "search_term": "치킨도시락 food korean"
+    },
+    {
+      "original": "바싹불고기도시락",
+      "cleaned": "바싹불고기도시락",
+      "search_term": "바싹불고기도시락 food korean"
+    },
+    {
+      "original": "등심돈까스도시락",
+      "cleaned": "등심돈까스도시락",
+      "search_term": "등심돈까스도시락 food korean"
+    },
+    {
+      "original": "치킨마요계란덮밥",
+      "cleaned": "치킨마요계란덮밥",
+      "search_term": "치킨마요계란덮밥 food korean"
+    },
+    {
+      "original": "혜자로운 집밥",
+      "cleaned": "혜자로운 집밥",
+      "search_term": "혜자로운 집밥 food korean"
+    },
+    {
+      "original": "참치마요김밥",
+      "cleaned": "참치마요김밥",
+      "search_term": "참치마요김밥 food korean"
+    },
+    {
+      "original": "언양식 불고기김밥",
+      "cleaned": "언양식 불고기김밥",
+      "search_term": "언양식 불고기김밥 food korean"
+    },
+    {
+      "original": "참치김치김밥",
+      "cleaned": "참치김치김밥",
+      "search_term": "참치김치김밥 food korean"
+    },
+    {
+      "original": "월드콘",
+      "cleaned": "월드콘",
+      "search_term": "월드콘 food korean"
+    },
+    {
+      "original": "붕어싸만코",
+      "cleaned": "붕어싸만코",
+      "search_term": "붕어싸만코 food korean"
+    },
+    {
+      "original": "메로나",
+      "cleaned": "메로나",
+      "search_term": "메로나 food korean"
+    },
+    {
+      "original": "투게더",
+      "cleaned": "투게더",
+      "search_term": "투게더 food korean"
+    },
+    {
+      "original": "빵빠레",
+      "cleaned": "빵빠레",
+      "search_term": "빵빠레 food korean"
+    },
+    {
+      "original": "브라보콘",
+      "cleaned": "브라보콘",
+      "search_term": "브라보콘 food korean"
+    },
+    {
+      "original": "돼지바",
+      "cleaned": "돼지바",
+      "search_term": "돼지바 food korean"
+    },
+    {
+      "original": "비비빅",
+      "cleaned": "비비빅",
+      "search_term": "비비빅 food korean"
+    },
+    {
+      "original": "수박바",
+      "cleaned": "수박바",
+      "search_term": "수박바 food korean"
+    },
+    {
+      "original": "하겐다즈",
+      "cleaned": "하겐다즈",
+      "search_term": "하겐다즈 food korean"
+    }
+  ]
+}
