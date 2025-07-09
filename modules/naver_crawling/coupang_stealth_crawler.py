@@ -104,11 +104,40 @@ class CoupangStealthCrawler:
             print(f"📍 현재 URL: {current_url}")
             print(f"📄 페이지 제목: {page_title}")
             
-            # 4. 차단 여부 확인
-            if "403" in page_title or "차단" in page_source or "captcha" in page_source.lower():
-                print("🚫 쿠팡도 봇으로 탐지됨...")
-                self.driver.save_screenshot("coupang_blocked.png")
-                return self.get_backup_data(limit)
+            # 4. 실제 상품 존재 여부 우선 확인
+            print("🔍 실제 상품 존재 여부 확인 중...")
+            
+            # 실제 상품 요소가 있는지 먼저 확인
+            product_found = False
+            quick_selectors = ['.search-product', '[data-product-id]', '.product-item']
+            
+            for selector in quick_selectors:
+                try:
+                    elements = self.driver.find_elements("css selector", selector)
+                    if elements and len(elements) > 0:
+                        product_found = True
+                        print(f"✅ 상품 발견: {selector}로 {len(elements)}개 요소 찾음")
+                        break
+                except:
+                    continue
+            
+            # 상품이 없으면 차단 검사 진행
+            if not product_found:
+                has_403 = "403" in page_title
+                has_block = "차단" in page_source
+                has_captcha = "captcha" in page_source.lower()
+                
+                print(f"🔍 차단 검사:")
+                print(f"  - 403 in title: {has_403}")
+                print(f"  - 차단 in source: {has_block}")
+                print(f"  - captcha in source: {has_captcha}")
+                
+                if has_403 or has_block or has_captcha:
+                    print("🚫 쿠팡도 봇으로 탐지됨...")
+                    self.driver.save_screenshot("coupang_blocked.png")
+                    return self.get_backup_data(limit)
+            else:
+                print("🎉 실제 상품 존재 확인! 차단 검사 생략하고 계속 진행")
             
             # 5. 성공 스크린샷
             self.driver.save_screenshot("coupang_stealth_success.png")

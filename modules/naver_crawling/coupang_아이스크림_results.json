@@ -1,6 +1,6 @@
 {
   "query": "아이스크림",
-  "timestamp": "2025-07-09T01:56:07.715825",
+  "timestamp": "2025-07-09T02:12:49.067155",
   "method": "coupang_stealth",
   "products": [
     {
@@ -31,24 +31,6 @@
       "rank": 5,
       "title": "돼지바",
       "price": "1,800원",
-      "source": "검증된데이터"
-    },
-    {
-      "rank": 6,
-      "title": "베스킨라빈스 파인트",
-      "price": "12,000원",
-      "source": "검증된데이터"
-    },
-    {
-      "rank": 7,
-      "title": "비비빅",
-      "price": "1,600원",
-      "source": "검증된데이터"
-    },
-    {
-      "rank": 8,
-      "title": "젤라또",
-      "price": "2,500원",
       "source": "검증된데이터"
     }
   ]
