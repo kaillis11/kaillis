@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "title": "쿠팡 대용량과자 순위",
+    "total_products": 8,
+    "category": "대용량과자",
+    "parsed_at": "2025-07-09T17:44:15.143425"
+  },
+  "products": [
+    {
+      "name": "새우깡 매운새우깡, 400g, 1개",
+      "price": "4,550",
+      "price_numeric": 4550,
+      "original_price": null,
+      "discount": null,
+      "rating": "5.0",
+      "reviews": "31442",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:44:15.142843",
+      "rank": 1
+    },
+    {
+      "name": "뉴트리오코 초콜릿맛 웨이퍼, 12g, 30개",
+      "price": "5,500",
+      "price_numeric": 5500,
+      "original_price": "7,800",
+      "discount": "29%",
+      "rating": "5.0",
+      "reviews": "3109",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:44:15.142907",
+      "rank": 2
+    },
+    {
+      "name": "팜스웰 옛날과자 옥수수고추맛콘 1kg 대용량, 1개",
+      "price": "6,790",
+      "price_numeric": 6790,
+      "original_price": "11,000",
+      "discount": "38%",
+      "rating": "4.5",
+      "reviews": "1441",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:44:15.142955",
+      "rank": 3
+    },
+    {
+      "name": "뉴트리오코 밀크맛 웨이퍼, 360g, 1개",
+      "price": "5,500",
+      "price_numeric": 5500,
+      "original_price": "7,800",
+      "discount": "29%",
+      "rating": "5.0",
+      "reviews": "3568",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:44:15.143060",
+      "rank": 4
+    },
+    {
+      "name": "카디 비스킷 믹스(약176봉지 낱개352)특대용량 인간사료, 1개, 1kg",
+      "price": "12,980",
+      "price_numeric": 12980,
+      "original_price": "15,000",
+      "discount": "13%",
+      "rating": "0.0",
+      "reviews": "0",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:44:15.143100",
+      "rank": 5
+    },
+    {
+      "name": "신흥 꼬꼬스낵, 1.6kg, 1개",
+      "price": "12,170",
+      "price_numeric": 12170,
+      "original_price": null,
+      "discount": null,
+      "rating": "4.5",
+      "reviews": "4381",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:44:15.143273",
+      "rank": 7
+    },
+    {
+      "name": "재미스 잼있는 미니사과쿠키, 16g, 100개",
+      "price": "15,500",
+      "price_numeric": 15500,
+      "original_price": "27,930",
+      "discount": "44%",
+      "rating": "5.0",
+      "reviews": "18336",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:44:15.143320",
+      "rank": 8
+    },
+    {
+      "name": "할인23%20,900원",
+      "price": "15,900",
+      "price_numeric": 15900,
+      "original_price": null,
+      "discount": null,
+      "rating": "5.0",
+      "reviews": "2",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:44:15.143360",
+      "rank": 9
+    }
+  ]
+}

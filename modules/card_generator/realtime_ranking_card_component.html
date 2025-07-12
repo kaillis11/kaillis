@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실시간 랭킹 카드 컴포넌트</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background: #f0f2f5;
+            padding: 20px;
+        }
+
+        .realtime-card {
+            width: 380px;
+            height: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            position: relative;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* 실시간 표시 애니메이션 */
+        .live-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #ff4444;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .live-text {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* 순위 범위 표시 */
+        .rank-range {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 16px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        /* 랭킹 리스트 컨테이너 */
+        .ranking-container {
+            height: 480px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ranking-list {
+            position: absolute;
+            width: 100%;
+            padding: 20px;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .ranking-list.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .ranking-list.next {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        .ranking-list.prev {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        /* 개별 랭킹 아이템 */
+        .rank-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f2f5;
+            animation: slideIn 0.3s ease backwards;
+        }
+
+        .rank-item:last-child {
+            border-bottom: none;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .rank-number {
+            width: 40px;
+            height: 40px;
+            background: #f0f2f5;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+            color: #667eea;
+            margin-right: 12px;
+        }
+
+        /* 1,2,3위 특별 스타일 */
+        .rank-item:nth-child(1) .rank-number {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: white;
+        }
+
+        .rank-item:nth-child(2) .rank-number {
+            background: linear-gradient(135deg, #C0C0C0, #808080);
+            color: white;
+        }
+
+        .rank-item:nth-child(3) .rank-number {
+            background: linear-gradient(135deg, #CD7F32, #8B4513);
+            color: white;
+        }
+
+        .rank-icon {
+            font-size: 28px;
+            margin-right: 12px;
+        }
+
+        .rank-info {
+            flex: 1;
+        }
+
+        .rank-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 2px;
+        }
+
+        .rank-tag {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* 하단 페이지 인디케이터 */
+        .page-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .page-dot {
+            width: 8px;
+            height: 8px;
+            background: #ddd;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .page-dot.active {
+            width: 24px;
+            background: #667eea;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="realtime-card">
+        <div class="card-header">
+            <h2 class="card-title">🍦 아이스크림 실시간 인기</h2>
+            <p class="card-subtitle">네이버 데이터랩 · 2025.06.08 ~ 2025.07.08</p>
+            <div class="live-indicator">
+                <div class="live-dot"></div>
+                <span class="live-text">LIVE</span>
+            </div>
+            <div class="rank-range" id="rankRange">1-10위</div>
+        </div>
+
+        <div class="ranking-container" id="rankingContainer">
+            <!-- 랭킹 리스트들이 동적으로 생성됩니다 -->
+        </div>
+
+        <div class="page-indicators" id="pageIndicators">
+            <div class="page-dot active" data-page="0"></div>
+            <div class="page-dot" data-page="1"></div>
+            <div class="page-dot" data-page="2"></div>
+            <div class="page-dot" data-page="3"></div>
+        </div>
+    </div>
+
+    <script>
+        // 네이버 데이터랩 아이스크림 TOP 40 데이터
+        const ICECREAM_DATA = [
+            { rank: 1, name: '아이스크림', icon: '🍦', tag: '검색량 1위' },
+            { rank: 2, name: '라라스윗', icon: '🍨', tag: '저당 아이스크림 대표' },
+            { rank: 3, name: '하겐다즈', icon: '🍨', tag: '프리미엄 아이스크림' },
+            { rank: 4, name: '미니스크류바', icon: '🍦', tag: '롯데 인기 제품' },
+            { rank: 5, name: '붕어싸만코', icon: '🐟', tag: '빙그레 스테디셀러' },
+            { rank: 6, name: '구슬아이스크림', icon: '🔮', tag: '추억의 아이스크림' },
+            { rank: 7, name: '하겐다즈파인트', icon: '🥄', tag: '대용량 파인트' },
+            { rank: 8, name: '팥빙수', icon: '🍧', tag: '여름 대표 간식' },
+            { rank: 9, name: '제로아이스크림', icon: '0️⃣', tag: '무설탕/저칼로리' },
+            { rank: 10, name: '저당아이스크림', icon: '🍦', tag: '건강한 선택' },
+            { rank: 11, name: '월드콘', icon: '🌍', tag: '롯데 콘 아이스크림' },
+            { rank: 12, name: '설레임', icon: '💕', tag: '빙그레 신제품' },
+            { rank: 13, name: '상하목장소프트믹스', icon: '🥛', tag: '부드러운 맛' },
+            { rank: 14, name: '폴라레티', icon: '❄️', tag: '얼음과자' },
+            { rank: 15, name: '티코말차', icon: '🍵', tag: '말차맛 아이스크림' },
+            { rank: 16, name: '미니죠스바', icon: '🦈', tag: '미니 사이즈' },
+            { rank: 17, name: '티코아이스크림', icon: '🍦', tag: '롯데 티코' },
+            { rank: 18, name: '조이아이스크림', icon: '😊', tag: '해태 제품' },
+            { rank: 19, name: '상하목장아이스크림', icon: '🐄', tag: '프리미엄 우유' },
+            { rank: 20, name: '라라스윗아이스크림', icon: '🍨', tag: '저당 전문 브랜드' },
+            { rank: 21, name: '따옴아이스크림', icon: '🍦', tag: '따옴 브랜드' },
+            { rank: 22, name: '투게더아이스크림', icon: '🤝', tag: '빙그레 투게더' },
+            { rank: 23, name: '메로나', icon: '🍈', tag: '빙그레 대표상품' },
+            { rank: 24, name: '폴라포', icon: '🐻', tag: '곰돌이 아이스크림' },
+            { rank: 25, name: '라라스윗제로바', icon: '0️⃣', tag: '제로칼로리 바' },
+            { rank: 26, name: '투게더', icon: '💑', tag: '연인 아이스크림' },
+            { rank: 27, name: '딥앤로우', icon: '🍦', tag: '프리미엄 브랜드' },
+            { rank: 28, name: '파인애플샤베트', icon: '🍍', tag: '과일 샤베트' },
+            { rank: 29, name: '라벨리인절미빙수', icon: '🍧', tag: '인절미 빙수' },
+            { rank: 30, name: '인절미빙수', icon: '🍧', tag: '전통 디저트' },
+            { rank: 31, name: '설레임아이스크림', icon: '💗', tag: '빙그레 설레임' },
+            { rank: 32, name: '요맘때', icon: '⏰', tag: '시즌 한정' },
+            { rank: 33, name: '요거트아이스크림', icon: '🥛', tag: '요거트 맛' },
+            { rank: 34, name: '대용량아이스크림', icon: '📦', tag: '가족용 사이즈' },
+            { rank: 35, name: '하겐다즈아이스크림', icon: '🍨', tag: '프리미엄 라인' },
+            { rank: 36, name: '하겐다즈케이크', icon: '🎂', tag: '아이스크림 케이크' },
+            { rank: 37, name: '돼지바', icon: '🐷', tag: '롯데 돼지바' },
+            { rank: 38, name: '고드름아이스크림', icon: '🧊', tag: '시원한 얼음과자' },
+            { rank: 39, name: '라벨리아이스크림', icon: '🌸', tag: '라벨리 브랜드' },
+            { rank: 40, name: '빵또아', icon: '🍞', tag: '빵 아이스크림' }
+        ];
+
+        // 페이지별 데이터 세트
+        const PAGE_SETS = [
+            { range: '1-10위', data: ICECREAM_DATA.slice(0, 10) },
+            { range: '11-20위', data: ICECREAM_DATA.slice(10, 20) },
+            { range: '21-30위', data: ICECREAM_DATA.slice(20, 30) },
+            { range: '31-40위', data: ICECREAM_DATA.slice(30, 40) }
+        ];
+
+        let currentPage = 0;
+        let autoRotateInterval;
+
+        // 랭킹 리스트 HTML 생성
+        function createRankingList(data, pageIndex) {
+            const list = document.createElement('div');
+            list.className = 'ranking-list';
+            list.id = `page-${pageIndex}`;
+            
+            data.forEach((item, index) => {
+                const rankItem = document.createElement('div');
+                rankItem.className = 'rank-item';
+                rankItem.style.animationDelay = `${index * 0.05}s`;
+                
+                rankItem.innerHTML = `
+                    <div class="rank-number">${item.rank}</div>
+                    <div class="rank-icon">${item.icon}</div>
+                    <div class="rank-info">
+                        <div class="rank-name">${item.name}</div>
+                        <div class="rank-tag">${item.tag}</div>
+                    </div>
+                `;
+                
+                list.appendChild(rankItem);
+            });
+            
+            return list;
+        }
+
+        // 페이지 전환
+        function switchPage(newPage) {
+            const container = document.getElementById('rankingContainer');
+            const currentList = container.querySelector('.ranking-list.active');
+            const newList = document.getElementById(`page-${newPage}`);
+            
+            // 범위 업데이트
+            document.getElementById('rankRange').textContent = PAGE_SETS[newPage].range;
+            
+            // 페이지 인디케이터 업데이트
+            document.querySelectorAll('.page-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === newPage);
+            });
+            
+            // 애니메이션 전환
+            if (currentList) {
+                currentList.classList.remove('active');
+                currentList.classList.add('prev');
+            }
+            
+            newList.classList.remove('next', 'prev');
+            newList.classList.add('active');
+            
+            // 다음 페이지 준비
+            setTimeout(() => {
+                document.querySelectorAll('.ranking-list').forEach((list, index) => {
+                    if (index !== newPage) {
+                        list.classList.remove('active', 'prev');
+                        list.classList.add('next');
+                    }
+                });
+            }, 500);
+            
+            currentPage = newPage;
+        }
+
+        // 자동 회전
+        function startAutoRotate() {
+            autoRotateInterval = setInterval(() => {
+                const nextPage = (currentPage + 1) % PAGE_SETS.length;
+                switchPage(nextPage);
+            }, 5000); // 5초마다 전환
+        }
+
+        // 초기화
+        function init() {
+            const container = document.getElementById('rankingContainer');
+            
+            // 모든 페이지 생성
+            PAGE_SETS.forEach((pageSet, index) => {
+                const list = createRankingList(pageSet.data, index);
+                if (index === 0) {
+                    list.classList.add('active');
+                } else {
+                    list.classList.add('next');
+                }
+                container.appendChild(list);
+            });
+            
+            // 페이지 인디케이터 클릭 이벤트
+            document.querySelectorAll('.page-dot').forEach(dot => {
+                dot.addEventListener('click', () => {
+                    clearInterval(autoRotateInterval);
+                    switchPage(parseInt(dot.dataset.page));
+                    startAutoRotate();
+                });
+            });
+            
+            // 자동 회전 시작
+            startAutoRotate();
+        }
+
+        // 페이지 로드 시 초기화
+        init();
+    </script>
+</body>
+</html>

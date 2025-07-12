@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "title": "쿠팡 마카롱 최종 정확한 순위",
+    "total_products": 5,
+    "parsed_at": "2025-07-09T16:51:07.694754",
+    "parser_version": "4.0_final_accurate"
+  },
+  "products": [
+    {
+      "rank": 1,
+      "name": "널담 마카롱 사랑세트 8종 (냉동), 50g, 8개입, 1세트",
+      "price": "9,410",
+      "price_numeric": 9410,
+      "original_price": "11,900",
+      "discount": "20%",
+      "rating": "4.5",
+      "reviews": "6406",
+      "category": "macaron",
+      "category_name": "마카롱",
+      "parsed_at": "2025-07-09T16:51:07.694650"
+    },
+    {
+      "rank": 2,
+      "name": "[러브빈마카롱] 수제 마카롱 개별포장 8개입 스승의날 어린이날 단체주문, 세트 2번, 1세트",
+      "price": "11,700",
+      "price_numeric": 11700,
+      "original_price": "16,000",
+      "discount": "26%",
+      "rating": "4.5",
+      "reviews": "516",
+      "category": "macaron",
+      "category_name": "마카롱",
+      "parsed_at": "2025-07-09T16:51:07.694683"
+    },
+    {
+      "rank": 3,
+      "name": "파스키에 마카롱 12개입 (냉동), 154g, 2개",
+      "price": "19,360",
+      "price_numeric": 19360,
+      "original_price": "19,960",
+      "discount": "3%",
+      "rating": "4.5",
+      "reviews": "6327",
+      "category": "macaron",
+      "category_name": "마카롱",
+      "parsed_at": "2025-07-09T16:51:07.694699"
+    },
+    {
+      "rank": 4,
+      "name": "누니 마카롱(뚱카롱) 8구 선물세트, 시즌투(2), 1개, 320g",
+      "price": "16,900",
+      "price_numeric": 16900,
+      "original_price": null,
+      "discount": null,
+      "rating": "4.0",
+      "reviews": "2",
+      "category": "macaron",
+      "category_name": "마카롱",
+      "parsed_at": "2025-07-09T16:51:07.694711"
+    },
+    {
+      "rank": 5,
+      "name": "코스트코 36 마카롱 468g, 1박스",
+      "price": "28,980",
+      "price_numeric": 28980,
+      "original_price": null,
+      "discount": null,
+      "rating": "5.0",
+      "reviews": "0",
+      "category": "macaron",
+      "category_name": "마카롱",
+      "parsed_at": "2025-07-09T16:51:07.694723"
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "meta": {
+    "title": "쿠팡 마카롱 순위",
+    "total_products": 10,
+    "parsed_at": "2025-07-09T16:44:25.118987",
+    "parser_version": "2.0_improved"
+  },
+  "products": [
+    {
+      "name": "파스키에 마카롱 6종 x 2개입 세트 (냉동), 154g, 1개",
+      "price": "9,980",
+      "price_numeric": 9980,
+      "rating": "4.5",
+      "reviews": "6327",
+      "discount": null,
+      "rank": 1,
+      "category": "macaron",
+      "category_name": "마카롱",
+      "parsed_at": "2025-07-09T16:44:25.118935"
+    },
+    {
+      "name": "널담 마카롱 사랑세트 8종 (냉동), 50g, 8개입, 1세트",
+      "price": "11,900",
+      "price_numeric": 11900,
+      "rating": "4.5",
+      "reviews": "0",
+      "discount": "20%",
+      "rank": 2,
+      "category": "macaron",
+      "category_name": "마카롱",
+      "parsed_at": "2025-07-09T16:44:25.118949"
+    },
+    {
+      "name": "[러브빈마카롱] 수제 마카롱 개별포장 8개입 스승의날 어린이날 단체주문, 세트 2번, 1세트",
+      "price": "16,000",
+      "price_numeric": 16000,
+      "rating": "4.5",
+      "reviews": "516",
+      "discount": "26%",
+      "rank": 3,
+      "category": "macaron",
+      "category_name": "마카롱",
+      "parsed_at": "2025-07-09T16:44:25.118950"
+    },
+    {
+      "name": "14년동안 마카롱만 만들어온 전문점의 정통 프랑스 무색소 수제 마카롱 16구상자 선물세트, 16개, 25g",
+      "price": "28,200",
+      "price_numeric": 28200,
+      "rating": "0.0",
+      "reviews": "0",
+      "discount": null,
+      "rank": 4,
+      "category": "macaron",
+      "category_name": "마카롱",
+      "parsed_at": "2025-07-09T16:44:25.118950"
+    },
+    {
+      "name": "파스키에 마카롱 12개입 (냉동), 154g, 2개",
+      "price": "19,960",
+      "price_numeric": 19960,
+      "rating": "4.5",
+      "reviews": "0",
+      "discount": null,
+      "rank": 5,
+      "category": "macaron",
+      "category_name": "마카롱",
+      "parsed_at": "2025-07-09T16:44:25.118951"
+    },
+    {
+      "name": "누니 마카롱(뚱카롱) 8구 선물세트, 시즌투(2), 1개, 320g",
+      "price": "16,900",
+      "price_numeric": 16900,
+      "rating": "0.0",
+      "reviews": "302",
+      "discount": null,
+      "rank": 6,
+      "category": "macaron",
+      "category_name": "마카롱",
+      "parsed_at": "2025-07-09T16:44:25.118952"
+    },
+    {
+      "name": "하겐다즈 아이스크림 마카롱 5입 세트 (냉동), 35g, 5개입, 1세트",
+      "price": "26,900",
+      "price_numeric": 26900,
+      "rating": "4.5",
+      "reviews": "71",
+      "discount": null,
+      "rank": 7,
+      "category": "macaron",
+      "category_name": "마카롱",
+      "parsed_at": "2025-07-09T16:44:25.118952"
+    },
+    {
+      "name": "코스트코 36 마카롱 468g, 1박스",
+      "price": "28,980",
+      "price_numeric": 28980,
+      "rating": "0.0",
+      "reviews": "19",
+      "discount": null,
+      "rank": 8,
+      "category": "macaron",
+      "category_name": "마카롱",
+      "parsed_at": "2025-07-09T16:44:25.118953"
+    },
+    {
+      "name": "\"건강하고 뚱뚱한 맛의 향연\"수제마카롱 12가지맛 x 10구12구 선물세트/ 개별밀봉포장 / 본점직영 / 랜덤배송, 10개, 35g",
+      "price": "25,000",
+      "price_numeric": 25000,
+      "rating": "4.5",
+      "reviews": "203",
+      "discount": "45%",
+      "rank": 9,
+      "category": "macaron",
+      "category_name": "마카롱",
+      "parsed_at": "2025-07-09T16:44:25.118954"
+    },
+    {
+      "name": "신성베이커리 수박마카롱 (냉동), 25g, 1개, 6개입",
+      "price": "6,770",
+      "price_numeric": 6770,
+      "rating": "0.0",
+      "reviews": "339",
+      "discount": null,
+      "rank": 10,
+      "category": "macaron",
+      "category_name": "마카롱",
+      "parsed_at": "2025-07-09T16:44:25.118954"
+    }
+  ]
+}

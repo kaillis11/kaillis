@@ -1,0 +1,236 @@
+{
+  "meta": {
+    "title": "네이버 쇼핑 API 디저트 이미지 데이터",
+    "category": "dessert",
+    "total_products": 25,
+    "extracted_at": "2025-07-09T13:01:07.049638",
+    "source": "naver_shopping_api"
+  },
+  "products": [
+    {
+      "rank": 1,
+      "name": "오리온 오리온제과 마켓오 브라우니 12P 240g X 4개 4박스",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5440028/54400280181.20250424225829.jpg",
+      "price": "17400",
+      "mall": "네이버",
+      "brand": "마켓오",
+      "link": "https://search.shopping.naver.com/catalog/54400280181"
+    },
+    {
+      "rank": 2,
+      "name": "마켓오 제주 말차 브라우니 12개입 커피 디저트 간식",
+      "image_url": "https://shopping-phinf.pstatic.net/main_8931992/89319921837.jpg",
+      "price": "3900",
+      "mall": "간식의선택",
+      "brand": "마켓오",
+      "link": "https://smartstore.naver.com/main/products/11775411250"
+    },
+    {
+      "rank": 3,
+      "name": "오리온 마켓오 크림치즈 브라우니 240g",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5500746/55007464411.20250627130302.jpg",
+      "price": "4900",
+      "mall": "네이버",
+      "brand": "마켓오",
+      "link": "https://search.shopping.naver.com/catalog/55007464411"
+    },
+    {
+      "rank": 4,
+      "name": "오리온 마켓오 브라우니 바이트 640g",
+      "image_url": "https://shopping-phinf.pstatic.net/main_4811608/48116086267.20250304152936.jpg",
+      "price": "9790",
+      "mall": "네이버",
+      "brand": "",
+      "link": "https://search.shopping.naver.com/catalog/48116086267"
+    },
+    {
+      "rank": 5,
+      "name": "오리온 마켓오브라우니바이트 240g 5개",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5421617/54216178338.20250629140756.jpg",
+      "price": "4290",
+      "mall": "네이버",
+      "brand": "",
+      "link": "https://search.shopping.naver.com/catalog/54216178338"
+    },
+    {
+      "rank": 6,
+      "name": "배스킨라빈스 쿼터 아이스크림",
+      "image_url": "https://shopping-phinf.pstatic.net/main_2164859/21648597106.20200102171015.jpg",
+      "price": "16990",
+      "mall": "네이버",
+      "brand": "배스킨라빈스",
+      "link": "https://search.shopping.naver.com/catalog/21648597106"
+    },
+    {
+      "rank": 7,
+      "name": "배스킨라빈스 골라 먹는 27 큐브",
+      "image_url": "https://shopping-phinf.pstatic.net/main_3648962/36489621618.20221213110531.jpg",
+      "price": "24840",
+      "mall": "네이버",
+      "brand": "배스킨라빈스",
+      "link": "https://search.shopping.naver.com/catalog/36489621618"
+    },
+    {
+      "rank": 8,
+      "name": "[바로콘] 배스킨라빈스 패밀리 아이스크림 기프티콘",
+      "image_url": "https://shopping-phinf.pstatic.net/main_1120606/11206068673.6.jpg",
+      "price": "23650",
+      "mall": "바로콘",
+      "brand": "배스킨라빈스",
+      "link": "https://smartstore.naver.com/main/products/686229262"
+    },
+    {
+      "rank": 9,
+      "name": "배스킨라빈스 파인트 아이스크림",
+      "image_url": "https://shopping-phinf.pstatic.net/main_2164871/21648713975.20200102172311.jpg",
+      "price": "8620",
+      "mall": "네이버",
+      "brand": "배스킨라빈스",
+      "link": "https://search.shopping.naver.com/catalog/21648713975"
+    },
+    {
+      "rank": 10,
+      "name": "배스킨라빈스 3만원권",
+      "image_url": "https://shopping-phinf.pstatic.net/main_2515653/25156538523.20201209165936.jpg",
+      "price": "26400",
+      "mall": "네이버",
+      "brand": "배스킨라빈스",
+      "link": "https://search.shopping.naver.com/catalog/25156538523"
+    },
+    {
+      "rank": 11,
+      "name": "던킨도너츠 던킨 도너츠 10개팩",
+      "image_url": "https://shopping-phinf.pstatic.net/main_2569953/25699538528.20210122123918.jpg",
+      "price": "18810",
+      "mall": "네이버",
+      "brand": "던킨",
+      "link": "https://search.shopping.naver.com/catalog/25699538528"
+    },
+    {
+      "rank": 12,
+      "name": "던킨도너츠 던킨 먼치킨 10개팩",
+      "image_url": "https://shopping-phinf.pstatic.net/main_2285688/22856886427.20200514124418.jpg",
+      "price": "4290",
+      "mall": "네이버",
+      "brand": "던킨",
+      "link": "https://search.shopping.naver.com/catalog/22856886427"
+    },
+    {
+      "rank": 13,
+      "name": "던킨도너츠 던킨 도너츠 6개팩",
+      "image_url": "https://shopping-phinf.pstatic.net/main_2285650/22856503427.20200515173526.jpg",
+      "price": "10030",
+      "mall": "네이버",
+      "brand": "던킨",
+      "link": "https://search.shopping.naver.com/catalog/22856503427"
+    },
+    {
+      "rank": 14,
+      "name": "미니도넛세트",
+      "image_url": "https://shopping-phinf.pstatic.net/main_8907032/89070329139.jpg",
+      "price": "4500",
+      "mall": "던킨",
+      "brand": "던킨",
+      "link": "https://smartstore.naver.com/main/products/11525818733"
+    },
+    {
+      "rank": 15,
+      "name": "반반한 던킨팩",
+      "image_url": "https://shopping-phinf.pstatic.net/main_8907033/89070332161.jpg",
+      "price": "14000",
+      "mall": "던킨",
+      "brand": "던킨",
+      "link": "https://smartstore.naver.com/main/products/11525821755"
+    },
+    {
+      "rank": 16,
+      "name": "허쉬 너겟 초콜릿 밀크 다크 아몬드 어쏘트먼트 코스트코",
+      "image_url": "https://shopping-phinf.pstatic.net/main_8281080/82810800722.1.jpg",
+      "price": "9900",
+      "mall": "담소",
+      "brand": "허쉬",
+      "link": "https://smartstore.naver.com/main/products/5266278062"
+    },
+    {
+      "rank": 17,
+      "name": "허쉬 너겟 초콜릿 어소트먼트 900g 대용량 미니허쉬",
+      "image_url": "https://shopping-phinf.pstatic.net/main_8903240/89032405523.jpg",
+      "price": "18390",
+      "mall": "프레시코스트코",
+      "brand": "허쉬",
+      "link": "https://smartstore.naver.com/main/products/11487895158"
+    },
+    {
+      "rank": 18,
+      "name": "허쉬 미니어쳐 초콜릿 1.58kg 코스트코 간식 허쉬미니",
+      "image_url": "https://shopping-phinf.pstatic.net/main_8286425/82864259799.8.jpg",
+      "price": "38990",
+      "mall": "코스코온라인샵",
+      "brand": "허쉬",
+      "link": "https://smartstore.naver.com/main/products/5319767232"
+    },
+    {
+      "rank": 19,
+      "name": "허쉬 다크 초콜릿 아사이 앤드 블루베리 초코볼 405g 수입 미니 초코알 과자  1개",
+      "image_url": "https://shopping-phinf.pstatic.net/main_4934389/49343894401.16.jpg",
+      "price": "14700",
+      "mall": "쿠팡",
+      "brand": "허쉬",
+      "link": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8170121630&ctag=8170121630&lptag=I19679658019&itemId=19679658019&vendorItemId=84522634998&spec=10305199"
+    },
+    {
+      "rank": 20,
+      "name": "HERSHEYS 허쉬다크초코 아사이앤드 블루베리초콜릿 405g(15gx27개)",
+      "image_url": "https://shopping-phinf.pstatic.net/main_8387749/83877493235.4.jpg",
+      "price": "13000",
+      "mall": "남대문수정이네",
+      "brand": "",
+      "link": "https://smartstore.naver.com/main/products/6332990747"
+    },
+    {
+      "rank": 21,
+      "name": "오리온 대용량 초코파이 정 30개 1170g 1개 실속형 초코과자",
+      "image_url": "https://shopping-phinf.pstatic.net/main_8296403/82964033894.1.jpg",
+      "price": "7570",
+      "mall": "포스트에스",
+      "brand": "오리온",
+      "link": "https://smartstore.naver.com/main/products/5419540074"
+    },
+    {
+      "rank": 22,
+      "name": "오리온 초코파이 정 실속형 30개 과자",
+      "image_url": "https://shopping-phinf.pstatic.net/main_8693168/86931682868.3.jpg",
+      "price": "7570",
+      "mall": "GM유통",
+      "brand": "오리온",
+      "link": "https://smartstore.naver.com/main/products/9387182545"
+    },
+    {
+      "rank": 23,
+      "name": "오리온 수박초코파이 초코파이하우스망고 촉촉한멜론칩 코코멜론알맹이 마이구미 자몽허니블랙티",
+      "image_url": "https://shopping-phinf.pstatic.net/main_8941799/89417998927.jpg",
+      "price": "2890",
+      "mall": "커피365일",
+      "brand": "오리온",
+      "link": "https://smartstore.naver.com/main/products/11873488333"
+    },
+    {
+      "rank": 24,
+      "name": "오리온 초코파이 딸기 안녕 봄 12p(408g) x 1개",
+      "image_url": "https://shopping-phinf.pstatic.net/main_8907779/89077796977.jpg",
+      "price": "4200",
+      "mall": "올곧은밥상",
+      "brand": "오리온",
+      "link": "https://smartstore.naver.com/main/products/11533286571"
+    },
+    {
+      "rank": 25,
+      "name": "오리온 초코파이 39g, 30개입, 1개",
+      "image_url": "https://shopping-phinf.pstatic.net/main_5335213/53352134703.20250304162640.jpg",
+      "price": "5470",
+      "mall": "네이버",
+      "brand": "오리온",
+      "link": "https://search.shopping.naver.com/catalog/53352134703"
+    }
+  ]
+}

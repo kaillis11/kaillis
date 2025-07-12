@@ -1,0 +1,203 @@
+
+        <!DOCTYPE html>
+        <html lang="ko">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>WhatToEat 카드 미리보기</title>
+            <style>
+                body {
+                    font-family: 'Apple SD Gothic Neo', sans-serif;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    margin: 0;
+                    padding: 20px;
+                }
+                .container {
+                    max-width: 1200px;
+                    margin: 0 auto;
+                }
+                .header {
+                    text-align: center;
+                    color: white;
+                    margin-bottom: 30px;
+                }
+                .cards-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    gap: 20px;
+                }
+                .card {
+                    background: white;
+                    border-radius: 12px;
+                    padding: 20px;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                    transition: transform 0.2s;
+                }
+                .card:hover {
+                    transform: translateY(-5px);
+                }
+                .card-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 10px;
+                }
+                .emoji {
+                    font-size: 24px;
+                }
+                .rank {
+                    background: #ff6b6b;
+                    color: white;
+                    padding: 4px 8px;
+                    border-radius: 20px;
+                    font-size: 12px;
+                    font-weight: bold;
+                }
+                .card-title {
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin-bottom: 8px;
+                    color: #333;
+                }
+                .card-subtitle {
+                    font-size: 16px;
+                    color: #666;
+                    margin-bottom: 10px;
+                }
+                .card-description {
+                    font-size: 14px;
+                    color: #888;
+                    margin-bottom: 15px;
+                    line-height: 1.4;
+                }
+                .card-tags {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 5px;
+                }
+                .tag {
+                    background: #f0f0f0;
+                    padding: 2px 8px;
+                    border-radius: 12px;
+                    font-size: 12px;
+                    color: #666;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>🎴 WhatToEat 룰렛 카드</h1>
+                    <p>파싱된 데이터로 생성된 8개의 카드</p>
+                </div>
+                <div class="cards-grid">
+                    
+            <div class="card" style="border-left: 4px solid #FFA500;">
+                <div class="card-header">
+                    <span class="emoji">🍿</span>
+                    <span class="rank">#1</span>
+                </div>
+                <div class="card-title">브랜드 새우깡 매운새우깡</div>
+                <div class="card-subtitle">💰 4,550원</div>
+                <div class="card-description">🏆 1위 대용량과자 | ⭐ 5.0점 | 📝 31442개 리뷰</div>
+                <div class="card-tags">
+                    <span class="tag">대용량과자</span><span class="tag">고평점</span><span class="tag">인기</span><span class="tag">저렴</span>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left: 4px solid #FFA500;">
+                <div class="card-header">
+                    <span class="emoji">🍿</span>
+                    <span class="rank">#2</span>
+                </div>
+                <div class="card-title">브랜드 뉴트리오코 초콜릿맛 웨이퍼</div>
+                <div class="card-subtitle">💰 5,500원 (29% 할인)</div>
+                <div class="card-description">🏆 2위 대용량과자 | ⭐ 5.0점 | 📝 3109개 리뷰 | 💸 정가 7,800원</div>
+                <div class="card-tags">
+                    <span class="tag">대용량과자</span><span class="tag">할인</span><span class="tag">고평점</span><span class="tag">인기</span><span class="tag">합리적</span>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left: 4px solid #FFA500;">
+                <div class="card-header">
+                    <span class="emoji">🍿</span>
+                    <span class="rank">#3</span>
+                </div>
+                <div class="card-title">브랜드 팜스웰 옛날과자 옥수수고추맛콘 1kg 대용량</div>
+                <div class="card-subtitle">💰 6,790원 (38% 할인)</div>
+                <div class="card-description">🏆 3위 대용량과자 | ⭐ 4.5점 | 📝 1441개 리뷰 | 💸 정가 11,000원</div>
+                <div class="card-tags">
+                    <span class="tag">대용량과자</span><span class="tag">할인</span><span class="tag">고평점</span><span class="tag">인기</span><span class="tag">합리적</span>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left: 4px solid #FFA500;">
+                <div class="card-header">
+                    <span class="emoji">🍿</span>
+                    <span class="rank">#4</span>
+                </div>
+                <div class="card-title">브랜드 뉴트리오코 밀크맛 웨이퍼</div>
+                <div class="card-subtitle">💰 5,500원 (29% 할인)</div>
+                <div class="card-description">🏆 4위 대용량과자 | ⭐ 5.0점 | 📝 3568개 리뷰 | 💸 정가 7,800원</div>
+                <div class="card-tags">
+                    <span class="tag">대용량과자</span><span class="tag">할인</span><span class="tag">고평점</span><span class="tag">인기</span><span class="tag">합리적</span>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left: 4px solid #FFA500;">
+                <div class="card-header">
+                    <span class="emoji">🍿</span>
+                    <span class="rank">#5</span>
+                </div>
+                <div class="card-title">브랜드 카디 비스킷 믹스</div>
+                <div class="card-subtitle">💰 12,980원 (13% 할인)</div>
+                <div class="card-description">🏆 5위 대용량과자 | 💸 정가 15,000원</div>
+                <div class="card-tags">
+                    <span class="tag">대용량과자</span><span class="tag">할인</span><span class="tag">프리미엄</span>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left: 4px solid #FFA500;">
+                <div class="card-header">
+                    <span class="emoji">🍿</span>
+                    <span class="rank">#7</span>
+                </div>
+                <div class="card-title">브랜드 신흥 꼬꼬스낵</div>
+                <div class="card-subtitle">💰 12,170원</div>
+                <div class="card-description">🏆 7위 대용량과자 | ⭐ 4.5점 | 📝 4381개 리뷰</div>
+                <div class="card-tags">
+                    <span class="tag">대용량과자</span><span class="tag">고평점</span><span class="tag">인기</span><span class="tag">프리미엄</span>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left: 4px solid #FFA500;">
+                <div class="card-header">
+                    <span class="emoji">🍿</span>
+                    <span class="rank">#8</span>
+                </div>
+                <div class="card-title">브랜드 재미스 잼있는 미니사과쿠키</div>
+                <div class="card-subtitle">💰 15,500원 (44% 할인)</div>
+                <div class="card-description">🏆 8위 대용량과자 | ⭐ 5.0점 | 📝 18336개 리뷰 | 💸 정가 27,930원</div>
+                <div class="card-tags">
+                    <span class="tag">대용량과자</span><span class="tag">할인</span><span class="tag">고평점</span><span class="tag">인기</span><span class="tag">프리미엄</span>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left: 4px solid #FFA500;">
+                <div class="card-header">
+                    <span class="emoji">🍿</span>
+                    <span class="rank">#9</span>
+                </div>
+                <div class="card-title">롯데웰푸드 롯데웰푸드 엄마손 파이 50개입 개별포장 대용량 파이과...</div>
+                <div class="card-subtitle">💰 15,900원</div>
+                <div class="card-description">🏆 9위 대용량과자 | ⭐ 5.0점 | 📝 2개 리뷰</div>
+                <div class="card-tags">
+                    <span class="tag">대용량과자</span><span class="tag">고평점</span><span class="tag">프리미엄</span><span class="tag">롯데</span>
+                </div>
+            </div>
+            
+                </div>
+            </div>
+        </body>
+        </html>
+        

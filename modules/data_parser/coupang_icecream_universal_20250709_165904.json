@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "title": "쿠팡 아이스크림 순위",
+    "total_products": 5,
+    "parsed_at": "2025-07-09T16:59:04.817871",
+    "parser_version": "8.0_universal_smart",
+    "category": "icecream",
+    "note": "범용 스마트 파서 - 모든 쇼핑 카테고리 지원"
+  },
+  "products": [
+    {
+      "name": "빙그레 생귤탱귤 제로 감귤 막대 아이스크림 (냉동), 70ml, 1개입, 8개",
+      "price": "4,800",
+      "price_numeric": 4800,
+      "original_price": "5,960",
+      "discount": "19%",
+      "rating": "5.0",
+      "reviews": "1800",
+      "category": "icecream",
+      "category_name": "아이스크림",
+      "parsed_at": "2025-07-09T16:59:04.817821",
+      "rank": 1
+    },
+    {
+      "name": "라라스윗 저당 딸기 생요거트바 (냉동), 1개, 6개입, 70ml",
+      "price": "7,110",
+      "price_numeric": 7110,
+      "original_price": "7,900",
+      "discount": "10%",
+      "rating": "4.5",
+      "reviews": "1239",
+      "category": "icecream",
+      "category_name": "아이스크림",
+      "parsed_at": "2025-07-09T16:59:04.817747",
+      "rank": 2
+    },
+    {
+      "name": "롯데웰푸드 티코 밀크초코 저당 (냉동), 15개, 1개입, 34ml",
+      "price": "7,200",
+      "price_numeric": 7200,
+      "original_price": "8,000",
+      "discount": "10%",
+      "rating": "3.0",
+      "reviews": "232",
+      "category": "icecream",
+      "category_name": "아이스크림",
+      "parsed_at": "2025-07-09T16:59:04.817803",
+      "rank": 3
+    },
+    {
+      "name": "라라스윗 저당 복숭아 생요거트바 (냉동), 1개, 6개입, 70ml",
+      "price": "7,900",
+      "price_numeric": 7900,
+      "original_price": null,
+      "discount": null,
+      "rating": "2.0",
+      "reviews": "41",
+      "category": "icecream",
+      "category_name": "아이스크림",
+      "parsed_at": "2025-07-09T16:59:04.817782",
+      "rank": 4
+    },
+    {
+      "name": "라라스윗 저당 바닐라 초코바 (냉동), 90ml, 4개입, 1개",
+      "price": "7,990",
+      "price_numeric": 7990,
+      "original_price": "9,400",
+      "discount": "15%",
+      "rating": "5.0",
+      "reviews": "5569",
+      "category": "icecream",
+      "category_name": "아이스크림",
+      "parsed_at": "2025-07-09T16:59:04.817838",
+      "rank": 5
+    }
+  ]
+}

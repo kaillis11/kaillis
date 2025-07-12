@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "title": "쿠팡 대용량과자 순위",
+    "total_products": 11,
+    "category": "대용량과자",
+    "parsed_at": "2025-07-09T17:42:39.449886"
+  },
+  "products": [
+    {
+      "name": "팜스웰 옛날과자 옥수수고추맛콘 1kg 대용량, 1개",
+      "price": "6,790",
+      "price_numeric": 6790,
+      "original_price": "11,000",
+      "discount": "38%",
+      "rating": "4.5",
+      "reviews": "1441",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:42:39.449413",
+      "rank": 3
+    },
+    {
+      "name": "새우깡 매운새우깡, 400g, 1개",
+      "price": "4,550",
+      "price_numeric": 4550,
+      "original_price": null,
+      "discount": null,
+      "rating": "0.0",
+      "reviews": "0",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:42:39.449299",
+      "rank": 5
+    },
+    {
+      "name": "뉴트리오코 초콜릿맛 웨이퍼, 12g, 30개",
+      "price": "5,500",
+      "price_numeric": 5500,
+      "original_price": "7,800",
+      "discount": "29%",
+      "rating": "0.0",
+      "reviews": "0",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:42:39.449358",
+      "rank": 5
+    },
+    {
+      "name": "뉴트리오코 밀크맛 웨이퍼, 360g, 1개",
+      "price": "5,500",
+      "price_numeric": 5500,
+      "original_price": "7,800",
+      "discount": "29%",
+      "rating": "0.0",
+      "reviews": "0",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:42:39.449519",
+      "rank": 5
+    },
+    {
+      "name": "카디 비스킷 믹스(약176봉지 낱개352)특대용량 인간사료, 1개, 1kg",
+      "price": "12,980",
+      "price_numeric": 12980,
+      "original_price": "15,000",
+      "discount": "13%",
+      "rating": "0.0",
+      "reviews": "0",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:42:39.449556",
+      "rank": 5
+    },
+    {
+      "name": "미니베어 크렌베리 버터쿠키, 700g, 1개",
+      "price": "9,980",
+      "price_numeric": 9980,
+      "original_price": "12,000",
+      "discount": "16%",
+      "rating": "0.0",
+      "reviews": "0",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:42:39.449652",
+      "rank": 5
+    },
+    {
+      "name": "한입 쏙 9곡 보리과자, 800g, 1개",
+      "price": "9,980",
+      "price_numeric": 9980,
+      "original_price": "12,000",
+      "discount": "16%",
+      "rating": "0.0",
+      "reviews": "0",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:42:39.449689",
+      "rank": 5
+    },
+    {
+      "name": "재미스 잼있는 미니사과쿠키, 16g, 100개",
+      "price": "15,500",
+      "price_numeric": 15500,
+      "original_price": "27,930",
+      "discount": "44%",
+      "rating": "0.0",
+      "reviews": "0",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:42:39.449768",
+      "rank": 5
+    },
+    {
+      "name": "할인23%20,900원",
+      "price": "15,900",
+      "price_numeric": 15900,
+      "original_price": null,
+      "discount": null,
+      "rating": "0.0",
+      "reviews": "0",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:42:39.449801",
+      "rank": 5
+    },
+    {
+      "name": "신흥 꼬꼬스낵, 1.6kg, 1개",
+      "price": "12,170",
+      "price_numeric": 12170,
+      "original_price": null,
+      "discount": null,
+      "rating": "4.5",
+      "reviews": "4381",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:42:39.449732",
+      "rank": 7
+    },
+    {
+      "name": "[씩씩가게] 에이스 알뜰형 대용량 463g x 3ea",
+      "price": "15,900",
+      "price_numeric": 15900,
+      "original_price": null,
+      "discount": null,
+      "rating": "0.0",
+      "reviews": "0",
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T17:42:39.449835",
+      "rank": 10
+    }
+  ]
+}

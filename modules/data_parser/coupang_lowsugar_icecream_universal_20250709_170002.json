@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "title": "쿠팡 저당 아이스크림 순위",
+    "total_products": 9,
+    "parsed_at": "2025-07-09T17:00:02.809324",
+    "parser_version": "8.0_universal_smart",
+    "category": "lowsugar_icecream",
+    "note": "범용 스마트 파서 - 모든 쇼핑 카테고리 지원"
+  },
+  "products": [
+    {
+      "name": "빙그레 생귤탱귤 제로 감귤 막대 아이스크림 (냉동), 70ml, 1개입, 8개",
+      "price": "4,800",
+      "price_numeric": 4800,
+      "original_price": "5,960",
+      "discount": "19%",
+      "rating": "5.0",
+      "reviews": "1800",
+      "category": "lowsugar_icecream",
+      "category_name": "저당 아이스크림",
+      "parsed_at": "2025-07-09T17:00:02.809200",
+      "rank": 1
+    },
+    {
+      "name": "곰곰 310Kcal 딸기 아이스밀크 (냉동), 474ml, 1개입, 1개",
+      "price": "4,950",
+      "price_numeric": 4950,
+      "original_price": "6,990",
+      "discount": "29%",
+      "rating": "4.5",
+      "reviews": "69",
+      "category": "lowsugar_icecream",
+      "category_name": "저당 아이스크림",
+      "parsed_at": "2025-07-09T17:00:02.809218",
+      "rank": 2
+    },
+    {
+      "name": "빙그레 더위사냥 제로 디카페인 커피 (냉동), 140ml, 1개입, 6개",
+      "price": "6,200",
+      "price_numeric": 6200,
+      "original_price": null,
+      "discount": null,
+      "rating": "5.0",
+      "reviews": "2105",
+      "category": "lowsugar_icecream",
+      "category_name": "저당 아이스크림",
+      "parsed_at": "2025-07-09T17:00:02.809259",
+      "rank": 3
+    },
+    {
+      "name": "롯데웰푸드 티코 밀크초코 저당 (냉동), 15개, 1개입, 34ml",
+      "price": "7,200",
+      "price_numeric": 7200,
+      "original_price": "8,000",
+      "discount": "10%",
+      "rating": "3.0",
+      "reviews": "232",
+      "category": "lowsugar_icecream",
+      "category_name": "저당 아이스크림",
+      "parsed_at": "2025-07-09T17:00:02.809170",
+      "rank": 4
+    },
+    {
+      "name": "라라스윗 저당 복숭아 생요거트바 (냉동), 1개, 6개입, 70ml",
+      "price": "7,900",
+      "price_numeric": 7900,
+      "original_price": null,
+      "discount": null,
+      "rating": "2.0",
+      "reviews": "41",
+      "category": "lowsugar_icecream",
+      "category_name": "저당 아이스크림",
+      "parsed_at": "2025-07-09T17:00:02.809148",
+      "rank": 5
+    },
+    {
+      "name": "라라스윗 저당 딥초코 쭈쭈바 (냉동), 1개, 6개입, 130ml",
+      "price": "7,900",
+      "price_numeric": 7900,
+      "original_price": null,
+      "discount": null,
+      "rating": "5.0",
+      "reviews": "15",
+      "category": "lowsugar_icecream",
+      "category_name": "저당 아이스크림",
+      "parsed_at": "2025-07-09T17:00:02.809274",
+      "rank": 6
+    },
+    {
+      "name": "라라스윗 팥 모나카 아이스밀크 (냉동), 140ml, 4개입, 1개",
+      "price": "7,990",
+      "price_numeric": 7990,
+      "original_price": "9,400",
+      "discount": "15%",
+      "rating": "4.5",
+      "reviews": "1304",
+      "category": "lowsugar_icecream",
+      "category_name": "저당 아이스크림",
+      "parsed_at": "2025-07-09T17:00:02.809239",
+      "rank": 7
+    },
+    {
+      "name": "라라스윗 바닐라 저당콘 아이스크림 (냉동), 1개, 4개입, 160ml",
+      "price": "9,260",
+      "price_numeric": 9260,
+      "original_price": "10,900",
+      "discount": "15%",
+      "rating": "5.0",
+      "reviews": "602",
+      "category": "lowsugar_icecream",
+      "category_name": "저당 아이스크림",
+      "parsed_at": "2025-07-09T17:00:02.809108",
+      "rank": 8
+    },
+    {
+      "name": "라라스윗 저당 팥 모니카 16개",
+      "price": "52,650",
+      "price_numeric": 52650,
+      "original_price": null,
+      "discount": null,
+      "rating": "0.0",
+      "reviews": "0",
+      "category": "lowsugar_icecream",
+      "category_name": "저당 아이스크림",
+      "parsed_at": "2025-07-09T17:00:02.809286",
+      "rank": 9
+    }
+  ]
+}

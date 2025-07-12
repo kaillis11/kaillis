@@ -1,0 +1,216 @@
+
+        <!DOCTYPE html>
+        <html lang="ko">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>WhatToEat 카드 미리보기</title>
+            <style>
+                body {
+                    font-family: 'Apple SD Gothic Neo', sans-serif;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    margin: 0;
+                    padding: 20px;
+                }
+                .container {
+                    max-width: 1200px;
+                    margin: 0 auto;
+                }
+                .header {
+                    text-align: center;
+                    color: white;
+                    margin-bottom: 30px;
+                }
+                .cards-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    gap: 20px;
+                }
+                .card {
+                    background: white;
+                    border-radius: 12px;
+                    padding: 20px;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                    transition: transform 0.2s;
+                }
+                .card:hover {
+                    transform: translateY(-5px);
+                }
+                .card-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 10px;
+                }
+                .emoji {
+                    font-size: 24px;
+                }
+                .rank {
+                    background: #ff6b6b;
+                    color: white;
+                    padding: 4px 8px;
+                    border-radius: 20px;
+                    font-size: 12px;
+                    font-weight: bold;
+                }
+                .card-title {
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin-bottom: 8px;
+                    color: #333;
+                }
+                .card-subtitle {
+                    font-size: 16px;
+                    color: #666;
+                    margin-bottom: 10px;
+                }
+                .card-description {
+                    font-size: 14px;
+                    color: #888;
+                    margin-bottom: 15px;
+                    line-height: 1.4;
+                }
+                .card-tags {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 5px;
+                }
+                .tag {
+                    background: #f0f0f0;
+                    padding: 2px 8px;
+                    border-radius: 12px;
+                    font-size: 12px;
+                    color: #666;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>🎴 WhatToEat 룰렛 카드</h1>
+                    <p>파싱된 데이터로 생성된 9개의 카드</p>
+                </div>
+                <div class="cards-grid">
+                    
+            <div class="card" style="border-left: 4px solid #E0F6FF;">
+                <div class="card-header">
+                    <span class="emoji">🍦❄️</span>
+                    <span class="rank">#1</span>
+                </div>
+                <div class="card-title">빙그레 빙그레 생귤탱귤 제로 감귤 막대 아이스크림</div>
+                <div class="card-subtitle">💰 4,800원 (19% 할인)</div>
+                <div class="card-description">🏆 1위 저당 아이스크림 | ⭐ 5.0점 | 📝 1800개 리뷰 | 💸 정가 5,960원</div>
+                <div class="card-tags">
+                    <span class="tag">저당 아이스크림</span><span class="tag">할인</span><span class="tag">고평점</span><span class="tag">인기</span><span class="tag">저렴</span><span class="tag">빙그레</span>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left: 4px solid #E0F6FF;">
+                <div class="card-header">
+                    <span class="emoji">🍦❄️</span>
+                    <span class="rank">#2</span>
+                </div>
+                <div class="card-title">곰곰 곰곰 310Kcal 딸기 아이스밀크</div>
+                <div class="card-subtitle">💰 4,950원 (29% 할인)</div>
+                <div class="card-description">🏆 2위 저당 아이스크림 | ⭐ 4.5점 | 📝 69개 리뷰 | 💸 정가 6,990원</div>
+                <div class="card-tags">
+                    <span class="tag">저당 아이스크림</span><span class="tag">할인</span><span class="tag">고평점</span><span class="tag">저렴</span>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left: 4px solid #E0F6FF;">
+                <div class="card-header">
+                    <span class="emoji">🍦❄️</span>
+                    <span class="rank">#3</span>
+                </div>
+                <div class="card-title">빙그레 빙그레 더위사냥 제로 디카페인 커피</div>
+                <div class="card-subtitle">💰 6,200원</div>
+                <div class="card-description">🏆 3위 저당 아이스크림 | ⭐ 5.0점 | 📝 2105개 리뷰</div>
+                <div class="card-tags">
+                    <span class="tag">저당 아이스크림</span><span class="tag">고평점</span><span class="tag">인기</span><span class="tag">합리적</span><span class="tag">빙그레</span>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left: 4px solid #E0F6FF;">
+                <div class="card-header">
+                    <span class="emoji">🍦❄️</span>
+                    <span class="rank">#4</span>
+                </div>
+                <div class="card-title">롯데웰푸드 롯데웰푸드 티코 밀크초코 저당</div>
+                <div class="card-subtitle">💰 7,200원 (10% 할인)</div>
+                <div class="card-description">🏆 4위 저당 아이스크림 | ⭐ 3.0점 | 📝 232개 리뷰 | 💸 정가 8,000원</div>
+                <div class="card-tags">
+                    <span class="tag">저당 아이스크림</span><span class="tag">할인</span><span class="tag">합리적</span><span class="tag">롯데</span>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left: 4px solid #E0F6FF;">
+                <div class="card-header">
+                    <span class="emoji">🍦❄️</span>
+                    <span class="rank">#5</span>
+                </div>
+                <div class="card-title">라라스윗 라라스윗 저당 복숭아 생요거트바</div>
+                <div class="card-subtitle">💰 7,900원</div>
+                <div class="card-description">🏆 5위 저당 아이스크림 | ⭐ 2.0점 | 📝 41개 리뷰</div>
+                <div class="card-tags">
+                    <span class="tag">저당 아이스크림</span><span class="tag">합리적</span><span class="tag">라라스윗</span>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left: 4px solid #E0F6FF;">
+                <div class="card-header">
+                    <span class="emoji">🍦❄️</span>
+                    <span class="rank">#6</span>
+                </div>
+                <div class="card-title">라라스윗 라라스윗 저당 딥초코 쭈쭈바</div>
+                <div class="card-subtitle">💰 7,900원</div>
+                <div class="card-description">🏆 6위 저당 아이스크림 | ⭐ 5.0점 | 📝 15개 리뷰</div>
+                <div class="card-tags">
+                    <span class="tag">저당 아이스크림</span><span class="tag">고평점</span><span class="tag">합리적</span><span class="tag">라라스윗</span>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left: 4px solid #E0F6FF;">
+                <div class="card-header">
+                    <span class="emoji">🍦❄️</span>
+                    <span class="rank">#7</span>
+                </div>
+                <div class="card-title">라라스윗 라라스윗 팥 모나카 아이스밀크</div>
+                <div class="card-subtitle">💰 7,990원 (15% 할인)</div>
+                <div class="card-description">🏆 7위 저당 아이스크림 | ⭐ 4.5점 | 📝 1304개 리뷰 | 💸 정가 9,400원</div>
+                <div class="card-tags">
+                    <span class="tag">저당 아이스크림</span><span class="tag">할인</span><span class="tag">고평점</span><span class="tag">인기</span><span class="tag">합리적</span><span class="tag">라라스윗</span>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left: 4px solid #E0F6FF;">
+                <div class="card-header">
+                    <span class="emoji">🍦❄️</span>
+                    <span class="rank">#8</span>
+                </div>
+                <div class="card-title">라라스윗 라라스윗 바닐라 저당콘 아이스크림</div>
+                <div class="card-subtitle">💰 9,260원 (15% 할인)</div>
+                <div class="card-description">🏆 8위 저당 아이스크림 | ⭐ 5.0점 | 📝 602개 리뷰 | 💸 정가 10,900원</div>
+                <div class="card-tags">
+                    <span class="tag">저당 아이스크림</span><span class="tag">할인</span><span class="tag">고평점</span><span class="tag">합리적</span><span class="tag">라라스윗</span>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left: 4px solid #E0F6FF;">
+                <div class="card-header">
+                    <span class="emoji">🍦❄️</span>
+                    <span class="rank">#9</span>
+                </div>
+                <div class="card-title">라라스윗 라라스윗 저당 팥 모니카 16개</div>
+                <div class="card-subtitle">💰 52,650원</div>
+                <div class="card-description">🏆 9위 저당 아이스크림</div>
+                <div class="card-tags">
+                    <span class="tag">저당 아이스크림</span><span class="tag">프리미엄</span><span class="tag">라라스윗</span>
+                </div>
+            </div>
+            
+                </div>
+            </div>
+        </body>
+        </html>
+        

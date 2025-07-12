@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>아이콘 매핑 디버깅</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .icon-test { 
+            display: inline-block; 
+            margin: 10px; 
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .food-icon { 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 8px; 
+            background-size: cover; 
+            background-position: center;
+            margin: 0 auto 8px;
+        }
+
+        .food-icon.icon-치킨 {
+            background-image: url('../images/icon_치킨.jpg');
+        }
+        .food-icon.icon-치킨마요덮밥 {
+            background-image: url('../images/icon_치킨마요덮밥.jpg');
+        }
+        .food-icon.icon-치킨버거 {
+            background-image: url('../images/icon_치킨버거.jpg');
+        }
+        .food-icon.icon-삼겹살구이 {
+            background-image: url('../images/icon_삼겹살구이.jpg');
+        }
+        .food-icon.icon-갈비구이 {
+            background-image: url('../images/icon_갈비구이.jpg');
+        }
+        .food-icon.icon-제육볶음 {
+            background-image: url('../images/icon_제육볶음.jpg');
+        }
+        .food-icon.icon-대패삼겹살 {
+            background-image: url('../images/icon_대패삼겹살.jpg');
+        }
+        .food-icon.icon-항정살구이 {
+            background-image: url('../images/icon_항정살구이.jpg');
+        }
+        .food-icon.icon-불고기덮밥 {
+            background-image: url('../images/icon_불고기덮밥.jpg');
+        }
+        .food-icon.icon-불고기버거 {
+            background-image: url('../images/icon_불고기버거.jpg');
+        }
+        .food-icon.icon-떡볶이 {
+            background-image: url('../images/icon_tteokbokki.jpg');
+        }
+        .food-icon.icon-김밥 {
+            background-image: url('../images/icon_kimbap.jpg');
+        }
+        .food-icon.icon-라면 {
+            background-image: url('../images/icon_ramen.jpg');
+        }
+        .food-icon.icon-순대 {
+            background-image: url('../images/icon_순대.jpg');
+        }
+        .food-icon.icon-어묵 {
+            background-image: url('../images/icon_어묵.jpg');
+        }
+        .food-icon.icon-김치찌개 {
+            background-image: url('../images/icon_kimchi_stew.jpg');
+        }
+        .food-icon.icon-비빔밥 {
+            background-image: url('../images/icon_비빔밥.jpg');
+        }
+        .food-icon.icon-모듬초밥 {
+            background-image: url('../images/icon_모듬초밥.jpg');
+        }
+        .food-icon.icon-돈카츠 {
+            background-image: url('../images/icon_돈카츠.jpg');
+        }
+        .food-icon.icon-우동 {
+            background-image: url('../images/icon_우동.jpg');
+        }
+        .food-icon.icon-연어덮밥 {
+            background-image: url('../images/icon_연어덮밥.jpg');
+        }
+        .food-icon.icon-규동 {
+            background-image: url('../images/icon_규동.jpg');
+        }
+        .food-icon.icon-크림파스타 {
+            background-image: url('../images/icon_크림파스타.jpg');
+        }
+        .food-icon.icon-토마토파스타 {
+            background-image: url('../images/icon_토마토파스타.jpg');
+        }
+        .food-icon.icon-피자 {
+            background-image: url('../images/icon_pizza.jpg');
+        }
+        .food-icon.icon-오일파스타 {
+            background-image: url('../images/icon_오일파스타.jpg');
+        }
+        .food-icon.icon-라자냐 {
+            background-image: url('../images/icon_라자냐.jpg');
+        }
+        .food-icon.icon-짜장면 {
+            background-image: url('../images/icon_jajangmyeon.jpg');
+        }
+        .food-icon.icon-짬뽕 {
+            background-image: url('../images/icon_jjamppong.jpg');
+        }
+        .food-icon.icon-탕수육 {
+            background-image: url('../images/icon_sweet_sour_pork.jpg');
+        }
+        .food-icon.icon-양장피 {
+            background-image: url('../images/icon_양장피.jpg');
+        }
+        .food-icon.icon-마파두부 {
+            background-image: url('../images/icon_마파두부.jpg');
+        }
+        .food-icon.icon-더블치즈버거 {
+            background-image: url('../images/icon_더블치즈버거.jpg');
+        }
+        .food-icon.icon-새우버거 {
+            background-image: url('../images/icon_새우버거.jpg');
+        }
+        .food-icon.icon-베이컨버거 {
+            background-image: url('../images/icon_베이컨버거.jpg');
+        }
+        .food-icon.icon-돈까스덮밥 {
+            background-image: url('../images/icon_돈까스덮밥.jpg');
+        }
+        .food-icon.icon-스팸마요덮밥 {
+            background-image: url('../images/icon_스팸마요덮밥.jpg');
+        }
+        .food-icon.icon-족발 {
+            background-image: url('../images/icon_족발.jpg');
+        }
+        .food-icon.icon-보쌈 {
+            background-image: url('../images/icon_보쌈.jpg');
+        }
+        .food-icon.icon-곱창 {
+            background-image: url('../images/icon_곱창.jpg');
+        }
+        .food-icon.icon-아이스크림 {
+            background-image: url('../images/icon_아이스크림.jpg');
+        }
+        .food-icon.icon-케이크 {
+            background-image: url('../images/icon_케이크.jpg');
+        }
+        .food-icon.icon-마카롱 {
+            background-image: url('../images/icon_마카롱.jpg');
+        }
+        .food-icon.icon-붕어빵 {
+            background-image: url('../images/icon_붕어빵.jpg');
+        }
+        .food-icon.icon-호떡 {
+            background-image: url('../images/icon_호떡.jpg');
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 아이콘 매핑 디버깅</h1>
+    <div>
+
+        <div class="icon-test">
+            <div class="food-icon icon-치킨"></div>
+            <div>치킨</div>
+            <small>icon_치킨.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-치킨마요덮밥"></div>
+            <div>치킨마요덮밥</div>
+            <small>icon_치킨마요덮밥.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-치킨버거"></div>
+            <div>치킨버거</div>
+            <small>icon_치킨버거.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-삼겹살구이"></div>
+            <div>삼겹살구이</div>
+            <small>icon_삼겹살구이.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-갈비구이"></div>
+            <div>갈비구이</div>
+            <small>icon_갈비구이.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-제육볶음"></div>
+            <div>제육볶음</div>
+            <small>icon_제육볶음.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-대패삼겹살"></div>
+            <div>대패삼겹살</div>
+            <small>icon_대패삼겹살.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-항정살구이"></div>
+            <div>항정살구이</div>
+            <small>icon_항정살구이.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-불고기덮밥"></div>
+            <div>불고기덮밥</div>
+            <small>icon_불고기덮밥.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-불고기버거"></div>
+            <div>불고기버거</div>
+            <small>icon_불고기버거.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-떡볶이"></div>
+            <div>떡볶이</div>
+            <small>icon_tteokbokki.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-김밥"></div>
+            <div>김밥</div>
+            <small>icon_kimbap.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-라면"></div>
+            <div>라면</div>
+            <small>icon_ramen.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-순대"></div>
+            <div>순대</div>
+            <small>icon_순대.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-어묵"></div>
+            <div>어묵</div>
+            <small>icon_어묵.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-김치찌개"></div>
+            <div>김치찌개</div>
+            <small>icon_kimchi_stew.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-비빔밥"></div>
+            <div>비빔밥</div>
+            <small>icon_비빔밥.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-모듬초밥"></div>
+            <div>모듬초밥</div>
+            <small>icon_모듬초밥.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-돈카츠"></div>
+            <div>돈카츠</div>
+            <small>icon_돈카츠.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-우동"></div>
+            <div>우동</div>
+            <small>icon_우동.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-연어덮밥"></div>
+            <div>연어덮밥</div>
+            <small>icon_연어덮밥.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-규동"></div>
+            <div>규동</div>
+            <small>icon_규동.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-크림파스타"></div>
+            <div>크림파스타</div>
+            <small>icon_크림파스타.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-토마토파스타"></div>
+            <div>토마토파스타</div>
+            <small>icon_토마토파스타.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-피자"></div>
+            <div>피자</div>
+            <small>icon_pizza.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-오일파스타"></div>
+            <div>오일파스타</div>
+            <small>icon_오일파스타.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-라자냐"></div>
+            <div>라자냐</div>
+            <small>icon_라자냐.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-짜장면"></div>
+            <div>짜장면</div>
+            <small>icon_jajangmyeon.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-짬뽕"></div>
+            <div>짬뽕</div>
+            <small>icon_jjamppong.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-탕수육"></div>
+            <div>탕수육</div>
+            <small>icon_sweet_sour_pork.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-양장피"></div>
+            <div>양장피</div>
+            <small>icon_양장피.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-마파두부"></div>
+            <div>마파두부</div>
+            <small>icon_마파두부.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-더블치즈버거"></div>
+            <div>더블치즈버거</div>
+            <small>icon_더블치즈버거.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-새우버거"></div>
+            <div>새우버거</div>
+            <small>icon_새우버거.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-베이컨버거"></div>
+            <div>베이컨버거</div>
+            <small>icon_베이컨버거.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-돈까스덮밥"></div>
+            <div>돈까스덮밥</div>
+            <small>icon_돈까스덮밥.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-스팸마요덮밥"></div>
+            <div>스팸마요덮밥</div>
+            <small>icon_스팸마요덮밥.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-족발"></div>
+            <div>족발</div>
+            <small>icon_족발.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-보쌈"></div>
+            <div>보쌈</div>
+            <small>icon_보쌈.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-곱창"></div>
+            <div>곱창</div>
+            <small>icon_곱창.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-아이스크림"></div>
+            <div>아이스크림</div>
+            <small>icon_아이스크림.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-케이크"></div>
+            <div>케이크</div>
+            <small>icon_케이크.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-마카롱"></div>
+            <div>마카롱</div>
+            <small>icon_마카롱.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-붕어빵"></div>
+            <div>붕어빵</div>
+            <small>icon_붕어빵.jpg</small>
+        </div>
+        <div class="icon-test">
+            <div class="food-icon icon-호떡"></div>
+            <div>호떡</div>
+            <small>icon_호떡.jpg</small>
+        </div>
+    </div>
+</body>
+</html>

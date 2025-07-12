@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatToEat 룰렛 v2.0 - 프리미엄 퓨전</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 배경 애니메이션 */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: bgMove 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes bgMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            padding: 2rem 1rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .title {
+            color: white;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-weight: 400;
+        }
+
+        .roulette-container {
+            position: fixed;
+            width: 6400px;
+            height: 6400px;
+            top: 350px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: auto;
+        }
+
+        .roulette-wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: relative;
+            background: radial-gradient(circle at center, #ffffff 0%, #f8f9fa 100%);
+            box-shadow: 
+                0 0 0 2px rgba(255,255,255,0.8),
+                0 10px 40px rgba(0,0,0,0.3),
+                inset 0 0 100px rgba(0,0,0,0.05);
+            cursor: grab;
+            transition: transform 0.3s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+        }
+
+        .roulette-wheel:active {
+            cursor: grabbing;
+        }
+
+        /* 카테고리별 테마 색상 */
+        .category-chicken { --theme-color: #ff6b35; --theme-bg: #fff5f0; }
+        .category-meat { --theme-color: #e74c3c; --theme-bg: #ffebee; }
+        .category-bunsik { --theme-color: #f39c12; --theme-bg: #fffbf0; }
+        .category-lunchbox { --theme-color: #27ae60; --theme-bg: #f0fff4; }
+        .category-fastfood { --theme-color: #e67e22; --theme-bg: #fff8f0; }
+        .category-japanese { --theme-color: #8e44ad; --theme-bg: #f8f0ff; }
+        .category-western { --theme-color: #3498db; --theme-bg: #f0f8ff; }
+        .category-dessert { --theme-color: #e91e63; --theme-bg: #fff0f5; }
+        .category-chinese { --theme-color: #c0392b; --theme-bg: #fff0f0; }
+        .category-latenight { --theme-color: #34495e; --theme-bg: #f0f2f5; }
+        .category-soup { --theme-color: #16a085; --theme-bg: #f0fffa; }
+        .category-asian { --theme-color: #d35400; --theme-bg: #fff5e6; }
+        
+        /* 🎯 NEW! 파싱된 카드 색상 */
+        .category-large-snack { --theme-color: #FFA500; --theme-bg: #fff8f0; }
+        .category-macaron { --theme-color: #ff69b4; --theme-bg: #fff0f5; }
+        .category-low-sugar-ice { --theme-color: #87ceeb; --theme-bg: #f0f8ff; }
+
+        /* 쿠팡 광고 카드 스타일 */
+        .category-coupang { 
+            --theme-color: #ffc107; 
+            --theme-bg: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+        }
+
+        /* 랭킹 카드 스타일 */
+        .category-ranking { 
+            --theme-color: #ff6b35; 
+            --theme-bg: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+        }
+
+        .menu-category-card {
+            position: absolute;
+            width: 450px;
+            height: 900px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            padding: 30px 24px;
+            transform-origin: center;
+            box-shadow: 
+                0 2px 8px rgba(0,0,0,0.08),
+                0 8px 24px rgba(0,0,0,0.12);
+            cursor: grab;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu-category-card.category-coupang {
+            background: var(--theme-bg);
+            border: 2px solid #ffc107;
+        }
+
+        .menu-category-card.category-ranking {
+            background: var(--theme-bg);
+            border: 2px solid #ff6b35;
+        }
+
+        .menu-category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(180deg, var(--theme-bg) 0%, transparent 100%);
+            z-index: 0;
+        }
+
+        .category-header {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--theme-bg);
+        }
+
+        .category-emoji {
+            font-size: 60px;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .category-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--theme-color);
+            letter-spacing: -0.02em;
+        }
+
+        .menu-items-container {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        /* 스크롤바 스타일 */
+        .menu-items-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .menu-items-container::-webkit-scrollbar-track {
+            background: var(--theme-bg);
+            border-radius: 3px;
+        }
+
+        .menu-items-container::-webkit-scrollbar-thumb {
+            background: var(--theme-color);
+            border-radius: 3px;
+            opacity: 0.5;
+        }
+
+        .menu-item-row {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            background: var(--theme-bg);
+            border-radius: 15px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item-row::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: var(--theme-color);
+            transform: translateX(-100%);
+            transition: transform 0.2s ease;
+        }
+
+        .menu-item-row:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .menu-item-row:hover::before {
+            transform: translateX(0);
+        }
+
+        .rank-badge {
+            min-width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--theme-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-right: 16px;
+        }
+
+        .menu-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-right: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .menu-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .menu-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            letter-spacing: -0.01em;
+        }
+
+        .menu-tag {
+            font-size: 14px;
+            color: #7f8c8d;
+            font-weight: 400;
+        }
+
+        /* 중앙 장식 */
+        .center-decoration {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 0 0 10px rgba(255,255,255,0.2),
+                0 4px 20px rgba(0,0,0,0.2),
+                inset 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 10;
+            font-size: 60px;
+        }
+
+        /* 포인터 */
+        .pointer {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        .pointer-shape {
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-top: 40px solid #2c3e50;
+            position: relative;
+        }
+
+        .pointer-shape::after {
+            content: '';
+            position: absolute;
+            left: -18px;
+            top: -35px;
+            width: 0;
+            height: 0;
+            border-left: 18px solid transparent;
+            border-right: 18px solid transparent;
+            border-top: 30px solid #34495e;
+        }
+
+        /* 카드 팝업 스타일 */
+        .card-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .card-popup-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .card-popup {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 96vh;
+            padding: 24px 20px 80px 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            transform: scale(0.8);
+            animation: popupScale 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 팝업 카드에 원본 카드와 동일한 배경 그라데이션 적용 */
+        .card-popup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(180deg, var(--theme-bg) 0%, transparent 100%);
+            border-radius: 20px 20px 0 0;
+            z-index: 0;
+        }
+
+        /* 팝업 내용이 배경 위에 오도록 */
+        .popup-header, .popup-menu-grid {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes popupScale {
+            from { 
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to { 
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .popup-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--theme-bg);
+        }
+
+        .popup-emoji {
+            font-size: 50px;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .popup-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--theme-color);
+            letter-spacing: -0.02em;
+            margin-bottom: 6px;
+        }
+
+        .popup-subtitle {
+            font-size: 14px;
+            color: #7f8c8d;
+            font-weight: 400;
+        }
+
+        .popup-menu-grid {
+            display: grid;
+            gap: 6px;
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            margin-bottom: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: #bdc3c7 transparent;
+        }
+
+        .popup-menu-grid::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .popup-menu-grid::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .popup-menu-grid::-webkit-scrollbar-thumb {
+            background: #bdc3c7;
+            border-radius: 3px;
+        }
+
+        .popup-menu-grid::-webkit-scrollbar-thumb:hover {
+            background: #95a5a6;
+        }
+
+        .popup-source {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #95a5a6;
+            background: rgba(255,255,255,0.95);
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid #ecf0f1;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            background: var(--theme-bg);
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            min-height: 48px;
+        }
+
+        /* 원본 카드와 동일한 호버 효과 */
+        .popup-menu-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: var(--theme-color);
+            transform: translateX(-100%);
+            transition: transform 0.2s ease;
+        }
+
+        .popup-menu-item:hover {
+            background: rgba(236, 240, 241, 0.8);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: scale(1.02);
+        }
+
+        .popup-menu-item:hover::before {
+            transform: translateX(0);
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #7f8c8d;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            z-index: 1001; /* 다른 요소들보다 위에 */
+            pointer-events: auto; /* 클릭 허용 확실히 */
+        }
+
+        .popup-close:hover {
+            background: #f0f0f0;
+            color: #2c3e50;
+        }
+
+        .clickable-card {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .clickable-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .slow-rotation-hint {
+            position: fixed;
+            top: 50%;
+            right: 30px;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-size: 14px;
+            color: #2c3e50;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 50;
+            backdrop-filter: blur(10px);
+        }
+
+        .slow-rotation-hint.visible {
+            opacity: 1;
+        }
+
+        /* 컨트롤 영역 */
+        .controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 16px;
+            z-index: 100;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate(-50%, 20px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        .spin-button {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 100px;
+            cursor: pointer;
+            box-shadow: 
+                0 4px 20px rgba(255, 82, 82, 0.4),
+                0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spin-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .spin-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 6px 30px rgba(255, 82, 82, 0.5),
+                0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .spin-button:active {
+            transform: translateY(0);
+        }
+
+        .spin-button:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+
+        .debug-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 100;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .roulette-container {
+                width: 3000px;
+                height: 3000px;
+            }
+            
+            .menu-category-card {
+                width: 480px;
+                height: 680px;
+                padding: 24px 20px;
+            }
+            
+            .controls {
+                bottom: 20px;
+            }
+        }
+        
+        /* 카드 배경 이미지 스타일 */
+        .menu-category-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .menu-category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+        
+        .menu-category-card.category-chicken::before {
+            background-image: url('./images/bg_치킨.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            filter: blur(1px);
+        }
+        
+        .menu-category-card.category-meat::before {
+            background-image: url('./images/bg_삼겹살구이.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            filter: blur(1px);
+        }
+        
+        .menu-category-card.category-bunsik::before {
+            background-image: url('./images/bg_tteokbokki.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            filter: blur(1px);
+        }
+        
+        .menu-category-card.category-lunchbox::before {
+            background-image: url('./images/bg_치킨마요덮밥.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            filter: blur(1px);
+        }
+        
+        .menu-category-card.category-japanese::before {
+            background-image: url('./images/bg_모듬초밥.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            filter: blur(1px);
+        }
+        
+        .menu-category-card.category-western::before {
+            background-image: url('./images/bg_크림파스타.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            filter: blur(1px);
+        }
+        
+        .menu-category-card.category-chinese::before {
+            background-image: url('./images/bg_jajangmyeon.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            filter: blur(1px);
+        }
+        
+        .menu-category-card.category-dessert::before {
+            background-image: url('./images/bg_아이스크림.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            filter: blur(1px);
+        }
+        
+        .menu-category-card.category-soup::before {
+            background-image: url('./images/bg_kimchi_stew.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            filter: blur(1px);
+        }
+        
+        .menu-category-card.category-latenight::before {
+            background-image: url('./images/bg_족발.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            filter: blur(1px);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="header">
+            <h1 class="title">🍽️ 오늘 뭐 먹지?</h1>
+            <p class="subtitle">프리미엄 무한회전 룰렛 v2.0</p>
+        </div>
+    </div>
+    
+    <div class="roulette-container">
+        <div class="pointer">
+            <div class="pointer-shape"></div>
+        </div>
+        <div class="roulette-wheel" id="roulette">
+            <div class="center-decoration">🎯</div>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <button class="spin-button" onclick="rouletteEngine.randomSpin()">
+            <span>🎲 룰렛 돌리기!</span>
+        </button>
+    </div>
+
+    <!-- 속도 힌트 -->
+    <div class="slow-rotation-hint" id="speedHint">
+        💡 천천히 돌 때 카드를 클릭해보세요!
+    </div>
+
+    <!-- 카드 팝업 오버레이 -->
+    <div class="card-popup-overlay" id="cardPopupOverlay">
+        <div class="card-popup" id="cardPopup">
+            <button class="popup-close" id="popupCloseBtn">✕</button>
+            <div class="popup-header">
+                <div class="popup-emoji" id="popupEmoji"></div>
+                <div class="popup-title" id="popupTitle"></div>
+                <div class="popup-subtitle" id="popupSubtitle"></div>
+            </div>
+            <div class="popup-menu-grid" id="popupMenuGrid">
+                <!-- 메뉴 아이템들이 여기에 동적으로 추가됩니다 -->
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- 디버그 정보 -->
+    <div class="debug-info" id="debug" style="display: none;">
+        Mode: <span id="debug-mode">idle</span><br>
+        Rotation: <span id="debug-rotation">0</span>°<br>
+        Velocity: <span id="debug-velocity">0</span><br>
+        FPS: <span id="debug-fps">60</span>
+    </div>
+
+    <script>
+        // 24개 프리미엄 카드 데이터 (메뉴 + 쿠팡 + 랭킹)
+        const PREMIUM_MENU_DATA = [
+            // 메뉴 카드들 (12개)
+            { title: '🍗 치킨', id: 'chicken', type: 'menu', items: [
+                { rank: '1위', name: '후라이드치킨', icon: '🍗', tag: '바삭한 행복' },
+                { rank: '2위', name: '양념치킨', icon: '🍗', tag: '달콤매콤' },
+                { rank: '3위', name: '뿌링클치킨', icon: '🍗', tag: '부드러운 맛' },
+                { rank: '4위', name: '허니콤보치킨', icon: '🍗', tag: '달콤한 유혹' },
+                { rank: '5위', name: '황금올리브치킨', icon: '🍗', tag: '담백한 풍미' }
+            ]},
+            
+            // 쿠팡 광고 카드
+            { title: '🥤 치킨소스', id: 'coupang', type: 'coupang', rank: 'AD', items: [
+                { name: '치킨소스 베스트 1위', icon: '🥤', tag: '🛒 쿠팡 베스트셀러' }
+            ]},
+            
+            { title: '🥘 고기구이', id: 'meat', type: 'menu', items: [
+                { rank: '1위', name: '삼겹살구이', icon: '🥩', tag: '육즙 가득' },
+                { rank: '2위', name: '갈비구이', icon: '🥩', tag: '진한 풍미' },
+                { rank: '3위', name: '제육볶음', icon: '🥘', tag: '매콤달콤' },
+                { rank: '4위', name: '대패삼겹살', icon: '🥩', tag: '부드러운 식감' },
+                { rank: '5위', name: '항정살구이', icon: '🥩', tag: '고급스러운 맛' }
+            ]},
+            
+            // 랭킹 카드
+            { title: '🏆 피자 TOP7', id: 'ranking', type: 'ranking', rank: 'TOP', items: [
+                { name: '피자 랭킹 보기', icon: '🍕', tag: '🏆 인기 순위' }
+            ]},
+            
+            // 🎯 NEW! 파싱된 실제 데이터 카드 (2025-07-09)
+            { title: '🍿 대용량과자', id: 'large-snack', type: 'menu', items: [
+                { rank: '1위', name: '새우깡 매운새우깡', icon: '🦐', tag: '31,442개 리뷰 · 4,550원' },
+                { rank: '2위', name: '뉴트리오코 초콜릿웨이퍼', icon: '🍫', tag: '3,109개 리뷰 · 5,500원 (29% 할인)' },
+                { rank: '3위', name: '팜스웰 옥수수고추맛콘', icon: '🌽', tag: '1,441개 리뷰 · 6,790원 (38% 할인)' },
+                { rank: '4위', name: '뉴트리오코 밀크웨이퍼', icon: '🥛', tag: '3,568개 리뷰 · 5,500원 (29% 할인)' },
+                { rank: '5위', name: '카디 비스킷믹스', icon: '🍪', tag: '특대용량 1kg · 12,980원 (13% 할인)' },
+                { rank: '7위', name: '신흥 꼬꼬스낵', icon: '🐣', tag: '4,381개 리뷰 · 12,170원' },
+                { rank: '8위', name: '재미스 미니사과쿠키', icon: '🍎', tag: '18,336개 리뷰 · 15,500원 (44% 할인)' },
+                { rank: '9위', name: '롯데 엄마손파이', icon: '🥧', tag: '50개입 개별포장 · 15,900원' }
+            ]},
+            
+            // 쿠팡 광고 카드
+            { title: '🍳 구이팬', id: 'coupang', type: 'coupang', rank: 'AD', items: [
+                { name: '에어프라이어 1위', icon: '🍳', tag: '🛒 쿠팡 베스트셀러' }
+            ]},
+            
+            // 🎯 NEW! 마카롱 실제 데이터 카드  
+            { title: '🧁 마카롱', id: 'macaron', type: 'menu', items: [
+                { rank: '1위', name: '파스키에 마카롱 6종세트', icon: '🎀', tag: '12개입 · 9,980원' },
+                { rank: '2위', name: '널담 마카롱 사랑세트', icon: '💕', tag: '8종 · 9,410원 (20% 할인)' },
+                { rank: '3위', name: '러브빈 수제마카롱', icon: '💝', tag: '개별포장 8개 · 11,700원 (26% 할인)' },
+                { rank: '4위', name: '파스키에 마카롱 12개입', icon: '🌈', tag: '다양한 맛 · 19,360원 (3% 할인)' },
+                { rank: '5위', name: '누니 마카롱', icon: '✨', tag: '프리미엄 · 16,900원' },
+                { rank: '6위', name: '코스트코 36 마카롱', icon: '📦', tag: '대용량 468g · 28,980원' }
+            ]},
+            
+            // 랭킹 카드
+            { title: '🏆 분식 TOP7', id: 'ranking', type: 'ranking', rank: 'TOP', items: [
+                { name: '분식 랭킹 보기', icon: '🍜', tag: '🏆 인기 순위' }
+            ]},
+            
+            // 🎯 NEW! 저당 아이스크림 실제 데이터 카드
+            { title: '🍦❄️ 저당 아이스크림', id: 'low-sugar-ice', type: 'menu', items: [
+                { rank: '1위', name: '빙그레 생귤탱귤 제로', icon: '🍊', tag: '감귤 막대형 · 4,800원 (19% 할인)' },
+                { rank: '2위', name: '곰곰 310Kcal 딸기', icon: '🍓', tag: '저칼로리 · 4,950원 (29% 할인)' },
+                { rank: '3위', name: '빙그레 더위사냥 제로', icon: '☕', tag: '디카페인 커피 · 6,200원' },
+                { rank: '4위', name: '롯데 티코 밀크초코', icon: '🍫', tag: '저당 · 7,200원 (10% 할인)' },
+                { rank: '5위', name: '라라스윗 복숭아 생요거트바', icon: '🍑', tag: '저당 · 7,900원' },
+                { rank: '6위', name: '라라스윗 저당 딥초코 쭈쭈바', icon: '🍦', tag: '진한 초콜릿 · 7,900원' },
+                { rank: '7위', name: '라라스윗 팥 모나카', icon: '🥧', tag: '아이스밀크 · 7,990원 (15% 할인)' },
+                { rank: '8위', name: '라라스윗 바닐라 저당콘', icon: '🍦', tag: '콘 아이스크림 · 9,260원 (15% 할인)' },
+                { rank: '9위', name: '라라스윗 저당 팥 모니카', icon: '🧊', tag: '16개 대용량 · 52,650원' }
+            ]},
+            
+            // 쿠팡 광고 카드
+            { title: '🥡 도시락통', id: 'coupang', type: 'coupang', rank: 'AD', items: [
+                { name: '보온도시락 1위', icon: '🥡', tag: '🛒 쿠팡 베스트셀러' }
+            ]},
+            
+            { title: '🍛 일식', id: 'japanese', type: 'menu', items: [
+                { rank: '1위', name: '모듬초밥', icon: '🍣', tag: '정갈한 맛' },
+                { rank: '2위', name: '돈카츠', icon: '🍛', tag: '바삭한 식감' },
+                { rank: '3위', name: '우동', icon: '🍜', tag: '따뜻한 국물' },
+                { rank: '4위', name: '연어덮밥', icon: '🍣', tag: '신선한 연어' },
+                { rank: '5위', name: '규동', icon: '🍛', tag: '달콤한 소스' }
+            ]},
+            
+            // 랭킹 카드
+            { title: '🏆 패스트푸드 TOP7', id: 'ranking', type: 'ranking', rank: 'TOP', items: [
+                { name: '패스트푸드 랭킹', icon: '🍔', tag: '🏆 인기 순위' }
+            ]},
+            
+            { title: '🍝 양식', id: 'western', type: 'menu', items: [
+                { rank: '1위', name: '크림파스타', icon: '🍝', tag: '이국적 향연' },
+                { rank: '2위', name: '토마토파스타', icon: '🍝', tag: '새콤달콤' },
+                { rank: '3위', name: '피자', icon: '🍕', tag: '치즈의 향연' },
+                { rank: '4위', name: '오일파스타', icon: '🍝', tag: '깔끔한 맛' },
+                { rank: '5위', name: '라자냐', icon: '🧀', tag: '진한 치즈' }
+            ]},
+            
+            // 쿠팡 광고 카드
+            { title: '🥢 초밥도구', id: 'coupang', type: 'coupang', rank: 'AD', items: [
+                { name: '초밥틀 세트 1위', icon: '🥢', tag: '🛒 쿠팡 베스트셀러' }
+            ]},
+            
+            { title: '🍦 디저트', id: 'dessert', type: 'menu', items: [
+                { rank: '1위', name: '아이스크림', icon: '🍦', tag: '달콤한 유혹' },
+                { rank: '2위', name: '케이크', icon: '🍰', tag: '특별한 순간' },
+                { rank: '3위', name: '마카롱', icon: '🧁', tag: '프랑스 감성' },
+                { rank: '4위', name: '붕어빵', icon: '🧁', tag: '겨울 간식' },
+                { rank: '5위', name: '호떡', icon: '🥞', tag: '따뜻한 달콤함' }
+            ]},
+            
+            // 랭킹 카드
+            { title: '🏆 일식 TOP7', id: 'ranking', type: 'ranking', rank: 'TOP', items: [
+                { name: '일식 랭킹 보기', icon: '🍣', tag: '🏆 인기 순위' }
+            ]},
+            
+            { title: '🍲 중식', id: 'chinese', type: 'menu', items: [
+                { rank: '1위', name: '짜장면', icon: '🍜', tag: '진한 풍미' },
+                { rank: '2위', name: '짬뽕', icon: '🍲', tag: '매콤한 국물' },
+                { rank: '3위', name: '탕수육', icon: '🥘', tag: '새콤달콤' },
+                { rank: '4위', name: '양장피', icon: '🥗', tag: '시원한 맛' },
+                { rank: '5위', name: '마파두부', icon: '🌶️', tag: '매운맛의 진수' }
+            ]},
+            
+            // 쿠팡 광고 카드
+            { title: '🧂 양념통', id: 'coupang', type: 'coupang', rank: 'AD', items: [
+                { name: '만능 양념 1위', icon: '🧂', tag: '🛒 쿠팡 베스트셀러' }
+            ]},
+            
+            { title: '🌙 야식', id: 'latenight', type: 'menu', items: [
+                { rank: '1위', name: '치킨', icon: '🍗', tag: '밤의 위로' },
+                { rank: '2위', name: '피자', icon: '🍕', tag: '늦은 배고픔' },
+                { rank: '3위', name: '족발', icon: '🦶', tag: '쫄깃한 식감' },
+                { rank: '4위', name: '보쌈', icon: '🥬', tag: '담백한 맛' },
+                { rank: '5위', name: '곱창', icon: '🌭', tag: '고소한 내장' }
+            ]},
+            
+            // 랭킹 카드
+            { title: '🏆 양식 TOP7', id: 'ranking', type: 'ranking', rank: 'TOP', items: [
+                { name: '양식 랭킹 보기', icon: '🍝', tag: '🏆 인기 순위' }
+            ]},
+            
+            { title: '🥣 국물', id: 'soup', type: 'menu', items: [
+                { rank: '1위', name: '김치찌개', icon: '🍲', tag: '따뜻한 온기' },
+                { rank: '2위', name: '된장찌개', icon: '🍲', tag: '구수한 맛' },
+                { rank: '3위', name: '부대찌개', icon: '🍲', tag: '얼큰한 국물' },
+                { rank: '4위', name: '순두부찌개', icon: '🍲', tag: '부드러운 식감' },
+                { rank: '5위', name: '미역국', icon: '🥣', tag: '깔끔한 맛' }
+            ]},
+            
+            // 신규 추가: 실제 데이터 기반 카드들
+            { title: '🍜 라면 순위', id: 'ramen-ranking', type: 'ranking', rank: 'TOP', items: [
+                { rank: '1위', name: '신라면', icon: '🍜', tag: '35% (한국갤럽 2024)' },
+                { rank: '2위', name: '진라면', icon: '🍜', tag: '15%' },
+                { rank: '3위', name: '안성탕면', icon: '🍜', tag: '11%' },
+                { rank: '4위', name: '삼양라면', icon: '🍜', tag: '8%' },
+                { rank: '5위', name: '너구리', icon: '🍜', tag: '7%' },
+                { rank: '6위', name: '열라면', icon: '🍜', tag: '2.8%' },
+                { rank: '7위', name: '불닭볶음면', icon: '🔥', tag: '2.5%' },
+                { rank: '8위', name: '짜파게티', icon: '🍜', tag: '1.7%' },
+                { rank: '9위', name: '참깨라면', icon: '🍜', tag: '1.3%' },
+                { rank: '10위', name: '오징어짬뽕', icon: '🦑', tag: '1.2%' }
+            ]},
+            
+            { title: '🍗 치킨메뉴 순위', id: 'chicken-menu', type: 'ranking', rank: 'TOP', items: [
+                { rank: '1위', name: '크크크치킨', icon: '🍗', tag: '60계 (아하트렌드 2024)' },
+                { rank: '2위', name: '뿌링클', icon: '🍗', tag: 'BHC' },
+                { rank: '3위', name: '고추바사삭', icon: '🍗', tag: '굽네' },
+                { rank: '4위', name: '허니콤보', icon: '🍗', tag: '교촌' },
+                { rank: '5위', name: '황금올리브', icon: '🍗', tag: 'BBQ' },
+                { rank: '6위', name: '자메이카통다리', icon: '🍗', tag: 'BBQ' },
+                { rank: '7위', name: '슈프림양념', icon: '🍗', tag: '처갓집' },
+                { rank: '8위', name: '치필링', icon: '🌶️', tag: '멕시카나 신메뉴' },
+                { rank: '9위', name: '옥수수치킨', icon: '🌽', tag: '교촌 신메뉴' },
+                { rank: '10위', name: '크랑이치킨', icon: '🍗', tag: '60계 신메뉴' }
+            ]},
+            
+            { title: '🏢 치킨브랜드 매출', id: 'chicken-brand', type: 'ranking', rank: 'TOP', items: [
+                { rank: '1위', name: 'BHC', icon: '🏆', tag: '5,356억원 (2023)' },
+                { rank: '2위', name: 'BBQ', icon: '🥈', tag: '4,731억원' },
+                { rank: '3위', name: '교촌치킨', icon: '🥉', tag: '4,259억원' },
+                { rank: '4위', name: '굽네치킨', icon: '🍗', tag: '업계 4위' },
+                { rank: '5위', name: '처갓집치킨', icon: '🍗', tag: '업계 5위' }
+            ]},
+
+            // GS25 편의점 인기음식 순위 (2024년 실제 데이터)
+            { title: '🔺 GS25 삼각김밥', id: 'gs25-triangle', type: 'ranking', rank: 'TOP', items: [
+                { rank: '1위', name: '더큰 참치마요', icon: '🔺', tag: '1,300원 (GS25 2024)' },
+                { rank: '2위', name: '붉은대게 딱지장', icon: '🦀', tag: '1,000원' },
+                { rank: '3위', name: '더큰 베이컨참치마요', icon: '🔺', tag: '1,300원' },
+                { rank: '4위', name: '뉴 전주비빔', icon: '🌶️', tag: '900원' },
+                { rank: '5위', name: '춘천닭갈비', icon: '🍗', tag: '매콤한 맛' }
+            ]},
+
+            { title: '🍱 GS25 도시락', id: 'gs25-lunchbox', type: 'ranking', rank: 'TOP', items: [
+                { rank: '1위', name: '치킨도시락', icon: '🍱', tag: '3,800원 (GS25 2024)' },
+                { rank: '2위', name: '바싹불고기도시락', icon: '🍱', tag: '4,300원' },
+                { rank: '3위', name: '등심돈까스도시락', icon: '🍱', tag: '4,500원' },
+                { rank: '4위', name: '치킨마요계란덮밥', icon: '🍱', tag: '3,500원' },
+                { rank: '5위', name: '혜자로운 집밥', icon: '🍱', tag: '4,000~5,000원' }
+            ]},
+
+            { title: '🍙 GS25 일반김밥', id: 'gs25-kimbap', type: 'ranking', rank: 'TOP', items: [
+                { rank: '1위', name: '참치마요김밥', icon: '🍙', tag: '1,900원 (GS25 2024)' },
+                { rank: '2위', name: '언양식 불고기김밥', icon: '🍙', tag: '1,900원' },
+                { rank: '3위', name: '참치김치김밥', icon: '🍙', tag: '1,900원' }
+            ]},
+
+            // 쿠팡 광고 카드
+            { title: '📱 전자레인지', id: 'coupang', type: 'coupang', rank: 'AD', items: [
+                { name: '전자레인지 1위', icon: '📱', tag: '🛒 쿠팡 베스트셀러' }
+            ]},
+            
+            // 랭킹 카드
+            { title: '🏆 디저트 TOP7', id: 'ranking', type: 'ranking', rank: 'TOP', items: [
+                { name: '디저트 랭킹 보기', icon: '🍰', tag: '🏆 인기 순위' }
+            ]},
+
+            // 🍦 NEW! 2024년 실제 아이스크림 순위 (aT 농수산물유통공사 + 편의점 매출 데이터)
+            { title: '🍦 아이스크림 TOP10', id: 'icecream-ranking', type: 'ranking', rank: 'TOP', items: [
+                { rank: '1위', name: '월드콘', icon: '🍦', tag: '710억원 (롯데웰푸드)' },
+                { rank: '2위', name: '붕어싸만코', icon: '🐟', tag: '646억원 (빙그레)' },
+                { rank: '3위', name: '메로나', icon: '🍈', tag: '612억원 (빙그레)' },
+                { rank: '4위', name: '투게더', icon: '👨‍👩‍👧‍👦', tag: '528억원 (빙그레)' },
+                { rank: '5위', name: '빵빠레', icon: '🍞', tag: '438억원 (롯데웰푸드)' },
+                { rank: '6위', name: '브라보콘', icon: '🍦', tag: '350억원 (롯데웰푸드)' },
+                { rank: '7위', name: '돼지바', icon: '🐷', tag: '320억원 (롯데웰푸드)' },
+                { rank: '8위', name: '비비빅', icon: '🍦', tag: '280억원 (롯데웰푸드)' },
+                { rank: '9위', name: '수박바', icon: '🍉', tag: '250억원 (빙그레)' },
+                { rank: '10위', name: '하겐다즈', icon: '🍨', tag: '200억원 (프리미엄)' }
+            ]}
+        ];
+
+        // 물리엔진 상수
+        const PHYSICS = {
+            FRICTION: 0.985,
+            MIN_VELOCITY: 0.05,
+            PERPETUAL_VELOCITY: 0.02,  // 계속 유지할 최소 속도
+            MAX_VELOCITY: 25,
+            DRAG_MULTIPLIER: 0.8,
+            RADIUS: 2650,
+            CARD_WIDTH: 450,  // 카드 너비를 450px로 수정
+            CARD_HEIGHT: 900
+        };
+
+        // 룰렛 상태 관리 클래스
+        class RouletteState {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.mode = 'idle';           // 'idle', 'dragging', 'spinning'
+                this.rotation = 0;            // 현재 회전각도
+                this.velocity = 0;            // 현재 속도
+                this.lastAngle = 0;           // 마지막 드래그 각도
+                this.dragHistory = [];        // 드래그 속도 히스토리
+                this.lastUpdate = performance.now();
+            }
+
+            transition(newMode) {
+                const validTransitions = {
+                    'idle': ['dragging', 'spinning'],
+                    'dragging': ['idle', 'spinning'],
+                    'spinning': ['idle', 'dragging']
+                };
+
+                if (validTransitions[this.mode].includes(newMode)) {
+                    console.log(`State: ${this.mode} → ${newMode}`);
+                    this.mode = newMode;
+                    return true;
+                }
+                return false;
+            }
+
+            addDragSample(angle, time) {
+                this.dragHistory.push({ angle, time });
+                // 최근 100ms 데이터만 유지
+                this.dragHistory = this.dragHistory.filter(sample => 
+                    time - sample.time < 100
+                );
+            }
+
+            calculateVelocity() {
+                if (this.dragHistory.length < 2) return 0;
+
+                const recent = this.dragHistory.slice(-5);
+                let totalVelocity = 0;
+                let validSamples = 0;
+
+                for (let i = 1; i < recent.length; i++) {
+                    const timeDiff = recent[i].time - recent[i-1].time;
+                    if (timeDiff > 0 && !isNaN(recent[i].angle)) {
+                        const velocity = recent[i].angle / timeDiff * 16;
+                        if (!isNaN(velocity) && isFinite(velocity)) {
+                            totalVelocity += velocity;
+                            validSamples++;
+                        }
+                    }
+                }
+
+                const result = validSamples > 0 ? totalVelocity / validSamples : 0;
+                return isNaN(result) || !isFinite(result) ? 0 : result;
+            }
+        }
+
+        // 룰렛 렌더러 클래스
+        class RouletteRenderer {
+            constructor(element) {
+                this.element = element;
+            }
+
+            render(state) {
+                this.element.style.transform = `rotate(${state.rotation}deg)`;
+            }
+
+            updateDebugInfo(state, fps) {
+                if (document.getElementById('debug').style.display !== 'none') {
+                    document.getElementById('debug-mode').textContent = state.mode;
+                    document.getElementById('debug-rotation').textContent = Math.round(state.rotation);
+                    document.getElementById('debug-velocity').textContent = state.velocity.toFixed(2);
+                    document.getElementById('debug-fps').textContent = Math.round(fps);
+                }
+            }
+        }
+
+        // 이벤트 핸들러 클래스
+        class RouletteEventHandler {
+            constructor(engine, container) {
+                this.engine = engine;
+                this.container = container;
+                this.setupEvents();
+            }
+
+            setupEvents() {
+                // 통합 포인터 이벤트
+                this.container.addEventListener('pointerdown', this.onPointerStart.bind(this));
+                document.addEventListener('pointermove', this.onPointerMove.bind(this));
+                document.addEventListener('pointerup', this.onPointerEnd.bind(this));
+                
+                // 컨텍스트 메뉴 방지
+                this.container.addEventListener('contextmenu', e => e.preventDefault());
+                
+                // 디버그 토글 (D키)
+                document.addEventListener('keydown', e => {
+                    if (e.key === 'd' || e.key === 'D') {
+                        const debug = document.getElementById('debug');
+                        debug.style.display = debug.style.display === 'none' ? 'block' : 'none';
+                    }
+                });
+            }
+
+            onPointerStart(e) {
+                e.preventDefault();
+                this.engine.startDrag(this.getAngleFromEvent(e));
+            }
+
+            onPointerMove(e) {
+                e.preventDefault();
+                if (this.engine.state.mode === 'dragging') {
+                    this.engine.updateDrag(this.getAngleFromEvent(e));
+                }
+            }
+
+            onPointerEnd(e) {
+                e.preventDefault();
+                if (this.engine.state.mode === 'dragging') {
+                    this.engine.endDrag();
+                }
+            }
+
+            getAngleFromEvent(e) {
+                try {
+                    const rect = this.container.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    
+                    const clientX = e.clientX || (e.touches && e.touches[0] && e.touches[0].clientX) || 0;
+                    const clientY = e.clientY || (e.touches && e.touches[0] && e.touches[0].clientY) || 0;
+                    
+                    const deltaX = clientX - centerX;
+                    const deltaY = clientY - centerY;
+                    
+                    // 중심점에서 너무 가까우면 각도 계산 건너뛰기
+                    if (Math.abs(deltaX) < 1 && Math.abs(deltaY) < 1) {
+                        return this.engine.state.lastAngle || 0;
+                    }
+                    
+                    const angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
+                    
+                    // NaN 체크
+                    return isNaN(angle) || !isFinite(angle) ? (this.engine.state.lastAngle || 0) : angle;
+                } catch (error) {
+                    console.warn('각도 계산 오류:', error);
+                    return this.engine.state.lastAngle || 0;
+                }
+            }
+        }
+
+        // 카드 팝업 매니저 클래스
+        class CardPopupManager {
+            constructor() {
+                this.overlay = document.getElementById('cardPopupOverlay');
+                this.popup = document.getElementById('cardPopup');
+                this.currentCard = null;
+                
+                // X 버튼 클릭시 팝업 닫기 - 더 안전한 방법
+                document.addEventListener('click', (e) => {
+                    if (e.target && e.target.id === 'popupCloseBtn') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('X 버튼 클릭됨!'); // 디버그 로그
+                        this.closePopup();
+                    }
+                });
+                
+                // 오버레이 클릭시 팝업 닫기
+                this.overlay.addEventListener('click', (e) => {
+                    if (e.target === this.overlay) {
+                        this.closePopup();
+                    }
+                });
+                
+                // ESC 키로 팝업 닫기
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.overlay.classList.contains('active')) {
+                        this.closePopup();
+                    }
+                });
+            }
+
+            showPopup(categoryData) {
+                this.currentCard = categoryData;
+                
+                // 팝업 내용 업데이트
+                document.getElementById('popupEmoji').textContent = categoryData.title.split(' ')[0];
+                document.getElementById('popupTitle').textContent = this.getCleanTitle(categoryData);
+                document.getElementById('popupSubtitle').textContent = this.getSubtitle(categoryData);
+                
+                // 테마 색상과 배경 적용 (원본 카드와 동일)
+                const themeColors = this.getThemeColors(categoryData.id);
+                this.popup.style.setProperty('--theme-color', themeColors.color);
+                this.popup.style.setProperty('--theme-bg', themeColors.bg);
+                
+                // 메뉴 그리드 생성
+                this.createMenuGrid(categoryData);
+                
+                // 팝업 표시
+                this.overlay.classList.add('active');
+                
+                // 룰렛 일시정지 (선택사항)
+                // rouletteEngine.state.mode = 'idle';
+            }
+
+            closePopup() {
+                this.overlay.classList.remove('active');
+                this.currentCard = null;
+            }
+
+            getCleanTitle(categoryData) {
+                if (categoryData.type === 'coupang') {
+                    return `${categoryData.rank} ${categoryData.title.split(' ')[1]}`;
+                } else if (categoryData.type === 'ranking') {
+                    return `${categoryData.title.split(' ')[1]} ${categoryData.title.split(' ')[2]}`;
+                } else {
+                    return categoryData.title.split(' ')[1];
+                }
+            }
+
+            getSubtitle(categoryData) {
+                if (categoryData.type === 'coupang') {
+                    return '🛒 쿠팡 베스트셀러 상품';
+                } else if (categoryData.type === 'ranking') {
+                    return '🏆 인기 순위 보기';
+                } else {
+                    return `인기 ${categoryData.title.split(' ')[1]} 메뉴`;
+                }
+            }
+
+            createMenuGrid(categoryData) {
+                const grid = document.getElementById('popupMenuGrid');
+                grid.innerHTML = '';
+                
+                categoryData.items.forEach((item, index) => {
+                    const menuItem = document.createElement('div');
+                    menuItem.className = 'popup-menu-item';
+                    
+                    if (categoryData.type === 'coupang' || categoryData.type === 'ranking') {
+                        // 쿠팡/랭킹 카드는 하나의 큰 버튼
+                        menuItem.innerHTML = `
+                            <div class="menu-icon" style="font-size: 32px; margin-right: 16px; width: 45px; height: 45px;">${item.icon}</div>
+                            <div class="menu-info" style="flex: 1;">
+                                <div class="menu-name" style="font-size: 18px;">${item.name}</div>
+                                <div class="menu-tag" style="font-size: 14px;">${item.tag}</div>
+                            </div>
+                            <div style="font-size: 20px; margin-left: 16px;">→</div>
+                        `;
+                        
+                        menuItem.addEventListener('click', () => {
+                            if (categoryData.type === 'coupang') {
+                                // 쿠팡 페이지로 이동
+                                alert('🛒 쿠팡 페이지로 이동합니다!');
+                            } else if (categoryData.type === 'ranking') {
+                                // 랭킹 페이지 표시
+                                this.showRankingPage(categoryData);
+                            }
+                        });
+                    } else {
+                        // 일반 메뉴 아이템
+                        menuItem.innerHTML = `
+                            <div class="rank-badge" style="min-width: 40px; height: 40px; margin-right: 12px; font-size: 14px;">${item.rank}</div>
+                            <div class="menu-icon" style="font-size: 28px; margin-right: 12px; width: 40px; height: 40px;">${item.icon}</div>
+                            <div class="menu-info" style="flex: 1;">
+                                <div class="menu-name" style="font-size: 16px;">${item.name}</div>
+                                <div class="menu-tag" style="font-size: 12px;">${item.tag}</div>
+                            </div>
+                        `;
+                        
+                        menuItem.addEventListener('click', () => {
+                            // 메뉴 선택 효과
+                            this.selectMenu(item, categoryData);
+                        });
+                    }
+                    
+                    grid.appendChild(menuItem);
+                });
+                
+                // 출처 정보 추가
+                this.addSourceInfo(categoryData);
+                
+                // 동적 크기 조절
+                this.adjustItemSizes(categoryData.items.length);
+            }
+
+            addSourceInfo(categoryData) {
+                // 기존 출처 정보 제거
+                const existingSource = document.querySelector('.popup-source');
+                if (existingSource) {
+                    existingSource.remove();
+                }
+                
+                const popup = document.querySelector('.card-popup');
+                const sourceDiv = document.createElement('div');
+                sourceDiv.className = 'popup-source';
+                
+                let sourceText = '';
+                if (categoryData.id === 'ramen-ranking') {
+                    sourceText = '📊 출처: 한국갤럽 2024년 라면 브랜드 선호도 조사 (1,777명 대상)';
+                } else if (categoryData.id === 'chicken-menu') {
+                    sourceText = '📊 출처: 아하트렌드 2024년 치킨 메뉴 검색량 분석 데이터';
+                } else if (categoryData.id === 'chicken-brand') {
+                    sourceText = '📊 출처: 치킨업계 공식 매출 발표 (2023년 기준)';
+                } else if (categoryData.id === 'icecream-ranking') {
+                    sourceText = '📊 출처: aT 농수산물유통공사 2024 + 편의점 매출 데이터 종합';
+                } else {
+                    sourceText = '🔍 데이터 출처 정보';
+                }
+                
+                sourceDiv.textContent = sourceText;
+                popup.appendChild(sourceDiv);
+            }
+
+            adjustItemSizes(itemCount) {
+                const grid = document.getElementById('popupMenuGrid');
+                const items = grid.querySelectorAll('.popup-menu-item');
+                
+                // 항목 수에 따라 동적으로 높이 조절
+                let itemHeight;
+                if (itemCount <= 5) {
+                    itemHeight = '54px';
+                } else if (itemCount <= 7) {
+                    itemHeight = '48px';
+                } else if (itemCount <= 10) {
+                    itemHeight = '42px';
+                } else {
+                    itemHeight = '38px';
+                }
+                
+                items.forEach(item => {
+                    item.style.minHeight = itemHeight;
+                });
+            }
+
+            selectMenu(item, categoryData) {
+                // 선택 효과 애니메이션
+                const selectedText = `🎯 ${item.name} 선택!`;
+                
+                // 팝업 제목 업데이트
+                document.getElementById('popupTitle').textContent = selectedText;
+                document.getElementById('popupSubtitle').textContent = `${item.tag} - 좋은 선택이에요!`;
+                
+                // 2초 후 팝업 닫기
+                setTimeout(() => {
+                    this.closePopup();
+                }, 2000);
+            }
+
+            showRankingPage(categoryData) {
+                // 랭킹 페이지 표시 (간단 버전)
+                const rankings = this.getRankingData(categoryData.id);
+                const grid = document.getElementById('popupMenuGrid');
+                grid.innerHTML = '';
+                
+                document.getElementById('popupSubtitle').textContent = '🏆 실시간 인기 순위';
+                
+                rankings.forEach((rank, index) => {
+                    const rankItem = document.createElement('div');
+                    rankItem.className = 'popup-menu-item';
+                    rankItem.innerHTML = `
+                        <div class="rank-badge" style="background: ${index < 3 ? '#ffd700' : '#f0f0f0'}; min-width: 40px; height: 40px; margin-right: 12px; font-size: 14px;">
+                            ${index + 1}위
+                        </div>
+                        <div class="menu-icon" style="font-size: 28px; margin-right: 12px; width: 40px; height: 40px;">${rank.icon}</div>
+                        <div class="menu-info" style="flex: 1;">
+                            <div class="menu-name" style="font-size: 16px;">${rank.name}</div>
+                            <div class="menu-tag" style="font-size: 12px;">${rank.share}% 점유율</div>
+                        </div>
+                    `;
+                    grid.appendChild(rankItem);
+                });
+            }
+
+            getRankingData(categoryType) {
+                // 간단한 랭킹 데이터 (실제로는 API에서 가져올 수 있음)
+                const rankings = {
+                    'ranking-pizza': [
+                        { name: '페퍼로니 피자', icon: '🍕', share: 25 },
+                        { name: '치즈 피자', icon: '🧀', share: 20 },
+                        { name: '불고기 피자', icon: '🥩', share: 18 },
+                        { name: '콤비네이션 피자', icon: '🍕', share: 15 },
+                        { name: '하와이안 피자', icon: '🍍', share: 12 },
+                        { name: '마르게리타 피자', icon: '🍅', share: 10 }
+                    ],
+                    'ranking-bunsik': [
+                        { name: '떡볶이', icon: '🍜', share: 30 },
+                        { name: '김밥', icon: '🍙', share: 25 },
+                        { name: '라면', icon: '🍜', share: 20 },
+                        { name: '순대', icon: '🥓', share: 15 },
+                        { name: '튀김', icon: '🍤', share: 10 }
+                    ]
+                };
+                
+                return rankings[categoryType] || rankings['ranking-pizza'];
+            }
+
+            getThemeColors(categoryId) {
+                const themes = {
+                    'chicken': { color: '#ff6b35', bg: '#fff5f0' },
+                    'meat': { color: '#e74c3c', bg: '#ffebee' },
+                    'bunsik': { color: '#f39c12', bg: '#fffbf0' },
+                    'lunchbox': { color: '#27ae60', bg: '#f0fff4' },
+                    'fastfood': { color: '#e67e22', bg: '#fff8f0' },
+                    'japanese': { color: '#8e44ad', bg: '#f8f0ff' },
+                    'western': { color: '#3498db', bg: '#f0f8ff' },
+                    'dessert': { color: '#e91e63', bg: '#fff0f5' },
+                    'chinese': { color: '#c0392b', bg: '#fff0f0' },
+                    'latenight': { color: '#34495e', bg: '#f0f2f5' },
+                    'soup': { color: '#16a085', bg: '#f0fffa' },
+                    'asian': { color: '#d35400', bg: '#fff5e6' },
+                    'coupang': { 
+                        color: '#ffc107', 
+                        bg: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)'
+                    },
+                    'ranking': { 
+                        color: '#ff6b35', 
+                        bg: 'linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)'
+                    }
+                };
+                return themes[categoryId] || { color: '#3498db', bg: '#f0f8ff' };
+            }
+
+            getThemeColor(categoryId) {
+                return this.getThemeColors(categoryId).color;
+            }
+        }
+
+        // 메인 룰렛 엔진 클래스
+        class RouletteEngine {
+            constructor() {
+                this.state = new RouletteState();
+                this.renderer = new RouletteRenderer(document.getElementById('roulette'));
+                this.eventHandler = null;
+                this.animationId = null;
+                this.fpsCounter = { frames: 0, lastTime: 0, fps: 60 };
+                
+                this.init();
+            }
+
+            init() {
+                this.createCards();
+                this.eventHandler = new RouletteEventHandler(this, document.querySelector('.roulette-container'));
+                this.startUpdateLoop();
+            }
+
+            createCards() {
+                const roulette = document.getElementById('roulette');
+                const angleStep = 360 / PREMIUM_MENU_DATA.length;
+                
+                PREMIUM_MENU_DATA.forEach((categoryData, index) => {
+                    const card = this.createCategoryCard(categoryData, index, angleStep);
+                    roulette.appendChild(card);
+                });
+            }
+
+            createCategoryCard(categoryData, index, angleStep) {
+                const card = document.createElement('div');
+                card.className = `menu-category-card category-${categoryData.id}`;
+                
+                // 카드 클릭 이벤트 추가
+                card.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.handleCardClick(categoryData);
+                });
+                
+                // 카테고리 헤더
+                const header = document.createElement('div');
+                header.className = 'category-header';
+                
+                const emoji = document.createElement('div');
+                emoji.className = 'category-emoji';
+                emoji.textContent = categoryData.title.split(' ')[0];
+                
+                const title = document.createElement('div');
+                title.className = 'category-title';
+                
+                if (categoryData.type === 'coupang') {
+                    title.textContent = categoryData.rank + ' ' + categoryData.title.split(' ')[1];
+                } else if (categoryData.type === 'ranking') {
+                    title.textContent = categoryData.title.split(' ')[1] + ' ' + categoryData.title.split(' ')[2];
+                } else {
+                    title.textContent = categoryData.title.split(' ')[1];
+                }
+                
+                header.appendChild(emoji);
+                header.appendChild(title);
+                card.appendChild(header);
+                
+                // 메뉴 아이템 컨테이너
+                const itemsContainer = document.createElement('div');
+                itemsContainer.className = 'menu-items-container';
+                
+                categoryData.items.forEach(item => {
+                    const itemRow = this.createMenuItem(item, categoryData);
+                    itemsContainer.appendChild(itemRow);
+                });
+                
+                card.appendChild(itemsContainer);
+                
+                // 위치 계산
+                const angle = angleStep * index;
+                const x = Math.cos((angle - 90) * Math.PI / 180) * PHYSICS.RADIUS;
+                const y = Math.sin((angle - 90) * Math.PI / 180) * PHYSICS.RADIUS;
+                
+                card.style.left = `calc(50% + ${x}px - ${PHYSICS.CARD_WIDTH/2}px)`;
+                card.style.top = `calc(50% + ${y}px - ${PHYSICS.CARD_HEIGHT/2}px)`;
+                card.style.transform = `rotate(${angle}deg)`;
+                
+                return card;
+            }
+
+            createMenuItem(item, categoryData) {
+                const row = document.createElement('div');
+                row.className = 'menu-item-row';
+                
+                // 단일 아이템이면 (쿠팡, 랭킹) 중앙 정렬
+                if (categoryData.items.length === 1) {
+                    row.style.justifyContent = 'center';
+                    row.style.textAlign = 'center';
+                    row.innerHTML = `
+                        <div class="menu-icon" style="margin: 0 16px 0 0;">${item.icon}</div>
+                        <div class="menu-info">
+                            <div class="menu-name">${item.name}</div>
+                            <div class="menu-tag">${item.tag}</div>
+                        </div>
+                    `;
+                } else {
+                    // 일반 메뉴 아이템
+                    const rank = document.createElement('div');
+                    rank.className = 'rank-badge';
+                    rank.textContent = item.rank;
+                    
+                    const icon = document.createElement('div');
+                    icon.className = 'menu-icon';
+                    icon.textContent = item.icon;
+                    
+                    const info = document.createElement('div');
+                    info.className = 'menu-info';
+                    
+                    const name = document.createElement('div');
+                    name.className = 'menu-name';
+                    name.textContent = item.name;
+                    
+                    const tag = document.createElement('div');
+                    tag.className = 'menu-tag';
+                    tag.textContent = item.tag;
+                    
+                    info.appendChild(name);
+                    info.appendChild(tag);
+                    
+                    row.appendChild(rank);
+                    row.appendChild(icon);
+                    row.appendChild(info);
+                }
+                
+                return row;
+            }
+
+            startUpdateLoop() {
+                const update = (currentTime) => {
+                    this.updateFPS(currentTime);
+                    
+                    if (this.state.mode === 'spinning') {
+                        this.updateSpinning();
+                    }
+                    
+                    // 속도에 따른 카드 클릭 가능성 업데이트
+                    this.updateSpeedHintVisibility();
+                    
+                    this.renderer.render(this.state);
+                    this.renderer.updateDebugInfo(this.state, this.fpsCounter.fps);
+                    
+                    this.animationId = requestAnimationFrame(update);
+                };
+                
+                this.animationId = requestAnimationFrame(update);
+            }
+
+            updateFPS(currentTime) {
+                this.fpsCounter.frames++;
+                if (currentTime - this.fpsCounter.lastTime >= 1000) {
+                    this.fpsCounter.fps = this.fpsCounter.frames;
+                    this.fpsCounter.frames = 0;
+                    this.fpsCounter.lastTime = currentTime;
+                }
+            }
+
+            startDrag(angle) {
+                this.state.transition('dragging');
+                this.state.lastAngle = angle;
+                this.state.dragHistory = [];
+            }
+
+            updateDrag(angle) {
+                if (this.state.mode !== 'dragging') return;
+                
+                // NaN 체크
+                if (isNaN(angle) || !isFinite(angle)) {
+                    console.warn('Invalid angle in updateDrag:', angle);
+                    return;
+                }
+
+                let deltaAngle = angle - this.state.lastAngle;
+                
+                // 각도 정규화
+                if (deltaAngle > 180) deltaAngle -= 360;
+                if (deltaAngle < -180) deltaAngle += 360;
+                
+                // deltaAngle NaN 체크
+                if (isNaN(deltaAngle) || !isFinite(deltaAngle)) {
+                    console.warn('Invalid deltaAngle:', deltaAngle);
+                    return;
+                }
+                
+                const newRotation = this.state.rotation + (deltaAngle * PHYSICS.DRAG_MULTIPLIER);
+                
+                // 새로운 회전값 NaN 체크
+                if (isNaN(newRotation) || !isFinite(newRotation)) {
+                    console.warn('Invalid newRotation:', newRotation);
+                    return;
+                }
+                
+                this.state.rotation = newRotation;
+                this.state.lastAngle = angle;
+                
+                this.state.addDragSample(deltaAngle, performance.now());
+            }
+
+            endDrag() {
+                if (this.state.mode !== 'dragging') return;
+
+                this.state.velocity = this.state.calculateVelocity();
+                this.state.velocity = Math.max(Math.min(this.state.velocity, PHYSICS.MAX_VELOCITY), -PHYSICS.MAX_VELOCITY);
+                
+                // 드래그가 끝나면 항상 스피닝 모드로 전환 (최소 속도 보장)
+                if (Math.abs(this.state.velocity) <= PHYSICS.MIN_VELOCITY) {
+                    // 속도가 너무 작으면 최소 속도로 설정
+                    const direction = Math.random() > 0.5 ? 1 : -1; // 랜덤 방향
+                    this.state.velocity = PHYSICS.PERPETUAL_VELOCITY * direction;
+                }
+                
+                this.state.transition('spinning');
+            }
+
+            updateSpinning() {
+                // velocity NaN 체크
+                if (isNaN(this.state.velocity) || !isFinite(this.state.velocity)) {
+                    console.warn('Invalid velocity in updateSpinning:', this.state.velocity);
+                    this.state.velocity = PHYSICS.PERPETUAL_VELOCITY;
+                    return;
+                }
+                
+                this.state.velocity *= PHYSICS.FRICTION;
+                
+                // velocity 업데이트 후 NaN 체크
+                if (isNaN(this.state.velocity) || !isFinite(this.state.velocity)) {
+                    this.state.velocity = PHYSICS.PERPETUAL_VELOCITY;
+                }
+                
+                // 최소 속도 이하로 떨어지면 최소 속도로 유지 (방향은 보존)
+                if (Math.abs(this.state.velocity) <= PHYSICS.MIN_VELOCITY) {
+                    const direction = this.state.velocity >= 0 ? 1 : -1;
+                    this.state.velocity = PHYSICS.PERPETUAL_VELOCITY * direction;
+                }
+                
+                const newRotation = this.state.rotation + this.state.velocity;
+                
+                // rotation NaN 체크
+                if (isNaN(newRotation) || !isFinite(newRotation)) {
+                    console.warn('Invalid rotation in updateSpinning:', newRotation);
+                    this.state.velocity = PHYSICS.PERPETUAL_VELOCITY;
+                    return;
+                }
+                
+                this.state.rotation = newRotation;
+                
+                // 이제 idle 상태로 전환하지 않고 계속 천천히 돌아감
+                // 결과도 체크하지 않음 (사용자가 직접 정지시켜야 함)
+            }
+
+            randomSpin() {
+                this.state.transition('spinning');
+                this.state.velocity = (Math.random() * 15 + 10) * (Math.random() > 0.5 ? 1 : -1);
+            }
+
+            handleCardClick(categoryData) {
+                // 속도 체크: 최저 속도일 때만 클릭 허용
+                const currentSpeed = Math.abs(this.state.velocity);
+                const clickableSpeed = PHYSICS.PERPETUAL_VELOCITY * 3; // 최저 속도의 3배까지 허용
+                
+                if (currentSpeed > clickableSpeed) {
+                    // 너무 빨리 돌고 있으면 힌트 표시
+                    this.showSpeedHint();
+                    return;
+                }
+                
+                // 카드 팝업 표시
+                cardPopupManager.showPopup(categoryData);
+                
+                // 선택 효과 (선택사항)
+                this.addCardSelectionEffect();
+            }
+
+            showSpeedHint() {
+                const hint = document.getElementById('speedHint');
+                hint.classList.add('visible');
+                
+                // 3초 후 힌트 숨기기
+                setTimeout(() => {
+                    hint.classList.remove('visible');
+                }, 3000);
+            }
+
+            addCardSelectionEffect() {
+                // 간단한 선택 효과 (진동이나 플래시)
+                if (navigator.vibrate) {
+                    navigator.vibrate(50); // 모바일에서 진동
+                }
+            }
+
+            updateSpeedHintVisibility() {
+                const hint = document.getElementById('speedHint');
+                const currentSpeed = Math.abs(this.state.velocity);
+                const clickableSpeed = PHYSICS.PERPETUAL_VELOCITY * 3;
+                
+                // 클릭 가능한 속도일 때 카드에 시각적 효과 추가
+                const cards = document.querySelectorAll('.menu-category-card');
+                
+                if (currentSpeed <= clickableSpeed) {
+                    // 카드 클릭 가능 상태
+                    cards.forEach(card => {
+                        card.classList.add('clickable-card');
+                    });
+                } else {
+                    // 카드 클릭 불가 상태
+                    cards.forEach(card => {
+                        card.classList.remove('clickable-card');
+                    });
+                }
+            }
+
+        }
+
+
+        // 전역 인스턴스들
+        let rouletteEngine;
+        let cardPopupManager;
+
+        // 페이지 로드 시 초기화
+        window.addEventListener('load', () => {
+            rouletteEngine = new RouletteEngine();
+            cardPopupManager = new CardPopupManager();
+            
+            console.log('🎯 WhatToEat 프리미엄 룰렛 v2.0 초기화 완료!');
+            console.log('💡 디버그 정보를 보려면 D키를 누르세요.');
+            console.log('🖱️ 드래그로 룰렛을 돌려보세요!');
+            console.log('🎪 천천히 돌 때 카드를 클릭해보세요!');
+        });
+    </script>
+</body>
+</html>

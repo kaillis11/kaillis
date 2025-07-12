@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "title": "쿠팡 과자 순위",
+    "total_products": 2,
+    "category": "과자",
+    "parsed_at": "2025-07-09T17:39:47.759819"
+  },
+  "products": [
+    {
+      "name": "뉴트리오코 초콜릿맛 웨이퍼, 12g, 30개",
+      "price": "5,500",
+      "price_numeric": 5500,
+      "original_price": "7,800",
+      "discount": "29%",
+      "rating": "0.0",
+      "reviews": "0",
+      "category": "과자",
+      "parsed_at": "2025-07-09T17:39:47.759716",
+      "rank": 5
+    },
+    {
+      "name": "뉴트리오코 밀크맛 웨이퍼, 360g, 1개",
+      "price": "5,500",
+      "price_numeric": 5500,
+      "original_price": "7,800",
+      "discount": "29%",
+      "rating": "0.0",
+      "reviews": "0",
+      "category": "과자",
+      "parsed_at": "2025-07-09T17:39:47.759778",
+      "rank": 5
+    }
+  ]
+}

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>플립보드 스타일 실시간 랭킹</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background: #1a1a1a;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: auto;
+        }
+
+        /* 룰렛 카드에 들어갈 때 사용할 wrapper */
+        .flipboard-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .flipboard-container {
+            width: 380px;
+            background: #2a2a2a;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin: 20px;
+        }
+
+        .board-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .board-title {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .board-subtitle {
+            color: #888;
+            font-size: 12px;
+        }
+
+        /* 실시간 표시 */
+        .live-indicator {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,0,0,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,0,0,0.4);
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #ff4444;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 10px rgba(255,68,68,0.5);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .live-text {
+            font-size: 12px;
+            font-weight: 600;
+            color: #ff4444;
+            text-transform: uppercase;
+        }
+
+        /* 플립보드 스타일 */
+        .flip-board {
+            background: #000;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 
+                inset 0 2px 5px rgba(0,0,0,0.5),
+                0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .flip-row {
+            display: flex;
+            align-items: center;
+            height: 40px;
+            margin-bottom: 6px;
+            position: relative;
+            perspective: 1000px;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .flip-row:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 순위 번호도 플립 가능하게 변경 */
+        .rank-flip-content {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .rank-number {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #333 0%, #111 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 18px;
+            color: #fff;
+            box-shadow: 
+                inset 0 -2px 4px rgba(0,0,0,0.5),
+                0 2px 4px rgba(0,0,0,0.3);
+            border: 1px solid #444;
+            backface-visibility: hidden;
+            transition: transform 0.6s;
+        }
+
+        .rank-number.front {
+            z-index: 2;
+        }
+
+        .rank-number.back {
+            transform: rotateX(180deg);
+        }
+
+        .rank-flip-content.flipping .rank-number.front {
+            transform: rotateX(-180deg);
+        }
+
+        .rank-flip-content.flipping .rank-number.back {
+            transform: rotateX(0deg);
+        }
+
+        /* 1,2,3위 특별 스타일 */
+        .flip-row:nth-child(1) .rank-number {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+        }
+
+        .flip-row:nth-child(2) .rank-number {
+            background: linear-gradient(135deg, #C0C0C0 0%, #808080 100%);
+            color: #000;
+        }
+
+        .flip-row:nth-child(3) .rank-number {
+            background: linear-gradient(135deg, #CD7F32 0%, #8B4513 100%);
+            color: #fff;
+        }
+
+        /* 플립 가능한 컨텐츠 영역 */
+        .flip-content {
+            flex: 1;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            max-width: 280px;
+            width: 100%;
+        }
+
+        .flip-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #222 0%, #111 100%);
+            border-radius: 8px;
+            padding: 0 12px;
+            box-shadow: 
+                inset 0 1px 0 rgba(255,255,255,0.1),
+                inset 0 -1px 0 rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            transition: transform 0.6s;
+            overflow: hidden;
+        }
+
+        /* 현재 보이는 면 */
+        .flip-item.front {
+            z-index: 2;
+        }
+
+        /* 뒤집힌 면 (숨김) */
+        .flip-item.back {
+            transform: rotateX(180deg);
+        }
+
+        /* 플립 애니메이션 */
+        .flip-content.flipping .flip-item.front {
+            transform: rotateX(-180deg);
+        }
+
+        .flip-content.flipping .flip-item.back {
+            transform: rotateX(0deg);
+        }
+
+        /* 컨텐츠 스타일 */
+        .item-icon {
+            font-size: 24px;
+            margin-right: 12px;
+        }
+
+        .item-info {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .item-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .item-tag {
+            font-size: 13px;
+            color: #888;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        /* 범위 표시 */
+        .range-indicator {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* 페이지 인디케이터 */
+        .page-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .page-dot {
+            width: 8px;
+            height: 8px;
+            background: #444;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .page-dot.active {
+            width: 24px;
+            background: #ff4444;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(255,68,68,0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="flipboard-container">
+        <div class="board-header">
+            <h1 class="board-title">🍦 아이스크림 실시간 인기</h1>
+            <p class="board-subtitle">네이버 데이터랩 · 2025.06.08 ~ 2025.07.08</p>
+            <div class="live-indicator">
+                <div class="live-dot"></div>
+                <span class="live-text">Live</span>
+            </div>
+        </div>
+
+        <div class="flip-board">
+            <!-- 10개의 플립 행 -->
+            <div class="flip-row">
+                <div class="rank-flip-content" data-rank="0">
+                    <div class="rank-number front">1</div>
+                    <div class="rank-number back">11</div>
+                </div>
+                <div class="flip-content" data-row="0">
+                    <div class="flip-item front">
+                        <span class="item-icon">🍦</span>
+                        <div class="item-info">
+                            <div class="item-name">로딩중...</div>
+                            <div class="item-tag">준비중...</div>
+                        </div>
+                    </div>
+                    <div class="flip-item back">
+                        <span class="item-icon">🍦</span>
+                        <div class="item-info">
+                            <div class="item-name">로딩중...</div>
+                            <div class="item-tag">준비중...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 나머지 9개 행 반복 -->
+            <div class="flip-row">
+                <div class="rank-flip-content" data-rank="1">
+                    <div class="rank-number front">2</div>
+                    <div class="rank-number back">12</div>
+                </div>
+                <div class="flip-content" data-row="1">
+                    <div class="flip-item front"></div>
+                    <div class="flip-item back"></div>
+                </div>
+            </div>
+
+            <div class="flip-row">
+                <div class="rank-flip-content" data-rank="2">
+                    <div class="rank-number front">3</div>
+                    <div class="rank-number back">13</div>
+                </div>
+                <div class="flip-content" data-row="2">
+                    <div class="flip-item front"></div>
+                    <div class="flip-item back"></div>
+                </div>
+            </div>
+
+            <div class="flip-row">
+                <div class="rank-flip-content" data-rank="3">
+                    <div class="rank-number front">4</div>
+                    <div class="rank-number back">14</div>
+                </div>
+                <div class="flip-content" data-row="3">
+                    <div class="flip-item front"></div>
+                    <div class="flip-item back"></div>
+                </div>
+            </div>
+
+            <div class="flip-row">
+                <div class="rank-flip-content" data-rank="4">
+                    <div class="rank-number front">5</div>
+                    <div class="rank-number back">15</div>
+                </div>
+                <div class="flip-content" data-row="4">
+                    <div class="flip-item front"></div>
+                    <div class="flip-item back"></div>
+                </div>
+            </div>
+
+            <div class="flip-row">
+                <div class="rank-flip-content" data-rank="5">
+                    <div class="rank-number front">6</div>
+                    <div class="rank-number back">16</div>
+                </div>
+                <div class="flip-content" data-row="5">
+                    <div class="flip-item front"></div>
+                    <div class="flip-item back"></div>
+                </div>
+            </div>
+
+            <div class="flip-row">
+                <div class="rank-flip-content" data-rank="6">
+                    <div class="rank-number front">7</div>
+                    <div class="rank-number back">17</div>
+                </div>
+                <div class="flip-content" data-row="6">
+                    <div class="flip-item front"></div>
+                    <div class="flip-item back"></div>
+                </div>
+            </div>
+
+            <div class="flip-row">
+                <div class="rank-flip-content" data-rank="7">
+                    <div class="rank-number front">8</div>
+                    <div class="rank-number back">18</div>
+                </div>
+                <div class="flip-content" data-row="7">
+                    <div class="flip-item front"></div>
+                    <div class="flip-item back"></div>
+                </div>
+            </div>
+
+            <div class="flip-row">
+                <div class="rank-flip-content" data-rank="8">
+                    <div class="rank-number front">9</div>
+                    <div class="rank-number back">19</div>
+                </div>
+                <div class="flip-content" data-row="8">
+                    <div class="flip-item front"></div>
+                    <div class="flip-item back"></div>
+                </div>
+            </div>
+
+            <div class="flip-row">
+                <div class="rank-flip-content" data-rank="9">
+                    <div class="rank-number front">10</div>
+                    <div class="rank-number back">20</div>
+                </div>
+                <div class="flip-content" data-row="9">
+                    <div class="flip-item front"></div>
+                    <div class="flip-item back"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="range-indicator" id="rangeIndicator">Showing 1-10</div>
+
+        <div class="page-indicators">
+            <div class="page-dot active" data-page="0"></div>
+            <div class="page-dot" data-page="1"></div>
+            <div class="page-dot" data-page="2"></div>
+            <div class="page-dot" data-page="3"></div>
+        </div>
+    </div>
+
+    <script>
+        // 네이버 데이터랩 아이스크림 TOP 40 데이터
+        const ICECREAM_DATA = [
+            { name: '아이스크림', icon: '🍦', tag: '검색량 1위' },
+            { name: '라라스윗', icon: '🍨', tag: '저당 아이스크림 대표' },
+            { name: '하겐다즈', icon: '🍨', tag: '프리미엄 아이스크림' },
+            { name: '미니스크류바', icon: '🍦', tag: '롯데 인기 제품' },
+            { name: '붕어싸만코', icon: '🐟', tag: '빙그레 스테디셀러' },
+            { name: '구슬아이스크림', icon: '🔮', tag: '추억의 아이스크림' },
+            { name: '하겐다즈파인트', icon: '🥄', tag: '대용량 파인트' },
+            { name: '팥빙수', icon: '🍧', tag: '여름 대표 간식' },
+            { name: '제로아이스크림', icon: '0️⃣', tag: '무설탕/저칼로리' },
+            { name: '저당아이스크림', icon: '🍦', tag: '건강한 선택' },
+            { name: '월드콘', icon: '🌍', tag: '롯데 콘 아이스크림' },
+            { name: '설레임', icon: '💕', tag: '빙그레 신제품' },
+            { name: '상하목장소프트믹스', icon: '🥛', tag: '부드러운 맛' },
+            { name: '폴라레티', icon: '❄️', tag: '얼음과자' },
+            { name: '티코말차', icon: '🍵', tag: '말차맛 아이스크림' },
+            { name: '미니죠스바', icon: '🦈', tag: '미니 사이즈' },
+            { name: '티코아이스크림', icon: '🍦', tag: '롯데 티코' },
+            { name: '조이아이스크림', icon: '😊', tag: '해태 제품' },
+            { name: '상하목장아이스크림', icon: '🐄', tag: '프리미엄 우유' },
+            { name: '라라스윗아이스크림', icon: '🍨', tag: '저당 전문 브랜드' },
+            { name: '따옴아이스크림', icon: '🍦', tag: '따옴 브랜드' },
+            { name: '투게더아이스크림', icon: '🤝', tag: '빙그레 투게더' },
+            { name: '메로나', icon: '🍈', tag: '빙그레 대표상품' },
+            { name: '폴라포', icon: '🐻', tag: '곰돌이 아이스크림' },
+            { name: '라라스윗제로바', icon: '0️⃣', tag: '제로칼로리 바' },
+            { name: '투게더', icon: '💑', tag: '연인 아이스크림' },
+            { name: '딥앤로우', icon: '🍦', tag: '프리미엄 브랜드' },
+            { name: '파인애플샤베트', icon: '🍍', tag: '과일 샤베트' },
+            { name: '라벨리인절미빙수', icon: '🍧', tag: '인절미 빙수' },
+            { name: '인절미빙수', icon: '🍧', tag: '전통 디저트' },
+            { name: '설레임아이스크림', icon: '💗', tag: '빙그레 설레임' },
+            { name: '요맘때', icon: '⏰', tag: '시즌 한정' },
+            { name: '요거트아이스크림', icon: '🥛', tag: '요거트 맛' },
+            { name: '대용량아이스크림', icon: '📦', tag: '가족용 사이즈' },
+            { name: '하겐다즈아이스크림', icon: '🍨', tag: '프리미엄 라인' },
+            { name: '하겐다즈케이크', icon: '🎂', tag: '아이스크림 케이크' },
+            { name: '돼지바', icon: '🐷', tag: '롯데 돼지바' },
+            { name: '고드름아이스크림', icon: '🧊', tag: '시원한 얼음과자' },
+            { name: '라벨리아이스크림', icon: '🌸', tag: '라벨리 브랜드' },
+            { name: '빵또아', icon: '🍞', tag: '빵 아이스크림' }
+        ];
+
+        let currentPage = 0;
+        let autoFlipInterval;
+
+        // 플립 애니메이션 함수
+        function flipToNewData(rowIndex, newData, newRank) {
+            const flipContent = document.querySelector(`[data-row="${rowIndex}"]`);
+            const rankFlipContent = document.querySelector(`[data-rank="${rowIndex}"]`);
+            const backItem = flipContent.querySelector('.back');
+            const rankBack = rankFlipContent.querySelector('.back');
+            
+            // 뒷면에 새 데이터 설정
+            backItem.innerHTML = `
+                <span class="item-icon">${newData.icon}</span>
+                <div class="item-info">
+                    <div class="item-name">${newData.name}</div>
+                    <div class="item-tag">${newData.tag}</div>
+                </div>
+            `;
+            
+            // 순위 번호 뒷면 설정
+            rankBack.textContent = newRank;
+            
+            // 플립 애니메이션 시작
+            flipContent.classList.add('flipping');
+            rankFlipContent.classList.add('flipping');
+            
+            // 애니메이션 완료 후 처리
+            setTimeout(() => {
+                // 앞면에 새 데이터 복사
+                const frontItem = flipContent.querySelector('.front');
+                const rankFront = rankFlipContent.querySelector('.front');
+                frontItem.innerHTML = backItem.innerHTML;
+                rankFront.textContent = newRank;
+                
+                // 플립 상태 초기화
+                flipContent.classList.remove('flipping');
+                rankFlipContent.classList.remove('flipping');
+            }, 600);
+        }
+
+        // 전체 보드 업데이트 (순차적 플립)
+        function updateBoard(startIndex) {
+            const endIndex = startIndex + 10;
+            const displayData = ICECREAM_DATA.slice(startIndex, endIndex);
+            
+            displayData.forEach((data, index) => {
+                const actualRank = startIndex + index + 1;
+                setTimeout(() => {
+                    flipToNewData(index, data, actualRank);
+                }, index * 100); // 각 행이 100ms 간격으로 플립
+            });
+            
+            // 범위 표시 업데이트
+            document.getElementById('rangeIndicator').textContent = 
+                `Showing ${startIndex + 1}-${endIndex}`;
+        }
+
+        // 페이지 전환
+        function switchPage(newPage) {
+            currentPage = newPage;
+            const startIndex = newPage * 10;
+            
+            // 페이지 인디케이터 업데이트
+            document.querySelectorAll('.page-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === newPage);
+            });
+            
+            // 보드 업데이트
+            updateBoard(startIndex);
+        }
+
+        // 자동 페이지 전환
+        function startAutoFlip() {
+            autoFlipInterval = setInterval(() => {
+                const nextPage = (currentPage + 1) % 4;
+                switchPage(nextPage);
+            }, 6000); // 6초마다 페이지 전환
+        }
+
+        // 초기화
+        function init() {
+            // 초기 데이터 설정
+            const initialData = ICECREAM_DATA.slice(0, 10);
+            initialData.forEach((data, index) => {
+                const frontItem = document.querySelector(`[data-row="${index}"] .front`);
+                frontItem.innerHTML = `
+                    <span class="item-icon">${data.icon}</span>
+                    <div class="item-info">
+                        <div class="item-name">${data.name}</div>
+                        <div class="item-tag">${data.tag}</div>
+                    </div>
+                `;
+            });
+            
+            // 페이지 인디케이터 클릭 이벤트
+            document.querySelectorAll('.page-dot').forEach(dot => {
+                dot.addEventListener('click', () => {
+                    clearInterval(autoFlipInterval);
+                    switchPage(parseInt(dot.dataset.page));
+                    startAutoFlip();
+                });
+            });
+            
+            // 자동 플립 시작
+            startAutoFlip();
+        }
+
+        // 페이지 로드 시 초기화
+        init();
+    </script>
+</body>
+</html>

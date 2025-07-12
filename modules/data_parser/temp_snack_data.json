@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "title": "쿠팡 과자 순위",
+    "total_products": 2,
+    "category": "snack"
+  },
+  "products": [
+    {
+      "name": "[스낵365] 개꿀맛 10종 포카칩 꼬북칩 콘칩 꼬깔콘 치토스 스낵 과자세트, 1개",
+      "price": "13,800",
+      "price_numeric": 13800,
+      "original_price": null,
+      "discount": null,
+      "rating": "5.0",
+      "reviews": "2194",
+      "category": "snack",
+      "category_name": "간식",
+      "parsed_at": "2025-07-09T17:31:32.006407",
+      "rank": 1
+    },
+    {
+      "name": "농심 과자 세트, 과자 5종, 1세트",
+      "price": "14,500",
+      "price_numeric": 14500,
+      "original_price": "15,910",
+      "discount": "8%",
+      "rating": "5.0",
+      "reviews": "673",
+      "category": "snack",
+      "category_name": "간식",
+      "parsed_at": "2025-07-09T17:31:32.006452",
+      "rank": 2
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+
+        <!DOCTYPE html>
+        <html lang="ko">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>WhatToEat 카드 미리보기</title>
+            <style>
+                body {
+                    font-family: 'Apple SD Gothic Neo', sans-serif;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    margin: 0;
+                    padding: 20px;
+                }
+                .container {
+                    max-width: 1200px;
+                    margin: 0 auto;
+                }
+                .header {
+                    text-align: center;
+                    color: white;
+                    margin-bottom: 30px;
+                }
+                .cards-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    gap: 20px;
+                }
+                .card {
+                    background: white;
+                    border-radius: 12px;
+                    padding: 20px;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                    transition: transform 0.2s;
+                }
+                .card:hover {
+                    transform: translateY(-5px);
+                }
+                .card-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 10px;
+                }
+                .emoji {
+                    font-size: 24px;
+                }
+                .rank {
+                    background: #ff6b6b;
+                    color: white;
+                    padding: 4px 8px;
+                    border-radius: 20px;
+                    font-size: 12px;
+                    font-weight: bold;
+                }
+                .card-title {
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin-bottom: 8px;
+                    color: #333;
+                }
+                .card-subtitle {
+                    font-size: 16px;
+                    color: #666;
+                    margin-bottom: 10px;
+                }
+                .card-description {
+                    font-size: 14px;
+                    color: #888;
+                    margin-bottom: 15px;
+                    line-height: 1.4;
+                }
+                .card-tags {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 5px;
+                }
+                .tag {
+                    background: #f0f0f0;
+                    padding: 2px 8px;
+                    border-radius: 12px;
+                    font-size: 12px;
+                    color: #666;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>🎴 WhatToEat 룰렛 카드</h1>
+                    <p>파싱된 데이터로 생성된 2개의 카드</p>
+                </div>
+                <div class="cards-grid">
+                    
+            <div class="card" style="border-left: 4px solid #F5DEB3;">
+                <div class="card-header">
+                    <span class="emoji">🍪</span>
+                    <span class="rank">#1</span>
+                </div>
+                <div class="card-title">브랜드 [스낵365] 개꿀맛 10종 포카칩 꼬북칩 콘칩 꼬깔콘...</div>
+                <div class="card-subtitle">💰 13,800원</div>
+                <div class="card-description">🏆 1위 간식 | ⭐ 5.0점 | 📝 2194개 리뷰</div>
+                <div class="card-tags">
+                    <span class="tag">간식</span><span class="tag">고평점</span><span class="tag">인기</span><span class="tag">프리미엄</span>
+                </div>
+            </div>
+            
+            <div class="card" style="border-left: 4px solid #F5DEB3;">
+                <div class="card-header">
+                    <span class="emoji">🍪</span>
+                    <span class="rank">#2</span>
+                </div>
+                <div class="card-title">브랜드 농심 과자 세트</div>
+                <div class="card-subtitle">💰 14,500원 (8% 할인)</div>
+                <div class="card-description">🏆 2위 간식 | ⭐ 5.0점 | 📝 673개 리뷰 | 💸 정가 15,910원</div>
+                <div class="card-tags">
+                    <span class="tag">간식</span><span class="tag">할인</span><span class="tag">고평점</span><span class="tag">프리미엄</span>
+                </div>
+            </div>
+            
+                </div>
+            </div>
+        </body>
+        </html>
+        

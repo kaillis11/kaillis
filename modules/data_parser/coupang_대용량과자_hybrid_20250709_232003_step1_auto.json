@@ -1,0 +1,471 @@
+{
+  "meta": {
+    "title": "쿠팡 대용량과자 하이브리드 파싱",
+    "total_products": 51,
+    "category": "대용량과자",
+    "parsed_at": "2025-07-09T23:20:03.483479",
+    "parser_version": "1.0_hybrid",
+    "method": "90% 자동 + ATLAS MCP 보완"
+  },
+  "products": [
+    {
+      "name": "뉴트리오코 초콜릿맛 웨이퍼, 12g, 30개",
+      "price": "5,500",
+      "price_numeric": 5500,
+      "rank": 1,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.482387",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "팜스웰 옛날과자 옥수수고추맛콘 1kg 대용량, 1개",
+      "price": "6,790",
+      "price_numeric": 6790,
+      "rank": 2,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.482415",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "미니 크리스피 초코링, 700g, 1개",
+      "price": "10,980",
+      "price_numeric": 10980,
+      "rank": 3,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.482922",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "카디 비스킷 믹스(약176봉지 낱개352)특대용량 인간사료, 1개, 1kg",
+      "price": "12,980",
+      "price_numeric": 12980,
+      "rank": 4,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.482941",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "피키너츠 당신을 위한 추억의 과자 꾀돌이, 1.7kg, 1개",
+      "price": "14,500",
+      "price_numeric": 14500,
+      "rank": 4,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483243",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "새우깡 매운새우깡, 400g, 1개",
+      "price": "385",
+      "price_numeric": 385,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.482324",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "뉴트리오코 초콜릿맛 웨이퍼, 12g, 30개",
+      "price": "228",
+      "price_numeric": 228,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.482375",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "팜스웰 옛날과자 옥수수고추맛콘 1kg 대용량, 1개",
+      "price": "275",
+      "price_numeric": 275,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.482407",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "카디 비스킷 믹스(약176봉지 낱개352)특대용량 인간사료, 1개, 1kg",
+      "price": "275",
+      "price_numeric": 275,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.482932",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "삼립 누네띠네 벌크, 1개, 2.5kg",
+      "price": "568",
+      "price_numeric": 568,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.482953",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "미니베어 크렌베리 버터쿠키, 700g, 1개",
+      "price": "1,078",
+      "price_numeric": 1078,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.482961",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "한입 쏙 9곡 보리과자, 800g, 1개",
+      "price": "449",
+      "price_numeric": 449,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.482978",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "누네띠네, 12g, 120개",
+      "price": "222",
+      "price_numeric": 222,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.482989",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "크라운 빅파이 딸기, 216g, 4개",
+      "price": "625",
+      "price_numeric": 625,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.482997",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "타야스 엑스원 타르트, 480g, 1박스",
+      "price": "425",
+      "price_numeric": 425,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483004",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "오리온 고래밥 초코송이 미니믹스 과자세트, 고래밥 볶음 양념맛 10p + 초코송이 10p, 1세트",
+      "price": "664",
+      "price_numeric": 664,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483013",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "해태제과 맛동산, 165g, 5개",
+      "price": "466",
+      "price_numeric": 466,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483020",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "오리온 촉촉한 초코칩, 320g, 3개",
+      "price": "478",
+      "price_numeric": 478,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483027",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "코리아푸드 마카로니 대롱과자, 1kg, 1개",
+      "price": "608",
+      "price_numeric": 608,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483034",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "그린밀크쿠키 개별포장 낱개포장 초코칩쿠키 대용량과자 사무실간식, 1kg, 1개",
+      "price": "730",
+      "price_numeric": 730,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483042",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "보헬리 미니 프레첼, 1.2kg, 1개",
+      "price": "730",
+      "price_numeric": 730,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483049",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "포카칩 오리지널, 66g, 6개",
+      "price": "439",
+      "price_numeric": 439,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483059",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "오리온 눈을감자, 56g, 5개",
+      "price": "387",
+      "price_numeric": 387,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483065",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "신흥 꼬꼬스낵, 1.6kg, 1개",
+      "price": "370",
+      "price_numeric": 370,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483071",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "롯데웰푸드 엄마손 파이 50개입 개별포장 대용량 파이과자, 1개",
+      "price": "775",
+      "price_numeric": 775,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483086",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "[씩씩가게] 에이스 알뜰형 대용량 463g x 3ea",
+      "price": "795",
+      "price_numeric": 795,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483101",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "윈윈푸드 포테이토 크리스프 스낵 바베큐맛 50p + 사워크림맛 50p, 20g, 1세트",
+      "price": "1,220",
+      "price_numeric": 1220,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483128",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "신흥 계란과자, 1kg, 1개",
+      "price": "795",
+      "price_numeric": 795,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483134",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "구운김 달콤 쌀과자, 1개, 900g",
+      "price": "495",
+      "price_numeric": 495,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483144",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "미니오트 크런치 바닐라향, 650g, 2개",
+      "price": "439",
+      "price_numeric": 439,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483151",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "[씨엠유통] 에이스 알뜰형 대용량 463g x 3ea",
+      "price": "988",
+      "price_numeric": 988,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483157",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "대국민 고구마스틱, 800g, 1개",
+      "price": "403",
+      "price_numeric": 403,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483165",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "덕부아 버터 비스킷 대용량 과자, 100개, 7g",
+      "price": "1,045",
+      "price_numeric": 1045,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483173",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "새우깡 매운새우깡, 400g, 2개",
+      "price": "173",
+      "price_numeric": 173,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483180",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "애플망고 젤리, 1kg, 1개",
+      "price": "455",
+      "price_numeric": 455,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483188",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "삼립 한과 미니꿀약과 200개(개별포장) 선물세트 한국전통과자 맛있는약과, 8g, 200개",
+      "price": "263",
+      "price_numeric": 263,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483196",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "미니오트 크런치 바닐라향, 650g, 1개",
+      "price": "797",
+      "price_numeric": 797,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483203",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "꾀돌이 1.8kg(1700g+100g), 1.8kg, 1개",
+      "price": "11,800",
+      "price_numeric": 11800,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483218",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "브이콘 50gX10개 + 꾀돌이 40gX10개, 1세트",
+      "price": "11,800",
+      "price_numeric": 11800,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483226",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "광일제과 꾀돌이, 25g, 60개",
+      "price": "17,160",
+      "price_numeric": 17160,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483234",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "옛날 과자 세트 꾀돌이 5개+옥수수 브이콘 5개+밭두렁 5개+네모스낵 불고기맛 1개+밀키타 밀크 롤리팝 1개, 1세트, 722g",
+      "price": "13,900",
+      "price_numeric": 13900,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483254",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "농심 메론킥, 60g, 6개",
+      "price": "9,770",
+      "price_numeric": 9770,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483264",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "광일제과 꾀돌이, 200g, 1개",
+      "price": "3,800",
+      "price_numeric": 3800,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483275",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "마트코리아 왕소라 과자, 300g, 4개",
+      "price": "13,700",
+      "price_numeric": 13700,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483288",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "네이처월드 추억의 라면 과자 스낵 라면땅 불고기맛, 2개, 900g",
+      "price": "13,500",
+      "price_numeric": 13500,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483300",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "해태제과 에이스 과자 대용량 크래커 40개(개별포장), 40개",
+      "price": "22,500",
+      "price_numeric": 22500,
+      "rank": 5,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483313",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "미니베어 크렌베리 버터쿠키, 700g, 1개",
+      "price": "9,980",
+      "price_numeric": 9980,
+      "rank": 6,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.482971",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "재미스 잼있는 미니사과쿠키, 16g, 100개",
+      "price": "15,500",
+      "price_numeric": 15500,
+      "rank": 7,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483079",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "롯데웰푸드 엄마손 파이 50개입 개별포장 대용량 파이과자, 1개",
+      "price": "15,900",
+      "price_numeric": 15900,
+      "rank": 8,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483094",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "[씩씩가게] 에이스 알뜰형 대용량 463g x 3ea",
+      "price": "15,900",
+      "price_numeric": 15900,
+      "rank": 9,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483109",
+      "parse_method": "automatic"
+    },
+    {
+      "name": "청우 오즈랜드 쫀득 4종 세트 /쫀득초코칩+찰떡쿠키+초코파이찰떡+그랑쉘사과 (총 80봉), 1650g, 1개",
+      "price": "24,400",
+      "price_numeric": 24400,
+      "rank": 10,
+      "category": "대용량과자",
+      "parsed_at": "2025-07-09T23:20:03.483120",
+      "parse_method": "automatic"
+    }
+  ]
+}
