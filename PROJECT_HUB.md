@@ -16,8 +16,8 @@
 6. 🖼️ **[네이버 쇼핑 API 이미지 시스템](tools/naver_shopping_image_test.py)** - 이미지 추출 100% 성공 🔥 NEW
 7. 🔐 **[Google 로그인 구현 완료](docs/google_login_implementation_complete.md)** - 실제 작동 확인!
 8. 🏆 **[RANKING_SYSTEM_GUIDE.md](docs/RANKING_SYSTEM_GUIDE.md)** - 범용 랭킹 시스템 완전 가이드
-9. 🍽️ **[CONTEXT.md](CONTEXT.md)** - 프로젝트 컨텍스트 및 진행상황
-10. 🌟 **최종 버전**: `tools/roulette_v2_with_real_food_icons.html`
+9. 🧭 **[CONTEXT.md](CONTEXT.md)** - 작업 컨텍스트 및 진행 내역 (SOUL 브리지 v1.0)
+10. 🌟 **깃헙 배포 버전**: `index.html` (메인 엔트리 포인트) 🔥 NEW
 11. 📖 **[HANDOVER_GUIDE.md](docs/HANDOVER_GUIDE.md)** - 완벽한 인수인계 가이드 (40페이지)
 12. 🚪 **[GATEWAY.md](GATEWAY.md)** - 전체 네비게이션 포털
 
